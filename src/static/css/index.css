@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  box-sizing: content-box;
+}
+
+.bgc-f7c659 {
+  background: #f7c659 !important;
+}
+
+.color-f7c659 {
+  color: #f7c659;
+}
+
+.color-bfbfbf {
+  color: #bfbfbf;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-warp {
+  flex-wrap: wrap;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}

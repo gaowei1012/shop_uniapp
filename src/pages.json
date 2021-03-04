@@ -4,7 +4,12 @@
     {
       "path": "pages/home/index",
       "style": {
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "首页",
+        "usingComponents": {
+          "van-search": "/wxcomponents/search/index",
+          "van-image": "/wxcomponents/image/index",
+          "van-icon": "/wxcomponents/icon/index"
+        }
       }
     },
     {
@@ -14,7 +19,10 @@
       }
     },
     {
-      "path": "pages/shop/index"
+      "path": "pages/shop/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
     },
     {
       "path": "pages/cart/index",
@@ -32,8 +40,7 @@
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "#F7C659"
   },
   "tabBar": {
     "color": "#BFBFBF",
