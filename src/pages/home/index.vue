@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-04 16:24:05
+ * @LastEditTime: 2021-03-05 10:23:30
  * @Description: 首页
 -->
 
@@ -332,5 +332,4 @@ export default {
 </script>
 <style lang="less" scoped>
 @import url("./index.less");
-@import url("../../icons/iconfont.css");
 </style>

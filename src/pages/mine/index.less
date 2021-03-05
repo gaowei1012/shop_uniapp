@@ -1,0 +1,247 @@
+.mine-container {
+  background-color: #f5f5f5;
+  height: auto;
+  padding-bottom: 50rpx;
+  .header-box {
+    padding: 0 28rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .left {
+      display: flex;
+      align-items: center;
+      .name {
+        color: rgba(255, 255, 255, 100);
+        font-size: 40rpx;
+        padding: 0 26rpx;
+      }
+      .zhiwei {
+        width: 158rpx;
+        height: 48rpx;
+        line-height: 48rpx;
+        border-radius: 38rpx;
+        background-color: rgba(255, 169, 64, 100);
+        text-align: center;
+        color: #fff;
+        font-size: 26rpx;
+        van-icon {
+          font-size: 32rpx;
+          padding-right: 6rpx;
+        }
+      }
+    }
+    .right {
+      .iconfont {
+        color: #fff;
+        font-size: 44rpx;
+      }
+
+      .icon-message {
+        padding-right: 28rpx;
+      }
+    }
+  }
+
+  .order-box {
+    padding: 26rpx 36rpx 54rpx 34rpx;
+    background-color: #fff;
+    margin: 0 20rpx 74rpx;
+    position: relative;
+    top: -48rpx;
+    .title-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 34rpx;
+      .title {
+        font-size: 32rpx;
+        color: #404040;
+        font-family: PingFangSC-bold;
+      }
+      .more {
+        font-size: 26rpx;
+        padding-right: 4 rpx;
+        color: #5a5a5a;
+        .icon-right {
+          color: #919191;
+          font-size: 28rpx;
+        }
+      }
+    }
+    .content-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      .box {
+        text-align: center;
+        position: relative;
+        .number {
+          width: 34rpx;
+          height: 34rpx;
+          font-size: 26rpx;
+          color: #f759ab;
+          border: 1px solid #f759ab;
+          border-radius: 50%;
+          position: absolute;
+          left: 64rpx;
+          bottom: 68rpx;
+        }
+
+        .iconfont,
+        .icon-ship {
+          font-size: 48rpx;
+          color: #5a5a5a;
+          margin-bottom: 8rpx;
+        }
+        view {
+          font-size: 24rpx;
+        }
+      }
+    }
+  }
+
+  .info-box {
+    margin: 0 22rpx 114rpx;
+    padding: 0 26rpx 0 42rpx;
+    background-color: #fff;
+    .box {
+      line-height: 92rpx;
+      .name-box {
+        display: flex;
+        align-items: center;
+        .iconfont {
+          font-size: 35rpx;
+          margin-right: 20rpx;
+        }
+        .name {
+          color: #404040;
+          font-size: 28rpx;
+        }
+        .icon-address {
+          color: #9254de;
+        }
+        .icon-collect {
+          color: #5697c6;
+        }
+        .icon-customer-service {
+          color: #ff4d4f;
+        }
+      }
+      .icon-right {
+        font-size: 35rpx;
+        color: #b2b2b2;
+      }
+    }
+    .box:not(:last-child) {
+      border-bottom: 1px solid #d9d9d9;
+    }
+  }
+
+  .recommend-box {
+    .title {
+      font-size: 32rpx;
+      font-family: PingFangSC-bold;
+      color: #404040;
+      text-align: center;
+      position: relative;
+      margin-bottom: 42rpx;
+    }
+    .title::before,
+    .title::after {
+      content: "";
+      width: 68rpx;
+      border-top: 1px solid #bfbfbf;
+      margin-right: 14rpx;
+      content: "";
+      position: absolute; /*定位背景横线的位置*/
+      top: 52%;
+      background: #bfbfbf; /*宽和高做出来的背景横线*/
+      width: 68rpx;
+      height: 2rpx;
+    }
+    .title::before {
+      // left: 14rpx; /*调整背景横线的左右距离*/
+      left: 26%;
+    }
+    .title::after {
+      // right: 14rpx;
+      right: 26%;
+    }
+
+    .content-box {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 18rpx;
+
+      .box {
+        padding: 14rpx 24rpx 14rpx 16rpx;
+        background-color: #fff;
+        margin-bottom: 14rpx;
+        .img {
+          width: 320rpx;
+          height: 320rpx;
+          margin-bottom: 18rpx;
+        }
+        .content {
+          // background-color/: red;
+          .chandi {
+            color: #bfbfbf;
+            font-size: 24rpx;
+            margin-bottom: 12rpx;
+          }
+          .name {
+            width: 308rpx;
+            font-size: 24rpx;
+            color: #010101;
+            margin-bottom: 18rpx;
+            word-wrap: break-word;
+          }
+          .new {
+            width: 60rpx;
+            height: 36rpx;
+            color: #f759ab;
+            border: 1px solid #f759ab;
+            font-size: 24rpx;
+            text-align: center;
+            margin-bottom: 30rpx;
+          }
+          .price-box {
+            position: relative;
+            padding-bottom: 24rpx;
+            .new-price {
+              font-size: 36rpx;
+              padding-right: 10rpx;
+              color: #f759ab;
+            }
+            .old-price {
+              font-size: 24rpx;
+              color: #bfbfbf;
+              text-decoration: line-through;
+            }
+          }
+          .price-box::after {
+            content: "";
+            width: 324rpx;
+            height: 2rpx;
+            background-color: red;
+            left: 30px;
+            bottom: 0;
+            right: 0;
+          }
+
+          .leaderboard {
+            color: #ffaa67;
+            font-size: 24rpx;
+            margin-top: 12rpx;
+            .iconfont {
+              margin-right: 14rpx;
+            }
+          }
+        }
+      }
+      .box:nth-child(2n + 1) {
+        margin-right: 14rpx;
+      }
+    }
+  }
+}
