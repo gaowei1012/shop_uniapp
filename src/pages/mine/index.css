@@ -1,0 +1,233 @@
+.mine-container {
+  background-color: #f5f5f5;
+  height: auto;
+  padding-bottom: 50rpx;
+}
+.mine-container .header-box {
+  padding: 0 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mine-container .header-box .left {
+  display: flex;
+  align-items: center;
+}
+.mine-container .header-box .left .name {
+  color: #ffffff;
+  font-size: 40rpx;
+  padding: 0 26rpx;
+}
+.mine-container .header-box .left .zhiwei {
+  width: 158rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  border-radius: 38rpx;
+  background-color: #ffa940;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+}
+.mine-container .header-box .left .zhiwei van-icon {
+  font-size: 32rpx;
+  padding-right: 6rpx;
+}
+.mine-container .header-box .right .iconfont {
+  color: #fff;
+  font-size: 44rpx;
+}
+.mine-container .header-box .right .icon-message {
+  padding-right: 28rpx;
+}
+.mine-container .order-box {
+  padding: 26rpx 36rpx 54rpx 34rpx;
+  background-color: #fff;
+  margin: 0 20rpx 74rpx;
+  position: relative;
+  top: -48rpx;
+}
+.mine-container .order-box .title-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 34rpx;
+}
+.mine-container .order-box .title-box .title {
+  font-size: 32rpx;
+  color: #404040;
+  font-family: PingFangSC-bold;
+}
+.mine-container .order-box .title-box .more {
+  font-size: 26rpx;
+  padding-right: 4 rpx;
+  color: #5a5a5a;
+}
+.mine-container .order-box .title-box .more .icon-right {
+  color: #919191;
+  font-size: 28rpx;
+}
+.mine-container .order-box .content-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.mine-container .order-box .content-box .box {
+  text-align: center;
+  position: relative;
+}
+.mine-container .order-box .content-box .box .number {
+  width: 34rpx;
+  height: 34rpx;
+  font-size: 26rpx;
+  color: #f759ab;
+  border: 1px solid #f759ab;
+  border-radius: 50%;
+  position: absolute;
+  left: 64rpx;
+  bottom: 68rpx;
+}
+.mine-container .order-box .content-box .box .iconfont,
+.mine-container .order-box .content-box .box .icon-ship {
+  font-size: 48rpx;
+  color: #5a5a5a;
+  margin-bottom: 8rpx;
+}
+.mine-container .order-box .content-box .box view {
+  font-size: 24rpx;
+}
+.mine-container .info-box {
+  margin: 0 22rpx 114rpx;
+  padding: 0 26rpx 0 42rpx;
+  background-color: #fff;
+}
+.mine-container .info-box .box {
+  line-height: 92rpx;
+}
+.mine-container .info-box .box .name-box {
+  display: flex;
+  align-items: center;
+}
+.mine-container .info-box .box .name-box .iconfont {
+  font-size: 35rpx;
+  margin-right: 20rpx;
+}
+.mine-container .info-box .box .name-box .name {
+  color: #404040;
+  font-size: 28rpx;
+}
+.mine-container .info-box .box .name-box .icon-address {
+  color: #9254de;
+}
+.mine-container .info-box .box .name-box .icon-collect {
+  color: #5697c6;
+}
+.mine-container .info-box .box .name-box .icon-customer-service {
+  color: #ff4d4f;
+}
+.mine-container .info-box .box .icon-right {
+  font-size: 35rpx;
+  color: #b2b2b2;
+}
+.mine-container .info-box .box:not(:last-child) {
+  border-bottom: 1px solid #d9d9d9;
+}
+.mine-container .recommend-box {
+  width: 100%;
+}
+.mine-container .recommend-box .title {
+  font-size: 32rpx;
+  font-family: PingFangSC-bold;
+  color: #404040;
+  text-align: center;
+  position: relative;
+  margin-bottom: 42rpx;
+}
+.mine-container .recommend-box .title::before,
+.mine-container .recommend-box .title::after {
+  border-top: 1px solid #bfbfbf;
+  margin-right: 14rpx;
+  content: "";
+  position: absolute;
+  /*定位背景横线的位置*/
+  top: 52%;
+  background: #bfbfbf;
+  /*宽和高做出来的背景横线*/
+  width: 68rpx;
+  height: 2rpx;
+}
+.mine-container .recommend-box .title::before {
+  left: 26%;
+}
+.mine-container .recommend-box .title::after {
+  right: 26%;
+}
+.mine-container .recommend-box .content-box {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 8rpx;
+}
+.mine-container .recommend-box .content-box .box {
+  padding: 14rpx 24rpx 14rpx 18rpx;
+  background-color: #fff;
+  margin-bottom: 14rpx;
+}
+.mine-container .recommend-box .content-box .box .img {
+  width: 320rpx;
+  height: 320rpx;
+  margin-bottom: 18rpx;
+}
+.mine-container .recommend-box .content-box .box .content .chandi {
+  color: #bfbfbf;
+  font-size: 24rpx;
+  margin-bottom: 12rpx;
+}
+.mine-container .recommend-box .content-box .box .content .name {
+  width: 308rpx;
+  font-size: 24rpx;
+  color: #010101;
+  margin-bottom: 18rpx;
+  word-wrap: break-word;
+}
+.mine-container .recommend-box .content-box .box .content .new {
+  width: 60rpx;
+  height: 36rpx;
+  color: #f759ab;
+  border: 1px solid #f759ab;
+  font-size: 24rpx;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+.mine-container .recommend-box .content-box .box .content .price-box {
+  position: relative;
+  padding-bottom: 24rpx;
+}
+.mine-container .recommend-box .content-box .box .content .price-box .new-price {
+  font-size: 36rpx;
+  padding-right: 10rpx;
+  color: #f759ab;
+}
+.mine-container .recommend-box .content-box .box .content .price-box .old-price {
+  font-size: 24rpx;
+  color: #bfbfbf;
+  text-decoration: line-through;
+}
+.mine-container .recommend-box .content-box .box .content .price-box::after {
+  content: "";
+  width: 324rpx;
+  height: 2rpx;
+  background-color: red;
+  left: 30px;
+  bottom: 0;
+  right: 0;
+}
+.mine-container .recommend-box .content-box .box .content .leaderboard {
+  color: #ffaa67;
+  font-size: 24rpx;
+  margin-top: 12rpx;
+}
+.mine-container .recommend-box .content-box .box .content .leaderboard .iconfont {
+  margin-right: 14rpx;
+}
+.mine-container .recommend-box .content-box .box:nth-child(2n + 1) {
+  margin-right: 14rpx;
+}
