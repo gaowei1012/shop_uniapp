@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-01 20:05:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-07 14:00:38
+ * @LastEditTime: 2021-03-07 15:44:29
  * @Description: 
 -->
 <script>
@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 @import url("./static/icons/iconfont.css");
 /*每个页面公共css */
 * {
@@ -33,5 +33,11 @@ export default {
 
 .van-tree-select {
   height: 100vh !important;
+}
+.van-search {
+  background: #f7c659 !important;
+  .van-search__content {
+    border-radius: 60rpx;
+  }
 }
 </style>

@@ -2,11 +2,17 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:57:56
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-07 14:57:35
+ * @LastEditTime: 2021-03-07 15:45:45
  * @Description: 分类
 -->
 <template>
   <view class="sort-container">
+    <van-search
+      v-model="searchVal"
+      placeholder="搜索商品"
+      @search="searchInfo"
+    />
+
     <van-tree-select
       class="tree"
       :items="treeData"
@@ -46,6 +52,7 @@
 export default {
   data() {
     return {
+      searchVal: "",
       introducedImg: "https://img.yzcdn.cn/vant/apple-1.jpg",
       treeData: [
         {
@@ -143,46 +150,21 @@ export default {
     onClickNav(e = {}) {
       const { detail } = e;
       this.mainActiveIndex = detail.index || 0;
+      this.typeArray.push(...this.typeArray);
     },
 
     onClickItem(e) {
       const { detail } = e;
       this.activeId = detail.id;
     },
+
+    searchInfo(e) {
+      const { detail } = e;
+      console.log("searchInfo==>", detail);
+    },
   },
 };
 </script>
 <style lang="less">
-.sort-container {
-  padding-top: 18rpx;
-  .tree {
-    .van-tree-select__nav {
-      .van-sidebar-item--selected {
-        border-color: #f759ab;
-      }
-    }
-
-    .content-box {
-      padding-left: 26rpx;
-      padding-right: 26rpx;
-      .title {
-        color: #f759ab;
-        font-size: 26rpx;
-        margin-top: 60rpx;
-        margin-bottom: 32rpx;
-      }
-      .content {
-        flex-wrap: wrap;
-        justify-content: start;
-        .box {
-          margin-bottom: 44rpx;
-          margin-right: 27rpx;
-          view {
-            font-size: 24rpx;
-          }
-        }
-      }
-    }
-  }
-}
+@import url("./index.less");
 </style>
