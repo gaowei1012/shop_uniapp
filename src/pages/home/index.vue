@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-05 10:23:30
+ * @LastEditTime: 2021-03-06 17:40:44
  * @Description: 首页
 -->
 
@@ -130,7 +130,11 @@
           <label class="desc">精挑细选，总有一款适合你</label>
         </view>
         <view class="content-box">
-          <view  class="box" v-for="recommend in recommendArray" :key="recommend.id">
+          <view
+            class="box"
+            v-for="recommend in recommendArray"
+            :key="recommend.id"
+          >
             <van-image
               class="image"
               :src="recommend.src"
@@ -147,6 +151,7 @@
 </template>
 
 <script>
+import request from "../../api/index";
 export default {
   data() {
     return {
@@ -320,12 +325,21 @@ export default {
       ],
     };
   },
-  onLoad() {},
+  onLoad() {
+    this.getSort();
+  },
   //方法集合
   methods: {
     searchInfo(e) {
       const { detail } = e;
       console.log("searchInfo==>", detail);
+    },
+
+    getSort() {
+      request.getCategoryList().then((res) => {
+        console.log(res);
+        this.sortArray = res.data;
+      });
     },
   },
 };

@@ -2,12 +2,15 @@
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
-      "path": "pages/mine/index",
+      "path": "pages/sort/index",
       "style": {
-        "navigationBarTitleText": "个人中心"
+        "navigationBarTitleText": "分类",
+        "usingComponents": {
+          "van-search": "/wxcomponents/search/index",
+          "van-tree-select": "/wxcomponents/tree-select/index"
+        }
       }
     },
-
     {
       "path": "pages/home/index",
       "style": {
@@ -17,22 +20,17 @@
         }
       }
     },
-    {
-      "path": "pages/sort/index",
-      "style": {
-        "navigationBarTitleText": "分类"
-      }
-    },
-    {
-      "path": "pages/shop/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
+
     {
       "path": "pages/cart/index",
       "style": {
         "navigationBarTitleText": "购物袋"
+      }
+    },
+    {
+      "path": "pages/mine/index",
+      "style": {
+        "navigationBarTitleText": "个人中心"
       }
     }
   ],
@@ -61,12 +59,6 @@
         "pagePath": "pages/sort/index",
         "iconPath": "static/tabs/sort.png",
         "selectedIconPath": "static/tabs/sort-active.png"
-      },
-      {
-        "text": "商铺",
-        "pagePath": "pages/shop/index",
-        "iconPath": "static/tabs/shop.png",
-        "selectedIconPath": "static/tabs/shop-active.png"
       },
       {
         "text": "购物袋",
