@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-08 20:01:10
+ * @LastEditTime: 2021-03-08 20:06:05
  * @Description: 购物车
 -->
 <template>
@@ -109,15 +109,13 @@ export default {
       return "结算(" + this.array.length + ")";
     },
     total() {
-      let sum = 0.0;
+      let sum = 0;
       if (this.array.length > 0)
         for (var i = 0; i < this.array.length; i++) {
           const item = this.array[i];
           sum += parseFloat(item.price) * item.number;
         }
-      sum = parseFloat(sum.toFixed(2));
-      console.log("总价为==>", sum);
-      return sum;
+      return sum * 100;
     },
   },
 
