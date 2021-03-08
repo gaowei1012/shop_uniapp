@@ -2,12 +2,13 @@
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
-      "path": "pages/sort/index",
+      "path": "pages/cart/index",
       "style": {
-        "navigationBarTitleText": "分类",
+        // "navigationBarTitleText": "购物袋",
         "usingComponents": {
-          "van-search": "/wxcomponents/search/index",
-          "van-tree-select": "/wxcomponents/tree-select/index"
+          "van-stepper": "/wxcomponents/stepper/index",
+          "van-checkbox": "/wxcomponents/checkbox/index",
+          "van-checkbox-group": "/wxcomponents/checkbox-group/index"
         }
       }
     },
@@ -20,11 +21,14 @@
         }
       }
     },
-
     {
-      "path": "pages/cart/index",
+      "path": "pages/sort/index",
       "style": {
-        "navigationBarTitleText": "购物袋"
+        "navigationBarTitleText": "分类",
+        "usingComponents": {
+          "van-search": "/wxcomponents/search/index",
+          "van-tree-select": "/wxcomponents/tree-select/index"
+        }
       }
     },
     {
@@ -36,7 +40,6 @@
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#F7C659",
     "usingComponents": {
       "van-image": "/wxcomponents/image/index",
