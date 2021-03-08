@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-08 19:26:06
+ * @LastEditTime: 2021-03-08 19:38:48
  * @Description: 购物车
 -->
 <template>
@@ -11,6 +11,7 @@
       <view class="title">购物车</view>
       <view class="edit">编辑</view>
     </view>
+
     <view class="content-box">
       <van-checkbox-group :value="checked" @change="onChange">
         <view
@@ -44,8 +45,12 @@
         </view>
       </van-checkbox-group>
     </view>
-
-    <van-submit-bar :price="total" button-text="提交订单" @submit="submitOrder">
+    <van-submit-bar
+      class="submit-bar"
+      :price="total"
+      :button-text="shopNum"
+      @submit="submitOrder"
+    >
       <van-checkbox :value="checkedAll" @change="allChecked">全选</van-checkbox>
     </van-submit-bar>
   </view>
@@ -100,6 +105,9 @@ export default {
     };
   },
   computed: {
+    shopNum() {
+      return "结算(" + this.array.length + ")";
+    },
     total() {
       return 3050;
     },
