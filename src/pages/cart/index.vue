@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-08 17:34:10
+ * @LastEditTime: 2021-03-08 18:49:55
  * @Description: 购物车
 -->
 <template>
@@ -13,7 +13,12 @@
     </view>
     <view class="content-box">
       <van-checkbox-group :value="checked" @change="onChange">
-        <view class="box flex" v-for="cart in cartArray" :key="cart.id">
+        <view
+          class="box flex"
+          v-for="cart in cartArray"
+          :key="cart.id"
+          @click="toggle(cart)"
+        >
           <van-checkbox :name="cart.id" class="checkbox" />
           <van-image
             class="cart-img"
@@ -24,7 +29,17 @@
           <view class="content">
             <view class="name">{{ cart.title }}</view>
             <view class="capacity">{{ cart.capacity }}</view>
-            <view class="price">￥{{ cart.price }}</view>
+            <view
+              class="price-box flex justify-content-between align-items-center"
+            >
+              <view class="price">￥{{ cart.price }}</view>
+              <van-stepper
+                :value="cart.numer"
+                :max="10"
+                integer
+                @change="changeStepper"
+              />
+            </view>
           </view>
         </view>
       </van-checkbox-group>
@@ -38,6 +53,7 @@ export default {
     return {
       checked: [],
       checkedAll: false,
+      stepperVal: 1,
       cartArray: [
         {
           id: 0,
@@ -46,6 +62,7 @@ export default {
             "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底液 35ml 674#...",
           price: "530.00",
           capacity: "35ml",
+          numer: 1,
         },
         {
           id: 1,
@@ -54,6 +71,7 @@ export default {
             "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底液 35ml 674#...",
           price: "530.00",
           capacity: "35ml",
+          numer: 1,
         },
         {
           id: 2,
@@ -62,6 +80,7 @@ export default {
             "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底液 35ml 674#...",
           price: "530.00",
           capacity: "35ml",
+          numer: 1,
         },
         {
           id: 3,
@@ -70,6 +89,7 @@ export default {
             "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底液 35ml 674#...",
           price: "530.00",
           capacity: "35ml",
+          numer: 1,
         },
       ],
     };
@@ -79,7 +99,8 @@ export default {
   methods: {
     // 单选
     onChange(event) {
-      this.checked = event.detail;
+      const { detail } = event;
+      this.checked = detail;
       this.checked.length === this.cartArray.length
         ? (this.checkedAll = true)
         : (this.allChecked = false);
@@ -91,6 +112,15 @@ export default {
       });
       this.checkedAll = event.detail;
       if (this.checkedAll === false) this.checked = [];
+    },
+    // 更改进步器
+    changeStepper(e) {
+      const { detail } = e;
+      this.stepperVal = detail;
+    },
+    // 获取当前行数据
+    toggle(e) {
+      e.number = this.stepperVal;
     },
   },
 };
