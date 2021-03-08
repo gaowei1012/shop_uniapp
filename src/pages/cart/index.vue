@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-08 20:06:05
+ * @LastEditTime: 2021-03-08 20:31:53
  * @Description: 购物车
 -->
 <template>
@@ -14,12 +14,7 @@
 
     <view class="content-box">
       <van-checkbox-group :value="checked" @change="onChange">
-        <view
-          class="box flex"
-          v-for="cart in cartArray"
-          :key="cart.id"
-          @click="toggle(cart)"
-        >
+        <view class="box flex" v-for="cart in cartArray" :key="cart.id">
           <van-checkbox :name="cart.id" class="checkbox" />
           <van-image
             class="cart-img"
@@ -37,8 +32,11 @@
               <van-stepper
                 :value="cart.number"
                 :max="10"
+                :name="cart.id"
+                :long-press="false"
                 integer
-                @change="changeStepper"
+                @plus="changeStepper(cart, 'plus')"
+                @minus="changeStepper(cart, 'minus')"
               />
             </view>
           </view>
@@ -106,11 +104,11 @@ export default {
   },
   computed: {
     shopNum() {
-      return "结算(" + this.array.length + ")";
+      return "结算(" + this.checked.length + ")";
     },
     total() {
       let sum = 0;
-      if (this.array.length > 0)
+      if (this.checked.length > 0)
         for (var i = 0; i < this.array.length; i++) {
           const item = this.array[i];
           sum += parseFloat(item.price) * item.number;
@@ -130,6 +128,7 @@ export default {
         : (this.allChecked = false);
     },
     // 全选
+    // TODO: 点击其中一条再点击全选,报错 _vm.allChecked is not a function
     allChecked(event) {
       this.checked = this.cartArray.map((item) => {
         return item.id.toString();
@@ -137,17 +136,17 @@ export default {
       this.checkedAll = event.detail;
       if (this.checkedAll === false) this.checked = [];
     },
-    // 更改进步器
-    changeStepper(e) {
-      const { detail } = e;
-      this.stepperVal = detail;
-    },
-    // 获取当前行数据
-    toggle(e) {
-      e.number = this.stepperVal;
+    // 更改商品数量
+    // TODO: 后期改成Toast
+    changeStepper(e, deal) {
+      deal === "plus" ? (e.number = e.number + 1) : (e.number = e.number - 1);
+      if (e.number > 10 && deal === "plus") {
+        console.log("不能在增加了");
+      } else if (e.number === 1 && deal === "minus") {
+        console.log("不能在减少了");
+      }
       this.array.push(e);
       this.array = Array.from(new Set(this.array));
-      console.log(this.array.length);
     },
     // 提交订单
     submitOrder() {
