@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-08 19:38:48
+ * @LastEditTime: 2021-03-08 20:01:10
  * @Description: 购物车
 -->
 <template>
@@ -35,7 +35,7 @@
             >
               <view class="price">￥{{ cart.price }}</view>
               <van-stepper
-                :value="cart.numer"
+                :value="cart.number"
                 :max="10"
                 integer
                 @change="changeStepper"
@@ -69,27 +69,27 @@ export default {
           img: "../../static/sale.png",
           title:
             "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底液 35ml 674#...",
-          price: "530.00",
+          price: "500.00",
           capacity: "35ml",
-          numer: 1,
+          number: 1,
         },
         {
           id: 1,
           img: "../../static/sale.png",
           title:
             "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底液 35ml 674#...",
-          price: "530.00",
+          price: "510.00",
           capacity: "35ml",
-          numer: 1,
+          number: 1,
         },
         {
           id: 2,
           img: "../../static/sale.png",
           title:
             "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底液 35ml 674#...",
-          price: "530.00",
+          price: "520.00",
           capacity: "35ml",
-          numer: 1,
+          number: 1,
         },
         {
           id: 3,
@@ -98,7 +98,7 @@ export default {
             "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底液 35ml 674#...",
           price: "530.00",
           capacity: "35ml",
-          numer: 1,
+          number: 1,
         },
       ],
       array: [],
@@ -109,7 +109,15 @@ export default {
       return "结算(" + this.array.length + ")";
     },
     total() {
-      return 3050;
+      let sum = 0.0;
+      if (this.array.length > 0)
+        for (var i = 0; i < this.array.length; i++) {
+          const item = this.array[i];
+          sum += parseFloat(item.price) * item.number;
+        }
+      sum = parseFloat(sum.toFixed(2));
+      console.log("总价为==>", sum);
+      return sum;
     },
   },
 
@@ -139,16 +147,9 @@ export default {
     // 获取当前行数据
     toggle(e) {
       e.number = this.stepperVal;
-
       this.array.push(e);
+      this.array = Array.from(new Set(this.array));
       console.log(this.array.length);
-      const _this = this;
-      for (let i = 0; i < this.array.length; i++) {
-        const item = this.array[i];
-        console.log("item==>", item);
-        _this.total = item.price * item.numer;
-      }
-      console.log("total==>", this.total);
     },
     // 提交订单
     submitOrder() {
