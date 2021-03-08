@@ -8,7 +8,8 @@
         "usingComponents": {
           "van-stepper": "/wxcomponents/stepper/index",
           "van-checkbox": "/wxcomponents/checkbox/index",
-          "van-checkbox-group": "/wxcomponents/checkbox-group/index"
+          "van-checkbox-group": "/wxcomponents/checkbox-group/index",
+          "van-submit-bar": "/wxcomponents/submit-bar/index"
         }
       }
     },

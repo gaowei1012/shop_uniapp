@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-08 18:49:55
+ * @LastEditTime: 2021-03-08 19:26:06
  * @Description: 购物车
 -->
 <template>
@@ -44,6 +44,10 @@
         </view>
       </van-checkbox-group>
     </view>
+
+    <van-submit-bar :price="total" button-text="提交订单" @submit="submitOrder">
+      <van-checkbox :value="checkedAll" @change="allChecked">全选</van-checkbox>
+    </van-submit-bar>
   </view>
 </template>
 
@@ -92,9 +96,15 @@ export default {
           numer: 1,
         },
       ],
+      array: [],
     };
   },
-  onLoad() {},
+  computed: {
+    total() {
+      return 3050;
+    },
+  },
+
   //方法集合
   methods: {
     // 单选
@@ -121,6 +131,20 @@ export default {
     // 获取当前行数据
     toggle(e) {
       e.number = this.stepperVal;
+
+      this.array.push(e);
+      console.log(this.array.length);
+      const _this = this;
+      for (let i = 0; i < this.array.length; i++) {
+        const item = this.array[i];
+        console.log("item==>", item);
+        _this.total = item.price * item.numer;
+      }
+      console.log("total==>", this.total);
+    },
+    // 提交订单
+    submitOrder() {
+      console.log("点击到了");
     },
   },
 };
