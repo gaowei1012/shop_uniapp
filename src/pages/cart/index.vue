@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-10 20:02:59
+ * @LastEditTime: 2021-03-10 20:36:26
  * @Description: 购物车
 -->
 <template>
@@ -128,7 +128,6 @@ export default {
         : (this.checkedAll = false);
     },
     // 全选
-    // TODO: 点击其中一条再点击全选,报错 _vm.allChecked is not a function
     allChecked(event) {
       this.checked = this.cartArray.map((item) => {
         return item.id.toString();
