@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-08 20:31:53
+ * @LastEditTime: 2021-03-10 20:02:59
  * @Description: 购物车
 -->
 <template>
@@ -125,7 +125,7 @@ export default {
       this.checked = detail;
       this.checked.length === this.cartArray.length
         ? (this.checkedAll = true)
-        : (this.allChecked = false);
+        : (this.checkedAll = false);
     },
     // 全选
     // TODO: 点击其中一条再点击全选,报错 _vm.allChecked is not a function
