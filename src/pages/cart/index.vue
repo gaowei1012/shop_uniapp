@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-11 15:06:35
+ * @LastEditTime: 2021-03-11 15:32:35
  * @Description: 购物车
 -->
 <template>
@@ -20,7 +20,11 @@
     <view class="content-box">
       <van-checkbox-group :value="checked" @change="onChange">
         <view class="box flex" v-for="cart in cartArray" :key="cart.id">
-          <van-checkbox :name="cart.id" class="checkbox" />
+          <van-checkbox
+            :name="cart.id"
+            class="checkbox"
+            @click.native="clickCheckBox(cart)"
+          />
           <van-image
             class="cart-img"
             width="120rpx"
@@ -137,7 +141,11 @@ export default {
       return sum * 100;
     },
   },
-
+  // watch: {
+  //   checked() {
+  //     // if()
+  //   },
+  // },
   //方法集合
   methods: {
     // 单选
@@ -147,6 +155,9 @@ export default {
       this.checked.length === this.cartArray.length
         ? (this.checkedAll = true)
         : (this.checkedAll = false);
+    },
+    clickCheckBox(e) {
+      this.array.push(e);
     },
     // 全选
     allChecked(event) {
@@ -179,7 +190,6 @@ export default {
     // 删除视频
     deleteShop() {
       if (this.checked.length > 0) {
-        console.log("check==>", this.checked, this.checked.length);
         // 删除所有商品
         if (
           this.cartArray.length == this.checked.length ||
@@ -196,7 +206,6 @@ export default {
           this.checked = [];
         }
 
-        console.log("cartArray==>", this.checked.length, this.cartArray.length);
       } else {
       }
     },
