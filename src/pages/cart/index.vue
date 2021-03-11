@@ -2,20 +2,13 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-11 09:34:31
+ * @LastEditTime: 2021-03-11 14:45:57
  * @Description: 购物车
 -->
 <template>
   <view class="cart-container">
     <view class="bgc-f7c659 header-title">
       <view class="title">购物车</view>
-      <!-- <view class="edit" v-show=""></view>
-      <view class="edit" @click="editShop" v-show="editVal == true">{{
-        editText
-      }}</view>
-      <view class="edit" @click="editShop" v-show="editVal == false">{{
-        editText
-      }}</view> -->
       <view class="edit" @click="editShop" v-show="editText === true"
         >编辑</view
       >
@@ -55,14 +48,29 @@
         </view>
       </van-checkbox-group>
     </view>
-    <van-submit-bar
-      class="submit-bar"
-      :price="total"
-      :button-text="shopNum"
-      @submit="submitOrder"
-    >
-      <van-checkbox :value="checkedAll" @change="allChecked">全选</van-checkbox>
-    </van-submit-bar>
+
+    <template>
+      <view class="deal" v-if="editText === false">
+        <van-checkbox class="checkbox" :value="checkedAll" @change="allChecked"
+          >全选</van-checkbox
+        >
+        <view class="flex">
+          <view class="collect">转入收藏夹</view>
+          <view class="delete" @click="deleteShop">删除</view>
+        </view>
+      </view>
+      <van-submit-bar
+        class="submit-bar"
+        :price="total"
+        :button-text="shopNum"
+        @submit="submitOrder"
+        v-else
+      >
+        <van-checkbox :value="checkedAll" @change="allChecked"
+          >全选</van-checkbox
+        >
+      </van-submit-bar>
+    </template>
   </view>
 </template>
 
@@ -167,20 +175,27 @@ export default {
     // 编辑商品
     editShop() {
       this.editText = !this.editText;
-      console.log("editText==>", this.editText);
-      // this.editText === false
-      //   ? (this.editText = "完成")
-      //   : (this.editText = "编辑");
-
-      this.checked.length > 0
-        ? // 删除单个商品
+    },
+    // 删除视频
+    deleteShop() {
+      if (this.checked.length > 0) {
+        console.log("check==>", this.checked, this.checked.length);
+        // 删除所有商品
+        if (
+          this.cartArray.length == this.checked.length ||
+          this.checkedAll === true
+        ) {
+          this.cartArray = [];
+        } else {
+          const id = parseInt(this.checked.join());
+          // 删除多个商品
           this.cartArray.splice(
-            this.cartArray.findIndex(
-              (item) => item.id === parseInt(this.checked.toString())
-            ),
-            1
-          )
-        : console.log("请添加选中商品在点击编辑呦~");
+            this.cartArray.findIndex((item) => item.id == id),
+            this.checked.length
+          );
+        }
+      } else {
+      }
     },
   },
 };
