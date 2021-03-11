@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-11 15:32:35
+ * @LastEditTime: 2021-03-11 18:42:02
  * @Description: 购物车
 -->
 <template>
@@ -141,11 +141,6 @@ export default {
       return sum * 100;
     },
   },
-  // watch: {
-  //   checked() {
-  //     // if()
-  //   },
-  // },
   //方法集合
   methods: {
     // 单选
@@ -164,6 +159,8 @@ export default {
       this.checked = this.cartArray.map((item) => {
         return item.id.toString();
       });
+      this.array = [];
+      this.array = this.cartArray;
       this.checkedAll = event.detail;
       if (this.checkedAll === false) this.checked = [];
     },
@@ -205,7 +202,6 @@ export default {
           );
           this.checked = [];
         }
-
       } else {
       }
     },
