@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-11 14:45:57
+ * @LastEditTime: 2021-03-11 15:06:35
  * @Description: 购物车
 -->
 <template>
@@ -193,7 +193,10 @@ export default {
             this.cartArray.findIndex((item) => item.id == id),
             this.checked.length
           );
+          this.checked = [];
         }
+
+        console.log("cartArray==>", this.checked.length, this.cartArray.length);
       } else {
       }
     },
