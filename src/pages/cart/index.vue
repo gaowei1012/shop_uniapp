@@ -2,14 +2,26 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-10 20:36:26
+ * @LastEditTime: 2021-03-11 09:34:31
  * @Description: 购物车
 -->
 <template>
   <view class="cart-container">
     <view class="bgc-f7c659 header-title">
       <view class="title">购物车</view>
-      <view class="edit">编辑</view>
+      <!-- <view class="edit" v-show=""></view>
+      <view class="edit" @click="editShop" v-show="editVal == true">{{
+        editText
+      }}</view>
+      <view class="edit" @click="editShop" v-show="editVal == false">{{
+        editText
+      }}</view> -->
+      <view class="edit" @click="editShop" v-show="editText === true"
+        >编辑</view
+      >
+      <view class="edit" @click="editShop" v-show="editText === false"
+        >完成</view
+      >
     </view>
 
     <view class="content-box">
@@ -58,6 +70,7 @@
 export default {
   data() {
     return {
+      editText: true,
       checked: [],
       checkedAll: false,
       stepperVal: 1,
@@ -150,6 +163,24 @@ export default {
     // 提交订单
     submitOrder() {
       console.log("点击到了");
+    },
+    // 编辑商品
+    editShop() {
+      this.editText = !this.editText;
+      console.log("editText==>", this.editText);
+      // this.editText === false
+      //   ? (this.editText = "完成")
+      //   : (this.editText = "编辑");
+
+      this.checked.length > 0
+        ? // 删除单个商品
+          this.cartArray.splice(
+            this.cartArray.findIndex(
+              (item) => item.id === parseInt(this.checked.toString())
+            ),
+            1
+          )
+        : console.log("请添加选中商品在点击编辑呦~");
     },
   },
 };
