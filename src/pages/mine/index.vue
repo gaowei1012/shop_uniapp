@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:44
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-05 17:32:50
+ * @LastEditTime: 2021-03-11 20:55:57
  * @Description: 我的
 -->
 
@@ -57,6 +57,7 @@
         class="box flex justify-content-between"
         v-for="item in list"
         :key="item.id"
+        @click="handleList(item.name)"
       >
         <view class="name-box">
           <van-icon class="iconfont" :class="item.icon" />
@@ -134,7 +135,7 @@ export default {
       list: [
         { id: 1, name: "收货地址", icon: "icon-address" },
         { id: 2, name: "商品收藏", icon: "icon-collect" },
-        { id: 3, name: "客服中心", icon: "icon-customer-service" },
+        // { id: 3, name: "客服中心", icon: "icon-customer-service" },
       ],
 
       recommendArray: [
@@ -179,7 +180,14 @@ export default {
   },
   onLoad() {},
   //方法集合
-  methods: {},
+  methods: {
+    // 点击列表
+    handleList(e) {
+      e === "收货地址"
+        ? uni.navigateTo({ url: "/pages/address/index" })
+        : console.log("哈哈哈");
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
