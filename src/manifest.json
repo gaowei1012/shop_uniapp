@@ -1,7 +1,7 @@
 {
-    "name" : "",
-    "appid" : "",
-    "description" : "",
+    "name" : "商城",
+    "appid" : "__UNI__BE082E1",
+    "description" : "商城App+小程序",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
