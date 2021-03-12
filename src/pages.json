@@ -6,8 +6,8 @@
       "style": {
         "navigationBarTitleText": "首页",
         "usingComponents": {
-          "van-search": "/wxcomponents/search/index",
-          "van-tree-select": "/wxcomponents/tree-select/index"
+          "van-search": "/wxcomponents/vant-weapp/search/index",
+          "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
         }
       }
     },
@@ -16,8 +16,8 @@
       "style": {
         "navigationBarTitleText": "分类",
         "usingComponents": {
-          "van-search": "/wxcomponents/search/index",
-          "van-tree-select": "/wxcomponents/tree-select/index"
+          "van-search": "/wxcomponents/vant-weapp/search/index",
+          "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
         }
       }
     },
@@ -25,10 +25,10 @@
       "path": "pages/cart/index",
       "style": {
         "usingComponents": {
-          "van-stepper": "/wxcomponents/stepper/index",
-          "van-checkbox": "/wxcomponents/checkbox/index",
-          "van-checkbox-group": "/wxcomponents/checkbox-group/index",
-          "van-submit-bar": "/wxcomponents/submit-bar/index"
+          "van-stepper": "/wxcomponents/vant-weapp/stepper/index",
+          "van-checkbox": "/wxcomponents/vant-weapp/checkbox/index",
+          "van-checkbox-group": "/wxcomponents/vant-weapp/checkbox-group/index",
+          "van-submit-bar": "/wxcomponents/vant-weapp/submit-bar/index"
         }
       }
     },
@@ -49,9 +49,9 @@
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#F7C659",
     "usingComponents": {
-      "van-image": "/wxcomponents/image/index",
-      "van-icon": "/wxcomponents/icon/index",
-      "van-button": "/wxcomponents/button/index"
+      // "van-image": "/wxcomponents/vant-weapp/image/index",
+      "van-icon": "/wxcomponents/vant-weapp/icon/index",
+      "van-button": "/wxcomponents/vant-weapp/button/index"
     }
   },
   "tabBar": {
