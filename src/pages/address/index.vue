@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-12 10:40:37
+ * @LastEditTime: 2021-03-12 20:41:46
  * @Description: 地址列表
 -->
 
@@ -12,9 +12,8 @@
       <view>哈哈哈</view>
     </template>
     <template v-else>
-      <van-image
-        width="696rpx"
-        height="696rpx"
+      <image
+        style="width:696rpx;height:696rpx"
         src="../../static/img/no-address.png"
       />
       <view class="no-address">暂无任何地址</view>
@@ -37,5 +36,4 @@ export default {
 </script>
 <style lang="less">
 @import url("./index.less");
-
 </style>

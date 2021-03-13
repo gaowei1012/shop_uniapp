@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-11 18:54:23
+ * @LastEditTime: 2021-03-12 20:45:55
  * @Description: 购物车
 -->
 <template>
@@ -25,10 +25,9 @@
             class="checkbox"
             @click.native="clickCheckBox(cart)"
           />
-          <van-image
+          <image
             class="cart-img"
-            width="120rpx"
-            height="120rpx"
+            style="width:120rpx;height:120rpx"
             :src="cart.img"
           />
           <view class="content">
@@ -157,7 +156,7 @@ export default {
         : (this.checkedAll = false);
     },
     clickCheckBox(e) {
-      this.array = []
+      this.array = [];
       this.array.push(e);
     },
     // 全选

@@ -49,7 +49,6 @@
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#F7C659",
     "usingComponents": {
-      // "van-image": "/wxcomponents/vant-weapp/image/index",
       "van-icon": "/wxcomponents/vant-weapp/icon/index",
       "van-button": "/wxcomponents/vant-weapp/button/index"
     }

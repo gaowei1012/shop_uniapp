@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-06 17:40:44
+ * @LastEditTime: 2021-03-13 22:08:12
  * @Description: 首页
 -->
 
@@ -49,7 +49,7 @@
       <!-- 分类 -->
       <view class="sort-box">
         <view class="sort" v-for="sort in sortArray" :key="sort.id">
-          <van-image width="120rpx" height="120rpx" :src="sort.category_img" />
+          <image style="width:120rpx;height:120rpx" :src="sort.category_img" />
           <view>{{ sort.category_name }}</view>
         </view>
       </view>
@@ -61,7 +61,7 @@
           <label class="desc">一手活动信息在这里</label>
         </view>
         <view class="sale-img">
-          <van-image width="100%" height="100%" src="../../static/sale.png" />
+          <image src="../../static/sale.png" />
         </view>
         <view class="desc">{{ saleObj.desc }}</view>
         <view class="time">活动时间：{{ saleObj.time }}</view>
@@ -82,7 +82,7 @@
             v-for="discount in discountArray"
             :key="discount.id"
           >
-            <van-image width="140rpx" height="140rpx" :src="discount.src" />
+            <image style="width:140rpx;height:140rpx" :src="discount.src" />
             <view class="new-price color-f7c659"
               >￥{{ discount.new_price }}</view
             >
@@ -107,13 +107,7 @@
         </view>
         <view class="content-box">
           <view class="box flex" v-for="hot in hotArray" :key="hot.id">
-            <van-image
-              class="img"
-              :src="hot.src"
-              width="180rpx"
-              height="180rpx"
-              fit="fill"
-            />
+            <image class="img" :src="hot.src" />
             <view class="content">
               <view class="name">{{ hot.name }}</view>
               <view class="origin">{{ hot.origin }}</view>
@@ -135,12 +129,7 @@
             v-for="recommend in recommendArray"
             :key="recommend.id"
           >
-            <van-image
-              class="image"
-              :src="recommend.src"
-              width="180rpx"
-              height="180rpx"
-            />
+            <image class="image" :src="recommend.src" />
             <view class="name">{{ recommend.name }}</view>
             <view class="price color-f7c659">￥{{ recommend.price }}</view>
           </view>
@@ -326,7 +315,7 @@ export default {
     };
   },
   onLoad() {
-    this.getSort();
+    // this.getSort();
   },
   //方法集合
   methods: {

@@ -22,18 +22,16 @@
       @click-item="onClickItem"
     >
       <template class="content-box" slot="content">
-        <van-image
+        <image
           class="img"
           :src="introducedImg"
-          width="500rpx"
-          height="180rpx"
-          style="margin-top:18rpx;"
+          style="width:500rpx;height:180rpx;margin-top:18rpx;"
         />
         <view v-for="item in typeArray" :key="item.id">
           <view class="title">{{ item.text }}</view>
           <view class="content flex">
             <view class="box" v-for="child in item.children" :key="child.id">
-              <van-image
+              <image
                 :src="child.src"
                 width="140rpx"
                 height="140rpx"

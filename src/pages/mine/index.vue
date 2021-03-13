@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:44
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-11 20:55:57
+ * @LastEditTime: 2021-03-12 20:44:19
  * @Description: 我的
 -->
 
@@ -10,12 +10,10 @@
   <view class="mine-container">
     <view class="header-box">
       <view class="left">
-        <van-image
+        <image
           class="avatar"
           fit="cover"
-          round
-          width="108rpx"
-          height="108rpx"
+          style="width:108rpx;height:108rpx"
           src="https://img.yzcdn.cn/vant/cat.jpeg"
         />
         <view class="name">苏小妍</view>
@@ -75,12 +73,7 @@
           v-for="recommend in recommendArray"
           :key="recommend.id"
         >
-          <van-image
-            width="320rpx"
-            height="320rpx"
-            fit="fill"
-            :src="recommend.src"
-          />
+          <image style="width:320rpx;height:320rpx" :src="recommend.src" />
           <view class="content">
             <view class="chandi">{{ recommend.chandi }}</view>
             <view class="name">{{ recommend.name }}</view>
