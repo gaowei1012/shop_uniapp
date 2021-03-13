@@ -1,3 +1,10 @@
+/*
+ * @Author: 一个为高薪头秃的程序媴
+ * @Date: 2021-03-12 18:43:07
+ * @LastEditors: 一个为高薪头秃的程序猿
+ * @LastEditTime: 2021-03-13 22:38:50
+ * @Description:
+ */
 export var behavior = Behavior({
   created: function created() {
     var _this = this;
@@ -8,14 +15,16 @@ export var behavior = Behavior({
 
     var cache = {};
 
-    var _this$$options = this.$options(),
-        computed = _this$$options.computed;
-
+    var _this$$options = this.$options,
+      computed = _this$$options.computed;
+    if (!computed) {
+      return;
+    }
     var keys = Object.keys(computed);
 
-    this.calcComputed = function () {
+    this.calcComputed = function() {
       var needUpdate = {};
-      keys.forEach(function (key) {
+      keys.forEach(function(key) {
         var value = computed[key].call(_this);
 
         if (cache[key] !== value) {
@@ -38,6 +47,6 @@ export var behavior = Behavior({
       if (this.calcComputed) {
         this.setData(this.calcComputed());
       }
-    }
-  }
+    },
+  },
 });

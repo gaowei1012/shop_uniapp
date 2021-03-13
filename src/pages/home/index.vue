@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-13 22:08:12
+ * @LastEditTime: 2021-03-13 22:44:32
  * @Description: 首页
 -->
 
@@ -167,7 +167,7 @@ export default {
           create_at: "2021-03-02T10:22:18+08:00",
         },
         {
-          id: 2,
+          id: 3,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装1",
           category_img:
@@ -176,7 +176,7 @@ export default {
           create_at: "2021-03-02T10:22:18+08:00",
         },
         {
-          id: 2,
+          id: 4,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装2",
           category_img:
@@ -185,7 +185,7 @@ export default {
           create_at: "2021-03-02T10:22:18+08:00",
         },
         {
-          id: 3,
+          id: 5,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装3",
           category_img:
@@ -194,7 +194,7 @@ export default {
           create_at: "2021-03-02T10:22:18+08:00",
         },
         {
-          id: 4,
+          id: 6,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装4",
           category_img:
@@ -203,7 +203,7 @@ export default {
           create_at: "2021-03-02T10:22:18+08:00",
         },
         {
-          id: 5,
+          id: 7,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装5",
           category_img:
@@ -212,7 +212,7 @@ export default {
           create_at: "2021-03-02T10:22:18+08:00",
         },
         {
-          id: 6,
+          id: 8,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装6",
           category_img:
@@ -282,31 +282,31 @@ export default {
           price: "68.9",
         },
         {
-          id: 0,
+          id: 1,
           src: "../../static/sale.png",
           name: "修复精华水0",
           price: "68.9",
         },
         {
-          id: 1,
+          id: 2,
           src: "../../static/sale.png",
           name: "修复精华水1",
           price: "68.9",
         },
         {
-          id: 2,
+          id: 3,
           src: "../../static/sale.png",
           name: "修复精华水2",
           price: "68.9",
         },
         {
-          id: 3,
+          id: 4,
           src: "../../static/sale.png",
           name: "修复精华水3",
           price: "68.9",
         },
         {
-          id: 4,
+          id: 5,
           src: "../../static/sale.png",
           name: "修复精华水4",
           price: "68.9",
