@@ -25,20 +25,11 @@ VantComponent({
     desc: String,
     title: String,
     status: String,
-    useFooterSlot: Boolean
-  }
+    useFooterSlot: Boolean,
+  },
 });
 export default global['__wxComponents']['vant-weapp/panel/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-panel {
-  background: #fff;
-}
-.van-panel__header-value {
-  color: #f44;
-}
-.van-panel__footer {
-  padding: 10px 15px;
-}
+@import '../common/index.css';.van-panel{background:#fff;background:var(--panel-background-color,#fff)}.van-panel__header-value{color:#ee0a24;color:var(--panel-header-value-color,#ee0a24)}.van-panel__footer{padding:8px 16px;padding:var(--panel-footer-padding,8px 16px)}
 </style>

@@ -1,108 +1,81 @@
 <template>
-<uni-shadow-root class="vant-weapp-tabbar-index"><view :class="'custom-class van-hairline--top-bottom '+(utils.bem('tabbar', { fixed, safe: isIPhoneX && safeAreaInsetBottom }))" :style="zIndex ? 'z-index: ' + zIndex : ''">
+<uni-shadow-root class="vant-weapp-tabbar-index"><view :class="(border ? 'van-hairline--top-bottom' : '')+' '+(utils.bem('tabbar', { fixed, safe: safeAreaInsetBottom }))+' custom-class'" :style="zIndex ? 'z-index: ' + zIndex : ''">
   <slot></slot>
-</view></uni-shadow-root>
+</view>
+
+<view v-if="fixed && placeholder" :style="'height: '+(height)+'px;'"></view></uni-shadow-root>
 </template>
 <wxs src="../wxs/utils.wxs" module="utils"></wxs>
 <script>
 
 global['__wxRoute'] = 'vant-weapp/tabbar/index'
 import { VantComponent } from '../common/component';
-import { iphonex } from '../mixins/iphonex';
+import { useChildren } from '../common/relation';
+import { getRect } from '../common/utils';
 VantComponent({
-  mixins: [iphonex],
-  relation: {
-    name: 'tabbar-item',
-    type: 'descendant',
-    linked: function linked(target) {
-      var _this = this;
-
-      this.data.items.push(target);
-      setTimeout(function () {
-        _this.setActiveItem();
-      });
-    },
-    unlinked: function unlinked(target) {
-      var _this2 = this;
-
-      this.data.items = this.data.items.filter(function (item) {
-        return item !== target;
-      });
-      setTimeout(function () {
-        _this2.setActiveItem();
-      });
-    }
-  },
+  relation: useChildren('tabbar-item', function () {
+    this.updateChildren();
+  }),
   props: {
-    active: Number,
-    activeColor: String,
+    active: {
+      type: null,
+      observer: 'updateChildren',
+    },
+    activeColor: {
+      type: String,
+      observer: 'updateChildren',
+    },
+    inactiveColor: {
+      type: String,
+      observer: 'updateChildren',
+    },
     fixed: {
       type: Boolean,
-      value: true
+      value: true,
+      observer: 'setHeight',
+    },
+    placeholder: {
+      type: Boolean,
+      observer: 'setHeight',
+    },
+    border: {
+      type: Boolean,
+      value: true,
     },
     zIndex: {
       type: Number,
-      value: 1
-    }
+      value: 1,
+    },
+    safeAreaInsetBottom: {
+      type: Boolean,
+      value: true,
+    },
   },
   data: {
-    items: [],
-    currentActive: -1
-  },
-  watch: {
-    active: function active(_active) {
-      this.set({
-        currentActive: _active
-      });
-      this.setActiveItem();
-    }
-  },
-  created: function created() {
-    this.set({
-      currentActive: this.data.active
-    });
+    height: 50,
   },
   methods: {
-    setActiveItem: function setActiveItem() {
-      var _this3 = this;
-
-      this.data.items.forEach(function (item, index) {
-        item.setActive({
-          active: index === _this3.data.currentActive,
-          color: _this3.data.activeColor
+    updateChildren() {
+      const { children } = this;
+      if (!Array.isArray(children) || !children.length) {
+        return;
+      }
+      children.forEach((child) => child.updateFromParent());
+    },
+    setHeight() {
+      if (!this.data.fixed || !this.data.placeholder) {
+        return;
+      }
+      wx.nextTick(() => {
+        getRect(this, '.van-tabbar').then((res) => {
+          this.setData({ height: res.height });
         });
       });
     },
-    onChange: function onChange(child) {
-      var active = this.data.items.indexOf(child);
-
-      if (active !== this.data.currentActive && active !== -1) {
-        this.$emit('change', active);
-        this.set({
-          currentActive: active
-        });
-        this.setActiveItem();
-      }
-    }
-  }
+  },
 });
 export default global['__wxComponents']['vant-weapp/tabbar/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-tabbar {
-  display: -webkit-flex;
-  display: flex;
-  width: 100%;
-  height: 50px;
-  background-color: #fff;
-}
-.van-tabbar--fixed {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-}
-.van-tabbar--safe {
-  padding-bottom: 34px;
-}
+@import '../common/index.css';.van-tabbar{display:-webkit-flex;display:flex;box-sizing:initial;width:100%;height:50px;height:var(--tabbar-height,50px);background-color:#fff;background-color:var(--tabbar-background-color,#fff)}.van-tabbar--fixed{position:fixed;bottom:0;left:0}.van-tabbar--safe{padding-bottom:env(safe-area-inset-bottom)}
 </style>

@@ -1,306 +1,103 @@
 <template>
-<uni-shadow-root class="vant-weapp-popup-index"><van-overlay v-if="inited && overlay" mask :show="show" :z-index="zIndex" :custom-style="overlayStyle" @click="onClickOverlay"></van-overlay>
-<view v-if="inited" :class="'custom-class '+(utils.bem('popup', [position, { safe: isIPhoneX && safeAreaInsetBottom && position === 'bottom' }]))" :style="'z-index: '+(zIndex)+'; -webkit-animation: van-'+(transition || position)+'-'+(type)+' '+(duration)+'ms both; animation: van-'+(transition || position)+'-'+(type)+' '+(duration)+'ms both; '+(display ? '' : 'display: none;')+(customStyle)" @animationend="onAnimationEnd">
+<uni-shadow-root class="vant-weapp-popup-index"><van-overlay v-if="overlay" :show="show" :z-index="zIndex" :custom-style="overlayStyle" :duration="duration" @click="onClickOverlay"></van-overlay>
+<view v-if="inited" :class="'custom-class '+(classes)+' '+(utils.bem('popup', [position, { round, safe: safeAreaInsetBottom, safeTop: safeAreaInsetTop }]))" :style="computed.popupStyle({ zIndex, currentDuration, display, customStyle })" @transitionend="onTransitionEnd">
   <slot></slot>
+  <van-icon v-if="closeable" :name="closeIcon" :class="'close-icon-class van-popup__close-icon van-popup__close-icon--'+(closeIconPosition)" @click.native="onClickCloseIcon"></van-icon>
 </view></uni-shadow-root>
 </template>
-<wxs src="../wxs/utils.wxs" module="utils"></wxs>
+<wxs src="../wxs/utils.wxs" module="utils"></wxs><wxs src="./index.wxs" module="computed"></wxs>
 <script>
+import VanIcon from '../icon/index.vue'
 import VanOverlay from '../overlay/index.vue'
-global['__wxVueOptions'] = {components:{'van-overlay': VanOverlay}}
+global['__wxVueOptions'] = {components:{'van-icon': VanIcon,'van-overlay': VanOverlay}}
 
 global['__wxRoute'] = 'vant-weapp/popup/index'
 import { VantComponent } from '../common/component';
 import { transition } from '../mixins/transition';
-import { iphonex } from '../mixins/iphonex';
 VantComponent({
-  mixins: [transition(false), iphonex],
+  classes: [
+    'enter-class',
+    'enter-active-class',
+    'enter-to-class',
+    'leave-class',
+    'leave-active-class',
+    'leave-to-class',
+    'close-icon-class',
+  ],
+  mixins: [transition(false)],
   props: {
-    transition: String,
+    round: Boolean,
+    closeable: Boolean,
     customStyle: String,
     overlayStyle: String,
+    transition: {
+      type: String,
+      observer: 'observeClass',
+    },
     zIndex: {
       type: Number,
-      value: 100
+      value: 100,
     },
     overlay: {
       type: Boolean,
-      value: true
+      value: true,
+    },
+    closeIcon: {
+      type: String,
+      value: 'cross',
+    },
+    closeIconPosition: {
+      type: String,
+      value: 'top-right',
     },
     closeOnClickOverlay: {
       type: Boolean,
-      value: true
+      value: true,
     },
     position: {
       type: String,
-      value: 'center'
-    }
+      value: 'center',
+      observer: 'observeClass',
+    },
+    safeAreaInsetBottom: {
+      type: Boolean,
+      value: true,
+    },
+    safeAreaInsetTop: {
+      type: Boolean,
+      value: false,
+    },
+  },
+  created() {
+    this.observeClass();
   },
   methods: {
-    onClickOverlay: function onClickOverlay() {
+    onClickCloseIcon() {
+      this.$emit('close');
+    },
+    onClickOverlay() {
       this.$emit('click-overlay');
-
       if (this.data.closeOnClickOverlay) {
         this.$emit('close');
       }
-    }
-  }
+    },
+    observeClass() {
+      const { transition, position, duration } = this.data;
+      const updateData = {
+        name: transition || position,
+      };
+      if (transition === 'none') {
+        updateData.duration = 0;
+        this.originDuration = duration;
+      } else if (this.originDuration != null) {
+        updateData.duration = this.originDuration;
+      }
+      this.setData(updateData);
+    },
+  },
 });
 export default global['__wxComponents']['vant-weapp/popup/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-popup {
-  top: 50%;
-  left: 50%;
-  position: fixed;
-  max-height: 100%;
-  overflow-y: auto;
-  box-sizing: border-box;
-  background-color: #fff;
-  -webkit-overflow-scrolling: touch;
-  -webkit-animation: ease both;
-  animation: ease both;
-}
-.van-popup--center {
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(-50%, -50%, 0);
-}
-.van-popup--top {
-  width: 100%;
-  top: 0;
-  right: auto;
-  bottom: auto;
-  left: 50%;
-}
-.van-popup--right {
-  top: 50%;
-  right: 0;
-  bottom: auto;
-  left: auto;
-}
-.van-popup--bottom {
-  width: 100%;
-  top: auto;
-  bottom: 0;
-  right: auto;
-  left: 50%;
-}
-.van-popup--left {
-  top: 50%;
-  right: auto;
-  bottom: auto;
-  left: 0;
-}
-.van-popup--safe {
-  padding-bottom: 34px;
-}
-@-webkit-keyframes van-center-enter {
-  from {
-    opacity: 0;
-  }
-}
-@keyframes van-center-enter {
-  from {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes van-center-leave {
-  to {
-    opacity: 0;
-  }
-}
-@keyframes van-center-leave {
-  to {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes van-scale-enter {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
-    transform: translate3d(-50%, -50%, 0) scale(0.7);
-  }
-}
-@keyframes van-scale-enter {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
-    transform: translate3d(-50%, -50%, 0) scale(0.7);
-  }
-}
-@-webkit-keyframes van-scale-leave {
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
-    transform: translate3d(-50%, -50%, 0) scale(0.7);
-  }
-}
-@keyframes van-scale-leave {
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
-    transform: translate3d(-50%, -50%, 0) scale(0.7);
-  }
-}
-@-webkit-keyframes van-bottom-enter {
-  from {
-    -webkit-transform: translate3d(-50%, 100%, 0);
-    transform: translate3d(-50%, 100%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-@keyframes van-bottom-enter {
-  from {
-    -webkit-transform: translate3d(-50%, 100%, 0);
-    transform: translate3d(-50%, 100%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-@-webkit-keyframes van-bottom-leave {
-  from {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-50%, 100%, 0);
-    transform: translate3d(-50%, 100%, 0);
-  }
-}
-@keyframes van-bottom-leave {
-  from {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-50%, 100%, 0);
-    transform: translate3d(-50%, 100%, 0);
-  }
-}
-@-webkit-keyframes van-top-enter {
-  from {
-    -webkit-transform: translate3d(-50%, -100%, 0);
-    transform: translate3d(-50%, -100%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-@keyframes van-top-enter {
-  from {
-    -webkit-transform: translate3d(-50%, -100%, 0);
-    transform: translate3d(-50%, -100%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-@-webkit-keyframes van-top-leave {
-  from {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-50%, -100%, 0);
-    transform: translate3d(-50%, -100%, 0);
-  }
-}
-@keyframes van-top-leave {
-  from {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-50%, -100%, 0);
-    transform: translate3d(-50%, -100%, 0);
-  }
-}
-@-webkit-keyframes van-left-enter {
-  from {
-    -webkit-transform: translate3d(-100%, -50%, 0);
-    transform: translate3d(-100%, -50%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-}
-@keyframes van-left-enter {
-  from {
-    -webkit-transform: translate3d(-100%, -50%, 0);
-    transform: translate3d(-100%, -50%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-}
-@-webkit-keyframes van-left-leave {
-  from {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-100%, -50%, 0);
-    transform: translate3d(-100%, -50%, 0);
-  }
-}
-@keyframes van-left-leave {
-  from {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-100%, -50%, 0);
-    transform: translate3d(-100%, -50%, 0);
-  }
-}
-@-webkit-keyframes van-right-enter {
-  from {
-    -webkit-transform: translate3d(100%, -50%, 0);
-    transform: translate3d(100%, -50%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-}
-@keyframes van-right-enter {
-  from {
-    -webkit-transform: translate3d(100%, -50%, 0);
-    transform: translate3d(100%, -50%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-}
-@-webkit-keyframes van-right-leave {
-  from {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(100%, -50%, 0);
-    transform: translate3d(100%, -50%, 0);
-  }
-}
-@keyframes van-right-leave {
-  from {
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-  to {
-    -webkit-transform: translate3d(100%, -50%, 0);
-    transform: translate3d(100%, -50%, 0);
-  }
-}
+@import '../common/index.css';.van-popup{position:fixed;box-sizing:border-box;max-height:100%;overflow-y:auto;transition-timing-function:ease;-webkit-animation:ease both;animation:ease both;-webkit-overflow-scrolling:touch;background-color:#fff;background-color:var(--popup-background-color,#fff)}.van-popup--center{top:50%;left:50%;-webkit-transform:translate3d(-50%,-50%,0);transform:translate3d(-50%,-50%,0)}.van-popup--center.van-popup--round{border-radius:16px;border-radius:var(--popup-round-border-radius,16px)}.van-popup--top{top:0;left:0;width:100%}.van-popup--top.van-popup--round{border-radius:0 0 16px 16px;border-radius:0 0 var(--popup-round-border-radius,16px) var(--popup-round-border-radius,16px)}.van-popup--right{top:50%;right:0;-webkit-transform:translate3d(0,-50%,0);transform:translate3d(0,-50%,0)}.van-popup--right.van-popup--round{border-radius:16px 0 0 16px;border-radius:var(--popup-round-border-radius,16px) 0 0 var(--popup-round-border-radius,16px)}.van-popup--bottom{bottom:0;left:0;width:100%}.van-popup--bottom.van-popup--round{border-radius:16px 16px 0 0;border-radius:var(--popup-round-border-radius,16px) var(--popup-round-border-radius,16px) 0 0}.van-popup--left{top:50%;left:0;-webkit-transform:translate3d(0,-50%,0);transform:translate3d(0,-50%,0)}.van-popup--left.van-popup--round{border-radius:0 16px 16px 0;border-radius:0 var(--popup-round-border-radius,16px) var(--popup-round-border-radius,16px) 0}.van-popup--bottom.van-popup--safe{padding-bottom:env(safe-area-inset-bottom)}.van-popup--safeTop{padding-top:env(safe-area-inset-top)}.van-popup__close-icon{position:absolute;z-index:1;z-index:var(--popup-close-icon-z-index,1);color:#969799;color:var(--popup-close-icon-color,#969799);font-size:18px;font-size:var(--popup-close-icon-size,18px)}.van-popup__close-icon--top-left{top:16px;top:var(--popup-close-icon-margin,16px);left:16px;left:var(--popup-close-icon-margin,16px)}.van-popup__close-icon--top-right{top:16px;top:var(--popup-close-icon-margin,16px);right:16px;right:var(--popup-close-icon-margin,16px)}.van-popup__close-icon--bottom-left{bottom:16px;bottom:var(--popup-close-icon-margin,16px);left:16px;left:var(--popup-close-icon-margin,16px)}.van-popup__close-icon--bottom-right{right:16px;right:var(--popup-close-icon-margin,16px);bottom:16px;bottom:var(--popup-close-icon-margin,16px)}.van-popup__close-icon:active{opacity:.6}.van-scale-enter-active,.van-scale-leave-active{transition-property:opacity,-webkit-transform;transition-property:opacity,transform;transition-property:opacity,transform,-webkit-transform}.van-scale-enter,.van-scale-leave-to{-webkit-transform:translate3d(-50%,-50%,0) scale(.7);transform:translate3d(-50%,-50%,0) scale(.7);opacity:0}.van-fade-enter-active,.van-fade-leave-active{transition-property:opacity}.van-fade-enter,.van-fade-leave-to{opacity:0}.van-center-enter-active,.van-center-leave-active{transition-property:opacity}.van-center-enter,.van-center-leave-to{opacity:0}.van-bottom-enter-active,.van-bottom-leave-active,.van-left-enter-active,.van-left-leave-active,.van-right-enter-active,.van-right-leave-active,.van-top-enter-active,.van-top-leave-active{transition-property:-webkit-transform;transition-property:transform;transition-property:transform,-webkit-transform}.van-bottom-enter,.van-bottom-leave-to{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}.van-top-enter,.van-top-leave-to{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}.van-left-enter,.van-left-leave-to{-webkit-transform:translate3d(-100%,-50%,0);transform:translate3d(-100%,-50%,0)}.van-right-enter,.van-right-leave-to{-webkit-transform:translate3d(100%,-50%,0);transform:translate3d(100%,-50%,0)}
 </style>

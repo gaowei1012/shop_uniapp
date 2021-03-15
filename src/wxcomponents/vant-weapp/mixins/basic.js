@@ -1,22 +1,11 @@
-export var basic = Behavior({
+export const basic = Behavior({
   methods: {
-    $emit: function $emit() {
-      this.triggerEvent.apply(this, arguments);
+    $emit(name, detail, options) {
+      this.triggerEvent(name, detail, options);
     },
-    getRect: function getRect(selector, all) {
-      var _this = this;
-
-      return new Promise(function (resolve) {
-        wx.createSelectorQuery().in(_this)[all ? 'selectAll' : 'select'](selector).boundingClientRect(function (rect) {
-          if (all && Array.isArray(rect) && rect.length) {
-            resolve(rect);
-          }
-
-          if (!all && rect) {
-            resolve(rect);
-          }
-        }).exec();
-      });
-    }
-  }
+    set(data) {
+      this.setData(data);
+      return new Promise((resolve) => wx.nextTick(resolve));
+    },
+  },
 });

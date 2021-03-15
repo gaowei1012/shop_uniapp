@@ -1,17 +1,18 @@
 <template>
-<uni-shadow-root class="vant-weapp-picker-column-index"><view class="van-picker-column custom-class" :style="'height: '+(itemHeight * visibleItemCount)+'px'" @touchstart="onTouchStart" @touchmove.stop.prevent="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchEnd">
-  <view :style="wrapperStyle">
-    <view v-for="(option,index) in (options)" :key="option.index" :data-index="index" :style="'height: '+(itemHeight)+'px'" :class="'van-ellipsis van-picker-column__item '+(option && option.disabled ? 'van-picker-column__item--disabled' : '')+' '+(index === currentIndex ? 'van-picker-column__item--selected active-class' : '')" @click="onClickItem">{{ getOptionText(option, valueKey) }}</view>
+<uni-shadow-root class="vant-weapp-picker-column-index"><view class="van-picker-column custom-class" :style="computed.rootStyle({ itemHeight, visibleItemCount })" @touchstart="onTouchStart" @touchmove.stop.prevent="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchEnd">
+  <view :style="computed.wrapperStyle({ offset, itemHeight, visibleItemCount })">
+    <view v-for="(option,index) in (options)" :key="option.index" :data-index="index" :style="'height: '+(itemHeight)+'px'" :class="'van-ellipsis '+(utils.bem('picker-column__item', { disabled: option && option.disabled, selected: index === currentIndex }))+' '+(index === currentIndex ? 'active-class' : '')" @click="onClickItem">{{ computed.optionText(option, valueKey) }}</view>
   </view>
 </view></uni-shadow-root>
 </template>
-<wxs module="getOptionText" src="./index-getOptionText.wxs"></wxs>
+<wxs src="../wxs/utils.wxs" module="utils"></wxs><wxs src="./index.wxs" module="computed"></wxs>
 <script>
 
 global['__wxRoute'] = 'vant-weapp/picker-column/index'
 import { VantComponent } from '../common/component';
-import { isObj, range } from '../common/utils';
-var DEFAULT_DURATION = 200;
+import { range } from '../common/utils';
+import { isObj } from '../common/validator';
+const DEFAULT_DURATION = 200;
 VantComponent({
   classes: ['active-class'],
   props: {
@@ -21,12 +22,15 @@ VantComponent({
     visibleItemCount: Number,
     initialOptions: {
       type: Array,
-      value: []
+      value: [],
     },
     defaultIndex: {
       type: Number,
-      value: 0
-    }
+      value: 0,
+      observer(value) {
+        this.setIndex(value);
+      },
+    },
   },
   data: {
     startY: 0,
@@ -34,135 +38,103 @@ VantComponent({
     duration: 0,
     startOffset: 0,
     options: [],
-    currentIndex: 0
+    currentIndex: 0,
   },
-  created: function created() {
-    var _this = this;
-
-    var _this$data = this.data,
-        defaultIndex = _this$data.defaultIndex,
-        initialOptions = _this$data.initialOptions;
+  created() {
+    const { defaultIndex, initialOptions } = this.data;
     this.set({
       currentIndex: defaultIndex,
-      options: initialOptions
-    }, function () {
-      _this.setIndex(defaultIndex);
+      options: initialOptions,
+    }).then(() => {
+      this.setIndex(defaultIndex);
     });
   },
-  computed: {
-    count: function count() {
+  methods: {
+    getCount() {
       return this.data.options.length;
     },
-    baseOffset: function baseOffset() {
-      var data = this.data;
-      return data.itemHeight * (data.visibleItemCount - 1) / 2;
-    },
-    wrapperStyle: function wrapperStyle() {
-      var data = this.data;
-      return ["transition: " + data.duration + "ms", "transform: translate3d(0, " + (data.offset + data.baseOffset) + "px, 0)", "line-height: " + data.itemHeight + "px"].join('; ');
-    }
-  },
-  watch: {
-    defaultIndex: function defaultIndex(value) {
-      this.setIndex(value);
-    }
-  },
-  methods: {
-    onTouchStart: function onTouchStart(event) {
-      this.set({
+    onTouchStart(event) {
+      this.setData({
         startY: event.touches[0].clientY,
         startOffset: this.data.offset,
-        duration: 0
+        duration: 0,
       });
     },
-    onTouchMove: function onTouchMove(event) {
-      var data = this.data;
-      var deltaY = event.touches[0].clientY - data.startY;
-      this.set({
-        offset: range(data.startOffset + deltaY, -(data.count * data.itemHeight), data.itemHeight)
+    onTouchMove(event) {
+      const { data } = this;
+      const deltaY = event.touches[0].clientY - data.startY;
+      this.setData({
+        offset: range(
+          data.startOffset + deltaY,
+          -(this.getCount() * data.itemHeight),
+          data.itemHeight
+        ),
       });
     },
-    onTouchEnd: function onTouchEnd() {
-      var data = this.data;
-
+    onTouchEnd() {
+      const { data } = this;
       if (data.offset !== data.startOffset) {
-        this.set({
-          duration: DEFAULT_DURATION
-        });
-        var index = range(Math.round(-data.offset / data.itemHeight), 0, data.count - 1);
+        this.setData({ duration: DEFAULT_DURATION });
+        const index = range(
+          Math.round(-data.offset / data.itemHeight),
+          0,
+          this.getCount() - 1
+        );
         this.setIndex(index, true);
       }
     },
-    onClickItem: function onClickItem(event) {
-      var index = event.currentTarget.dataset.index;
+    onClickItem(event) {
+      const { index } = event.currentTarget.dataset;
       this.setIndex(index, true);
     },
-    adjustIndex: function adjustIndex(index) {
-      var data = this.data;
-      index = range(index, 0, data.count);
-
-      for (var i = index; i < data.count; i++) {
+    adjustIndex(index) {
+      const { data } = this;
+      const count = this.getCount();
+      index = range(index, 0, count);
+      for (let i = index; i < count; i++) {
         if (!this.isDisabled(data.options[i])) return i;
       }
-
-      for (var _i = index - 1; _i >= 0; _i--) {
-        if (!this.isDisabled(data.options[_i])) return _i;
+      for (let i = index - 1; i >= 0; i--) {
+        if (!this.isDisabled(data.options[i])) return i;
       }
     },
-    isDisabled: function isDisabled(option) {
+    isDisabled(option) {
       return isObj(option) && option.disabled;
     },
-    getOptionText: function getOptionText(option) {
-      var data = this.data;
-      return isObj(option) && data.valueKey in option ? option[data.valueKey] : option;
+    getOptionText(option) {
+      const { data } = this;
+      return isObj(option) && data.valueKey in option
+        ? option[data.valueKey]
+        : option;
     },
-    setIndex: function setIndex(index, userAction) {
-      var data = this.data;
+    setIndex(index, userAction) {
+      const { data } = this;
       index = this.adjustIndex(index) || 0;
-      this.set({
-        offset: -index * data.itemHeight
-      });
-
+      const offset = -index * data.itemHeight;
       if (index !== data.currentIndex) {
-        this.set({
-          currentIndex: index
+        return this.set({ offset, currentIndex: index }).then(() => {
+          userAction && this.$emit('change', index);
         });
-        userAction && this.$emit('change', index);
       }
+      return this.set({ offset });
     },
-    setValue: function setValue(value) {
-      var options = this.data.options;
-
-      for (var i = 0; i < options.length; i++) {
+    setValue(value) {
+      const { options } = this.data;
+      for (let i = 0; i < options.length; i++) {
         if (this.getOptionText(options[i]) === value) {
           return this.setIndex(i);
         }
       }
+      return Promise.resolve();
     },
-    getValue: function getValue() {
-      var data = this.data;
+    getValue() {
+      const { data } = this;
       return data.options[data.currentIndex];
-    }
-  }
+    },
+  },
 });
 export default global['__wxComponents']['vant-weapp/picker-column/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-picker-column {
-  overflow: hidden;
-  font-size: 16px;
-  text-align: center;
-}
-.van-picker-column__item {
-  padding: 0 5px;
-  color: #999;
-}
-.van-picker-column__item--selected {
-  font-weight: 500;
-  color: #333;
-}
-.van-picker-column__item--disabled {
-  opacity: 0.3;
-}
+@import '../common/index.css';.van-picker-column{overflow:hidden;text-align:center;color:#000;color:var(--picker-option-text-color,#000);font-size:16px;font-size:var(--picker-option-font-size,16px)}.van-picker-column__item{padding:0 5px}.van-picker-column__item--selected{font-weight:500;font-weight:var(--font-weight-bold,500);color:#323233;color:var(--picker-option-selected-text-color,#323233)}.van-picker-column__item--disabled{opacity:.3;opacity:var(--picker-option-disabled-opacity,.3)}
 </style>

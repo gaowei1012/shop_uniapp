@@ -1,7 +1,13 @@
 import { link } from '../mixins/link';
 import { VantComponent } from '../common/component';
 VantComponent({
-  classes: ['title-class', 'label-class', 'value-class', 'right-icon-class'],
+  classes: [
+    'title-class',
+    'label-class',
+    'value-class',
+    'right-icon-class',
+    'hover-class',
+  ],
   mixins: [link],
   props: {
     title: null,
@@ -16,15 +22,17 @@ VantComponent({
     titleWidth: String,
     customStyle: String,
     arrowDirection: String,
+    useLabelSlot: Boolean,
     border: {
       type: Boolean,
-      value: true
-    }
+      value: true,
+    },
+    titleStyle: String,
   },
   methods: {
-    onClick: function onClick(event) {
+    onClick(event) {
       this.$emit('click', event.detail);
       this.jumpLink();
-    }
-  }
+    },
+  },
 });

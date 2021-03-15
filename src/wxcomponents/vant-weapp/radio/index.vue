@@ -1,12 +1,13 @@
 <template>
-<uni-shadow-root class="vant-weapp-radio-index"><view class="van-radio custom-class">
-  <view class="van-radio__input">
-    <radio-group @change="onChange">
-      <radio :value="name" :checked="value === name" :disabled="disabled" class="van-radio__control"></radio>
-    </radio-group>
-    <van-icon :class="utils.bem('radio__icon', { disabled, checked: !disabled && name === value, check: !disabled && name !== value })" custom-class="icon-class" :color="value === name ? checkedColor : ''" :name="value === name ? 'checked' : 'circle'"></van-icon>
+<uni-shadow-root class="vant-weapp-radio-index"><view :class="(utils.bem('radio', [direction]))+' custom-class'">
+  <view v-if="labelPosition === 'left'" :class="'label-class '+(utils.bem('radio__label', [labelPosition, { disabled }]))" @click="onClickLabel">
+    <slot></slot>
   </view>
-  <view :class="'van-radio__label van-radio__label--'+(labelPosition)+' label-class'" @click="onClickLabel">
+  <view class="van-radio__icon-wrap" :style="'font-size: '+(utils.addUnit(iconSize))+';'" @click="onChange">
+    <slot v-if="useIconSlot" name="icon"></slot>
+    <van-icon v-else name="success" :class="utils.bem('radio__icon', [shape, { disabled, checked: value === name }])" :style="'font-size: '+(utils.addUnit(iconSize))+';'+(checkedColor && !disabled && value === name ? 'border-color:' + checkedColor + '; background-color:' + checkedColor + ';' : '')" custom-class="icon-class" :custom-style="'line-height: '+(utils.addUnit(iconSize))+';font-size: .8em;display: block;'"></van-icon>
+  </view>
+  <view v-if="labelPosition === 'right'" :class="'label-class '+(utils.bem('radio__label', [labelPosition, { disabled }]))" @click="onClickLabel">
     <slot></slot>
   </view>
 </view></uni-shadow-root>
@@ -18,91 +19,52 @@ global['__wxVueOptions'] = {components:{'van-icon': VanIcon}}
 
 global['__wxRoute'] = 'vant-weapp/radio/index'
 import { VantComponent } from '../common/component';
+import { useParent } from '../common/relation';
 VantComponent({
   field: true,
-  relation: {
-    name: 'radio-group',
-    type: 'ancestor'
-  },
+  relation: useParent('radio-group'),
   classes: ['icon-class', 'label-class'],
   props: {
     name: null,
     value: null,
     disabled: Boolean,
+    useIconSlot: Boolean,
+    checkedColor: String,
+    labelPosition: {
+      type: String,
+      value: 'right',
+    },
     labelDisabled: Boolean,
-    labelPosition: String,
-    checkedColor: String
+    shape: {
+      type: String,
+      value: 'round',
+    },
+    iconSize: {
+      type: null,
+      value: 20,
+    },
   },
   methods: {
-    emitChange: function emitChange(value) {
-      var instance = this.getRelationNodes('../radio-group/index')[0] || this;
+    emitChange(value) {
+      const instance = this.parent || this;
       instance.$emit('input', value);
       instance.$emit('change', value);
     },
-    onChange: function onChange(event) {
-      this.emitChange(event.detail.value);
-    },
-    onClickLabel: function onClickLabel() {
-      if (!this.data.disabled && !this.data.labelDisabled) {
+    onChange() {
+      if (!this.data.disabled) {
         this.emitChange(this.data.name);
       }
-    }
-  }
+    },
+    onClickLabel() {
+      const { disabled, labelDisabled, name } = this.data;
+      if (!disabled && !labelDisabled) {
+        this.emitChange(name);
+      }
+    },
+  },
 });
 export default global['__wxComponents']['vant-weapp/radio/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-radio {
-  overflow: hidden;
-  line-height: 1;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.van-radio__input,
-.van-radio__label {
-  display: inline-block;
-  vertical-align: middle;
-}
-.van-radio__input {
-  position: relative;
-  font-size: 20px;
-}
-.van-radio__control {
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-}
-.van-radio__label {
-  margin-left: 10px;
-  color: #333;
-  font-size: 16px;
-  line-height: 20px;
-}
-.van-radio__label--left {
-  margin: 0 10px 0 0;
-  float: left;
-}
-.van-radio__label:empty {
-  margin: 0;
-}
-.van-radio__icon {
-  pointer-events: none;
-  display: block;
-  line-height: 0;
-}
-.van-radio__icon--disabled {
-  color: #e5e5e5;
-}
-.van-radio__icon--checked {
-  color: #1989fa;
-}
-.van-radio__icon--check {
-  color: #999;
-}
+@import '../common/index.css';.van-radio{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;overflow:hidden;-webkit-user-select:none;user-select:none}.van-radio__icon-wrap{-webkit-flex:none;flex:none}.van-radio--horizontal{margin-right:12px;margin-right:var(--padding-sm,12px)}.van-radio__icon{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;box-sizing:border-box;width:1em;height:1em;color:transparent;text-align:center;transition-property:color,border-color,background-color;border:1px solid #c8c9cc;border:1px solid var(--radio-border-color,#c8c9cc);font-size:20px;font-size:var(--radio-size,20px);transition-duration:.2s;transition-duration:var(--radio-transition-duration,.2s)}.van-radio__icon--round{border-radius:100%}.van-radio__icon--checked{color:#fff;color:var(--white,#fff);background-color:#1989fa;background-color:var(--radio-checked-icon-color,#1989fa);border-color:#1989fa;border-color:var(--radio-checked-icon-color,#1989fa)}.van-radio__icon--disabled{background-color:#ebedf0;background-color:var(--radio-disabled-background-color,#ebedf0);border-color:#c8c9cc;border-color:var(--radio-disabled-icon-color,#c8c9cc)}.van-radio__icon--disabled.van-radio__icon--checked{color:#c8c9cc;color:var(--radio-disabled-icon-color,#c8c9cc)}.van-radio__label{word-wrap:break-word;margin-left:10px;margin-left:var(--radio-label-margin,10px);color:#323233;color:var(--radio-label-color,#323233);line-height:20px;line-height:var(--radio-size,20px)}.van-radio__label--left{float:left;margin:0 10px 0 0;margin:0 var(--radio-label-margin,10px) 0 0}.van-radio__label--disabled{color:#c8c9cc;color:var(--radio-disabled-label-color,#c8c9cc)}.van-radio__label:empty{margin:0}
 </style>

@@ -1,12 +1,12 @@
 <template>
-<uni-shadow-root class="vant-weapp-collapse-item-index"><view class="van-collapse-item van-hairline--top custom-class">
-  <van-cell :title="title" :icon="icon" :is-link="isLink" :value="value" :label="label" :border="border && expanded" :class="utils.bem('collapse-item__title', { disabled, expanded })" right-icon-class="van-cell__right-icon" custom-class="van-cell" @click="onClick">
+<uni-shadow-root class="vant-weapp-collapse-item-index"><view :class="'van-collapse-item custom-class '+(index !== 0 ? 'van-hairline--top' : '')">
+  <van-cell :title="title" title-class="title-class" :icon="icon" :value="value" :label="label" :is-link="isLink" :clickable="clickable" :border="border && expanded" :class="utils.bem('collapse-item__title', { disabled, expanded })" right-icon-class="van-cell__right-icon" custom-class="van-cell" hover-class="van-cell--hover" @click="onClick">
     <slot name="title" slot="title"></slot>
     <slot name="icon" slot="icon"></slot>
     <slot name="value"></slot>
     <slot name="right-icon" slot="right-icon"></slot>
   </van-cell>
-  <view class="van-collapse-item__wrapper" :style="'height: '+(contentHeight)+';'" :animation="animationData" @transitionend="onTransitionEnd">
+  <view :class="utils.bem('collapse-item__wrapper')" style="height: 0;" :animation="animation">
     <view class="van-collapse-item__content content-class">
       <slot></slot>
     </view>
@@ -20,15 +20,11 @@ global['__wxVueOptions'] = {components:{'van-cell': VanCell}}
 
 global['__wxRoute'] = 'vant-weapp/collapse-item/index'
 import { VantComponent } from '../common/component';
+import { useParent } from '../common/relation';
+import { setContentAnimate } from './animate';
 VantComponent({
-  classes: ['content-class'],
-  relation: {
-    name: 'collapse',
-    type: 'ancestor',
-    linked: function linked(parent) {
-      this.parent = parent;
-    }
-  },
+  classes: ['title-class', 'content-class'],
+  relation: useParent('collapse'),
   props: {
     name: null,
     title: null,
@@ -36,122 +32,54 @@ VantComponent({
     icon: String,
     label: String,
     disabled: Boolean,
+    clickable: Boolean,
     border: {
       type: Boolean,
-      value: true
+      value: true,
     },
     isLink: {
       type: Boolean,
-      value: true
-    }
+      value: true,
+    },
   },
   data: {
-    contentHeight: 0,
-    expanded: false
+    expanded: false,
   },
-  beforeCreate: function beforeCreate() {
-    this.animation = wx.createAnimation({
-      duration: 300,
-      timingFunction: 'ease-in-out'
-    });
+  mounted() {
+    this.updateExpanded();
+    this.mounted = true;
   },
   methods: {
-    updateExpanded: function updateExpanded() {
+    updateExpanded() {
       if (!this.parent) {
-        return null;
+        return;
       }
-
-      var _this$parent$data = this.parent.data,
-          value = _this$parent$data.value,
-          accordion = _this$parent$data.accordion,
-          items = _this$parent$data.items;
-      var name = this.data.name;
-      var index = items.indexOf(this);
-      var currentName = name == null ? index : name;
-      var expanded = accordion ? value === currentName : value.some(function (name) {
-        return name === currentName;
-      });
-
+      const { value, accordion } = this.parent.data;
+      const { children = [] } = this.parent;
+      const { name } = this.data;
+      const index = children.indexOf(this);
+      const currentName = name == null ? index : name;
+      const expanded = accordion
+        ? value === currentName
+        : (value || []).some((name) => name === currentName);
       if (expanded !== this.data.expanded) {
-        this.updateStyle(expanded);
+        setContentAnimate(this, expanded, this.mounted);
       }
-
-      this.set({
-        expanded: expanded
-      });
+      this.setData({ index, expanded });
     },
-    updateStyle: function updateStyle(expanded) {
-      var _this = this;
-
-      this.getRect('.van-collapse-item__content').then(function (res) {
-        var animationData = _this.animation.height(expanded ? res.height : 0).step().export();
-
-        if (expanded) {
-          _this.set({
-            animationData: animationData
-          });
-        } else {
-          _this.set({
-            contentHeight: res.height + 'px'
-          }, function () {
-            setTimeout(function () {
-              _this.set({
-                animationData: animationData
-              });
-            }, 20);
-          });
-        }
-      });
-    },
-    onClick: function onClick() {
+    onClick() {
       if (this.data.disabled) {
         return;
       }
-
-      var _this$data = this.data,
-          name = _this$data.name,
-          expanded = _this$data.expanded;
-      var index = this.parent.data.items.indexOf(this);
-      var currentName = name == null ? index : name;
+      const { name, expanded } = this.data;
+      const index = this.parent.children.indexOf(this);
+      const currentName = name == null ? index : name;
       this.parent.switch(currentName, !expanded);
     },
-    onTransitionEnd: function onTransitionEnd() {
-      if (this.data.expanded) {
-        this.set({
-          contentHeight: 'auto'
-        });
-      }
-    }
-  }
+  },
 });
 export default global['__wxComponents']['vant-weapp/collapse-item/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-collapse-item__title .van-cell__right-icon {
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-  transition: 0.3s;
-}
-.van-collapse-item__title--expanded .van-cell__right-icon {
-  -webkit-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-}
-.van-collapse-item__title--disabled .van-cell,
-.van-collapse-item__title--disabled .van-cell__right-icon {
-  color: #c9c9c9 !important;
-}
-.van-collapse-item__title--disabled .van-cell:active {
-  background-color: #fff !important;
-}
-.van-collapse-item__wrapper {
-  overflow: hidden;
-}
-.van-collapse-item__content {
-  color: #999;
-  padding: 15px;
-  font-size: 13px;
-  line-height: 1.5;
-  background-color: #fff;
-}
+@import '../common/index.css';.van-collapse-item__title .van-cell__right-icon{-webkit-transform:rotate(90deg);transform:rotate(90deg);transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s,-webkit-transform .3s;transition:-webkit-transform var(--collapse-item-transition-duration,.3s);transition:transform var(--collapse-item-transition-duration,.3s);transition:transform var(--collapse-item-transition-duration,.3s),-webkit-transform var(--collapse-item-transition-duration,.3s)}.van-collapse-item__title--expanded .van-cell__right-icon{-webkit-transform:rotate(-90deg);transform:rotate(-90deg)}.van-collapse-item__title--disabled .van-cell,.van-collapse-item__title--disabled .van-cell__right-icon{color:#c8c9cc!important;color:var(--collapse-item-title-disabled-color,#c8c9cc)!important}.van-collapse-item__title--disabled .van-cell--hover{background-color:#fff!important;background-color:var(--white,#fff)!important}.van-collapse-item__wrapper{overflow:hidden}.van-collapse-item__content{padding:15px;padding:var(--collapse-item-content-padding,15px);color:#969799;color:var(--collapse-item-content-text-color,#969799);font-size:13px;font-size:var(--collapse-item-content-font-size,13px);line-height:1.5;line-height:var(--collapse-item-content-line-height,1.5);background-color:#fff;background-color:var(--collapse-item-content-background-color,#fff)}
 </style>

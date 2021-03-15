@@ -1,124 +1,108 @@
 <template>
 <uni-shadow-root class="vant-weapp-rate-index"><view class="van-rate custom-class" @touchmove="onTouchMove">
-  <van-icon v-for="(item,index) in (list)" :key="item.index" class="van-rate__item" custom-class="icon-class" :size="(size)+'px'" :data-index="index" :name="item ? icon : voidIcon" :color="disabled ? disabledColor : item ? color : voidColor" @click="onSelect"></van-icon>
+  <view v-for="(item,index) in (innerCountArray)" :key="item.index" class="van-rate__item" :style="'padding-right: '+(index !== count - 1 ? utils.addUnit(gutter) : '')">
+    <van-icon :name="index + 1 <= innerValue ? icon : voidIcon" class="van-rate__icon" :style="'font-size: '+(utils.addUnit(size))" custom-class="icon-class" :data-score="index" :color="disabled ? disabledColor : index + 1 <= innerValue ? color : voidColor" @click="onSelect"></van-icon>
+
+    <van-icon v-if="allowHalf" :name="index + 0.5 <= innerValue ? icon : voidIcon" :class="utils.bem('rate__icon', ['half'])" :style="'font-size: '+(utils.addUnit(size))" custom-class="icon-class" :data-score="index - 0.5" :color="disabled ? disabledColor : index + 0.5 <= innerValue ? color : voidColor" @click="onSelect"></van-icon>
+  </view>
 </view></uni-shadow-root>
 </template>
-
+<wxs src="../wxs/utils.wxs" module="utils"></wxs>
 <script>
 import VanIcon from '../icon/index.vue'
 global['__wxVueOptions'] = {components:{'van-icon': VanIcon}}
 
 global['__wxRoute'] = 'vant-weapp/rate/index'
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
+import { getAllRect } from '../common/utils';
 import { VantComponent } from '../common/component';
+import { canIUseModel } from '../common/version';
 VantComponent({
   field: true,
   classes: ['icon-class'],
   props: {
+    value: {
+      type: Number,
+      observer(value) {
+        if (value !== this.data.innerValue) {
+          this.setData({ innerValue: value });
+        }
+      },
+    },
     readonly: Boolean,
     disabled: Boolean,
-    size: {
-      type: Number,
-      value: 20
-    },
+    allowHalf: Boolean,
+    size: null,
     icon: {
       type: String,
-      value: 'star'
+      value: 'star',
     },
     voidIcon: {
       type: String,
-      value: 'star-o'
+      value: 'star-o',
     },
     color: {
       type: String,
-      value: '#ffd21e'
+      value: '#ffd21e',
     },
     voidColor: {
       type: String,
-      value: '#c7c7c7'
+      value: '#c7c7c7',
     },
     disabledColor: {
       type: String,
-      value: '#bdbdbd'
+      value: '#bdbdbd',
     },
     count: {
       type: Number,
-      value: 5
+      value: 5,
+      observer(value) {
+        this.setData({ innerCountArray: Array.from({ length: value }) });
+      },
     },
-    value: {
-      type: Number,
-      value: 0
-    }
+    gutter: null,
+    touchable: {
+      type: Boolean,
+      value: true,
+    },
   },
   data: {
-    innerValue: 0
-  },
-  watch: {
-    value: function value(_value) {
-      if (_value !== this.data.innerValue) {
-        this.set({
-          innerValue: _value
-        });
-      }
-    }
-  },
-  computed: {
-    list: function list() {
-      var _this$data = this.data,
-          count = _this$data.count,
-          innerValue = _this$data.innerValue;
-      return Array.from({
-        length: count
-      }, function (_, index) {
-        return index < innerValue;
-      });
-    }
+    innerValue: 0,
+    innerCountArray: Array.from({ length: 5 }),
   },
   methods: {
-    onSelect: function onSelect(event) {
-      var data = this.data;
-      var index = event.currentTarget.dataset.index;
-
+    onSelect(event) {
+      const { data } = this;
+      const { score } = event.currentTarget.dataset;
       if (!data.disabled && !data.readonly) {
-        this.set({
-          innerValue: index + 1
+        this.setData({ innerValue: score + 1 });
+        if (canIUseModel()) {
+          this.setData({ value: score + 1 });
+        }
+        wx.nextTick(() => {
+          this.$emit('input', score + 1);
+          this.$emit('change', score + 1);
         });
-        this.$emit('input', index + 1);
-        this.$emit('change', index + 1);
       }
     },
-    onTouchMove: function onTouchMove(event) {
-      var _this = this;
-
-      var _event$touches$ = event.touches[0],
-          clientX = _event$touches$.clientX,
-          clientY = _event$touches$.clientY;
-      this.getRect('.van-rate__item', true).then(function (list) {
-        var target = list.find(function (item) {
-          return clientX >= item.left && clientX <= item.right && clientY >= item.top && clientY <= item.bottom;
-        });
-
+    onTouchMove(event) {
+      const { touchable } = this.data;
+      if (!touchable) return;
+      const { clientX } = event.touches[0];
+      getAllRect(this, '.van-rate__icon').then((list) => {
+        const target = list
+          .sort((item) => item.right - item.left)
+          .find((item) => clientX >= item.left && clientX <= item.right);
         if (target != null) {
-          _this.onSelect(_extends({}, event, {
-            currentTarget: target
-          }));
+          this.onSelect(
+            Object.assign(Object.assign({}, event), { currentTarget: target })
+          );
         }
       });
-    }
-  }
+    },
+  },
 });
 export default global['__wxComponents']['vant-weapp/rate/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-rate {
-  -webkit-user-select: none;
-  user-select: none;
-}
-.van-rate__item {
-  width: 1em;
-  padding: 0 2px;
-  box-sizing: content-box;
-}
+@import '../common/index.css';.van-rate{display:-webkit-inline-flex;display:inline-flex;-webkit-user-select:none;user-select:none}.van-rate__item{position:relative;padding:0 2px;padding:0 var(--rate-horizontal-padding,2px)}.van-rate__icon{display:block;height:1em;font-size:20px;font-size:var(--rate-icon-size,20px)}.van-rate__icon--half{position:absolute;top:0;width:.5em;overflow:hidden;left:2px;left:var(--rate-horizontal-padding,2px)}
 </style>

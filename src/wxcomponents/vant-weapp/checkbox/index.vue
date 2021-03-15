@@ -1,143 +1,99 @@
 <template>
 <uni-shadow-root class="vant-weapp-checkbox-index"><view class="van-checkbox custom-class">
+  <view v-if="labelPosition === 'left'" :class="'label-class '+(utils.bem('checkbox__label', [labelPosition, { disabled: disabled || parentDisabled }]))" @click="onClickLabel">
+    <slot></slot>
+  </view>
   <view class="van-checkbox__icon-wrap" @click="toggle">
     <slot v-if="useIconSlot" name="icon"></slot>
-    <van-icon v-else name="success" :class="utils.bem('checkbox__icon', [shape, { disabled, checked: value }])" :style="checkedColor && value && !disabled ? 'border-color:' + checkedColor + '; background-color:' + checkedColor : ''" custom-class="icon-class" custom-style="line-height: 20px;"></van-icon>
+    <van-icon v-else name="success" size="0.8em" :class="utils.bem('checkbox__icon', [shape, { disabled: disabled || parentDisabled, checked: value }])" :style="computed.iconStyle(checkedColor, value, disabled, parentDisabled, iconSize)" custom-class="icon-class" custom-style="line-height: 1.25em;"></van-icon>
   </view>
-  <view :class="'label-class '+(utils.bem('checkbox__label', [labelPosition, { disabled }]))" @click="onClickLabel">
+  <view v-if="labelPosition === 'right'" :class="'label-class '+(utils.bem('checkbox__label', [labelPosition, { disabled: disabled || parentDisabled }]))" @click="onClickLabel">
     <slot></slot>
   </view>
 </view></uni-shadow-root>
 </template>
-<wxs src="../wxs/utils.wxs" module="utils"></wxs>
+<wxs src="../wxs/utils.wxs" module="utils"></wxs><wxs src="./index.wxs" module="computed"></wxs>
 <script>
 import VanIcon from '../icon/index.vue'
 global['__wxVueOptions'] = {components:{'van-icon': VanIcon}}
 
 global['__wxRoute'] = 'vant-weapp/checkbox/index'
+import { useParent } from '../common/relation';
 import { VantComponent } from '../common/component';
+function emit(target, value) {
+  target.$emit('input', value);
+  target.$emit('change', value);
+}
 VantComponent({
   field: true,
-  relation: {
-    name: 'checkbox-group',
-    type: 'ancestor'
-  },
+  relation: useParent('checkbox-group'),
   classes: ['icon-class', 'label-class'],
   props: {
-    value: null,
+    value: Boolean,
     disabled: Boolean,
     useIconSlot: Boolean,
     checkedColor: String,
-    labelPosition: String,
+    labelPosition: {
+      type: String,
+      value: 'right',
+    },
     labelDisabled: Boolean,
     shape: {
       type: String,
-      value: 'round'
-    }
+      value: 'round',
+    },
+    iconSize: {
+      type: null,
+      value: 20,
+    },
+  },
+  data: {
+    parentDisabled: false,
   },
   methods: {
-    emitChange: function emitChange(value) {
-      var parent = this.getRelationNodes('../checkbox-group/index')[0];
-
-      if (parent) {
-        this.setParentValue(parent, value);
+    emitChange(value) {
+      if (this.parent) {
+        this.setParentValue(this.parent, value);
       } else {
-        this.$emit('input', value);
-        this.$emit('change', value);
+        emit(this, value);
       }
     },
-    toggle: function toggle() {
-      if (!this.data.disabled) {
-        this.emitChange(!this.data.value);
+    toggle() {
+      const { parentDisabled, disabled, value } = this.data;
+      if (!disabled && !parentDisabled) {
+        this.emitChange(!value);
       }
     },
-    onClickLabel: function onClickLabel() {
-      if (!this.data.disabled && !this.data.labelDisabled) {
-        this.emitChange(!this.data.value);
+    onClickLabel() {
+      const { labelDisabled, parentDisabled, disabled, value } = this.data;
+      if (!disabled && !labelDisabled && !parentDisabled) {
+        this.emitChange(!value);
       }
     },
-    setParentValue: function setParentValue(parent, value) {
-      var parentValue = parent.data.value.slice();
-      var name = this.data.name;
-
+    setParentValue(parent, value) {
+      const parentValue = parent.data.value.slice();
+      const { name } = this.data;
+      const { max } = parent.data;
       if (value) {
-        if (parent.data.max && parentValue.length >= parent.data.max) {
+        if (max && parentValue.length >= max) {
           return;
         }
-        /* istanbul ignore else */
-
-
         if (parentValue.indexOf(name) === -1) {
           parentValue.push(name);
-          parent.$emit('input', parentValue);
-          parent.$emit('change', parentValue);
+          emit(parent, parentValue);
         }
       } else {
-        var index = parentValue.indexOf(name);
-        /* istanbul ignore else */
-
+        const index = parentValue.indexOf(name);
         if (index !== -1) {
           parentValue.splice(index, 1);
-          parent.$emit('input', parentValue);
-          parent.$emit('change', parentValue);
+          emit(parent, parentValue);
         }
       }
-    }
-  }
+    },
+  },
 });
 export default global['__wxComponents']['vant-weapp/checkbox/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-checkbox {
-  overflow: hidden;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.van-checkbox__icon-wrap,
-.van-checkbox__label {
-  display: inline-block;
-  line-height: 20px;
-  vertical-align: middle;
-}
-.van-checkbox__icon {
-  display: block;
-  font-size: 14px;
-  width: 20px;
-  height: 20px;
-  color: transparent;
-  text-align: center;
-  box-sizing: border-box;
-  border: 1px solid #e5e5e5;
-  transition: 0.2s;
-}
-.van-checkbox__icon--round {
-  border-radius: 100%;
-}
-.van-checkbox__icon--checked {
-  color: #fff;
-  border-color: #1989fa;
-  background-color: #1989fa;
-}
-.van-checkbox__icon--disabled {
-  border-color: #c9c9c9;
-  background-color: #eee;
-}
-.van-checkbox__icon--disabled.van-checkbox__icon--checked {
-  color: #c9c9c9;
-}
-.van-checkbox__label {
-  color: #333;
-  margin-left: 10px;
-}
-.van-checkbox__label--left {
-  float: left;
-  margin: 0 10px 0 0;
-}
-.van-checkbox__label--disabled {
-  color: #c9c9c9;
-}
-.van-checkbox__label:empty {
-  margin: 0;
-}
+@import '../common/index.css';.van-checkbox{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;overflow:hidden;-webkit-user-select:none;user-select:none}.van-checkbox__icon-wrap,.van-checkbox__label{line-height:20px;line-height:var(--checkbox-size,20px)}.van-checkbox__icon-wrap{-webkit-flex:none;flex:none}.van-checkbox__icon{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;box-sizing:border-box;width:1em;height:1em;color:transparent;text-align:center;transition-property:color,border-color,background-color;font-size:20px;font-size:var(--checkbox-size,20px);border:1px solid #c8c9cc;border:1px solid var(--checkbox-border-color,#c8c9cc);transition-duration:.2s;transition-duration:var(--checkbox-transition-duration,.2s)}.van-checkbox__icon--round{border-radius:100%}.van-checkbox__icon--checked{color:#fff;color:var(--white,#fff);background-color:#1989fa;background-color:var(--checkbox-checked-icon-color,#1989fa);border-color:#1989fa;border-color:var(--checkbox-checked-icon-color,#1989fa)}.van-checkbox__icon--disabled{background-color:#ebedf0;background-color:var(--checkbox-disabled-background-color,#ebedf0);border-color:#c8c9cc;border-color:var(--checkbox-disabled-icon-color,#c8c9cc)}.van-checkbox__icon--disabled.van-checkbox__icon--checked{color:#c8c9cc;color:var(--checkbox-disabled-icon-color,#c8c9cc)}.van-checkbox__label{word-wrap:break-word;margin-left:10px;margin-left:var(--checkbox-label-margin,10px);color:#323233;color:var(--checkbox-label-color,#323233)}.van-checkbox__label--left{float:left;margin:0 10px 0 0;margin:0 var(--checkbox-label-margin,10px) 0 0}.van-checkbox__label--disabled{color:#c8c9cc;color:var(--checkbox-disabled-label-color,#c8c9cc)}.van-checkbox__label:empty{margin:0}
 </style>

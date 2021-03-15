@@ -1,233 +1,154 @@
 <template>
-<uni-shadow-root class="vant-weapp-notice-bar-index"><view v-if="show" :class="'custom-class van-notice-bar '+(hasRightIcon ? 'van-notice-bar--within-icon' : '')" :style="'color: '+(color)+';background-color: '+(backgroundColor)" @click="onClick">
-  <view v-if="leftIcon" class="van-notice-bar__left-icon">
-    <image :src="leftIcon"></image>
-  </view>
-  <view class="van-notice-bar__content-wrap">
-    <view :class="'van-notice-bar__content '+(scrollable ? '' : 'van-ellipsis')" :animation="animationData">
+<uni-shadow-root class="vant-weapp-notice-bar-index"><view v-if="show" :class="'custom-class '+(utils.bem('notice-bar', { withicon: mode, wrapable }))" :style="computed.rootStyle({ color, backgroundColor, background })" @click="onClick">
+  <van-icon v-if="leftIcon" size="16px" :name="leftIcon" class="van-notice-bar__left-icon"></van-icon>
+  <slot v-else name="left-icon"></slot>
+
+  <view class="van-notice-bar__wrap">
+    <view :class="'van-notice-bar__content '+(!scrollable && !wrapable ? 'van-ellipsis' : '')" :animation="animationData">
       {{ text }}
+      <slot v-if="(!text)"></slot>
     </view>
   </view>
 
-  <block v-if="mode">
-    <van-icon v-if="mode === 'closeable'" class="van-notice-bar__right-icon" name="cross" @click.native="onClickIcon"></van-icon>
-    <navigator v-if="mode === 'link'" :url="url" :open-type="openType">
-      <van-icon class="van-notice-bar__right-icon" name="arrow"></van-icon>
-    </navigator>
-  </block>
+  <van-icon v-if="mode === 'closeable'" class="van-notice-bar__right-icon" name="cross" @click.native.stop.prevent="onClickIcon"></van-icon>
+  <navigator v-else-if="mode === 'link'" :url="url" :open-type="openType">
+    <van-icon class="van-notice-bar__right-icon" name="arrow"></van-icon>
+  </navigator>
+  <slot v-else name="right-icon"></slot>
 </view></uni-shadow-root>
 </template>
-
+<wxs src="../wxs/utils.wxs" module="utils"></wxs><wxs src="./index.wxs" module="computed"></wxs>
 <script>
 import VanIcon from '../icon/index.vue'
 global['__wxVueOptions'] = {components:{'van-icon': VanIcon}}
 
 global['__wxRoute'] = 'vant-weapp/notice-bar/index'
 import { VantComponent } from '../common/component';
-var FONT_COLOR = '#ed6a0c';
-var BG_COLOR = '#fffbe8';
+import { getRect, requestAnimationFrame } from '../common/utils';
 VantComponent({
   props: {
     text: {
       type: String,
-      value: ''
+      value: '',
+      observer: 'init',
     },
     mode: {
       type: String,
-      value: ''
+      value: '',
     },
     url: {
       type: String,
-      value: ''
+      value: '',
     },
     openType: {
       type: String,
-      value: 'navigate'
+      value: 'navigate',
     },
     delay: {
       type: Number,
-      value: 0
+      value: 1,
     },
     speed: {
       type: Number,
-      value: 50
+      value: 50,
+      observer: 'init',
     },
     scrollable: {
       type: Boolean,
-      value: true
+      value: true,
     },
     leftIcon: {
       type: String,
-      value: ''
+      value: '',
     },
-    color: {
-      type: String,
-      value: FONT_COLOR
-    },
-    backgroundColor: {
-      type: String,
-      value: BG_COLOR
-    }
+    color: String,
+    backgroundColor: String,
+    background: String,
+    wrapable: Boolean,
   },
   data: {
     show: true,
-    hasRightIcon: false,
-    width: undefined,
-    wrapWidth: undefined,
-    elapse: undefined,
-    animation: null,
-    resetAnimation: null,
-    timer: null
   },
-  watch: {
-    text: function text() {
-      this.set({}, this.init);
-    }
+  created() {
+    this.resetAnimation = wx.createAnimation({
+      duration: 0,
+      timingFunction: 'linear',
+    });
   },
-  created: function created() {
-    if (this.data.mode) {
-      this.set({
-        hasRightIcon: true
-      });
-    }
+  destroyed() {
+    this.timer && clearTimeout(this.timer);
   },
-  destroyed: function destroyed() {
-    var timer = this.data.timer;
-    timer && clearTimeout(timer);
+  mounted() {
+    this.init();
   },
   methods: {
-    init: function init() {
-      var _this = this;
-
-      this.getRect('.van-notice-bar__content').then(function (rect) {
-        if (!rect || !rect.width) {
-          return;
-        }
-
-        _this.set({
-          width: rect.width
-        });
-
-        _this.getRect('.van-notice-bar__content-wrap').then(function (rect) {
-          if (!rect || !rect.width) {
+    init() {
+      requestAnimationFrame(() => {
+        Promise.all([
+          getRect(this, '.van-notice-bar__content'),
+          getRect(this, '.van-notice-bar__wrap'),
+        ]).then((rects) => {
+          const [contentRect, wrapRect] = rects;
+          if (
+            contentRect == null ||
+            wrapRect == null ||
+            !contentRect.width ||
+            !wrapRect.width
+          ) {
             return;
           }
-
-          var wrapWidth = rect.width;
-          var _this$data = _this.data,
-              width = _this$data.width,
-              speed = _this$data.speed,
-              scrollable = _this$data.scrollable,
-              delay = _this$data.delay;
-
-          if (scrollable && wrapWidth < width) {
-            var elapse = width / speed * 1000;
-            var animation = wx.createAnimation({
-              duration: elapse,
-              timeingFunction: 'linear',
-              delay: delay
+          const { speed, scrollable, delay } = this.data;
+          if (scrollable || wrapRect.width < contentRect.width) {
+            const duration = (contentRect.width / speed) * 1000;
+            this.wrapWidth = wrapRect.width;
+            this.contentWidth = contentRect.width;
+            this.duration = duration;
+            this.animation = wx.createAnimation({
+              duration,
+              timingFunction: 'linear',
+              delay,
             });
-            var resetAnimation = wx.createAnimation({
-              duration: 0,
-              timeingFunction: 'linear'
-            });
-
-            _this.set({
-              elapse: elapse,
-              wrapWidth: wrapWidth,
-              animation: animation,
-              resetAnimation: resetAnimation
-            }, function () {
-              _this.scroll();
-            });
+            this.scroll();
           }
         });
       });
     },
-    scroll: function scroll() {
-      var _this2 = this;
-
-      var _this$data2 = this.data,
-          animation = _this$data2.animation,
-          resetAnimation = _this$data2.resetAnimation,
-          wrapWidth = _this$data2.wrapWidth,
-          elapse = _this$data2.elapse,
-          speed = _this$data2.speed;
-      resetAnimation.translateX(wrapWidth).step();
-      var animationData = animation.translateX(-(elapse * speed) / 1000).step();
-      this.set({
-        animationData: resetAnimation.export()
+    scroll() {
+      this.timer && clearTimeout(this.timer);
+      this.timer = null;
+      this.setData({
+        animationData: this.resetAnimation
+          .translateX(this.wrapWidth)
+          .step()
+          .export(),
       });
-      setTimeout(function () {
-        _this2.set({
-          animationData: animationData.export()
+      requestAnimationFrame(() => {
+        this.setData({
+          animationData: this.animation
+            .translateX(-this.contentWidth)
+            .step()
+            .export(),
         });
-      }, 100);
-      var timer = setTimeout(function () {
-        _this2.scroll();
-      }, elapse);
-      this.set({
-        timer: timer
       });
+      this.timer = setTimeout(() => {
+        this.scroll();
+      }, this.duration);
     },
-    onClickIcon: function onClickIcon() {
-      var timer = this.data.timer;
-      timer && clearTimeout(timer);
-      this.set({
-        show: false,
-        timer: null
-      });
+    onClickIcon(event) {
+      if (this.data.mode === 'closeable') {
+        this.timer && clearTimeout(this.timer);
+        this.timer = null;
+        this.setData({ show: false });
+        this.$emit('close', event.detail);
+      }
     },
-    onClick: function onClick(event) {
+    onClick(event) {
       this.$emit('click', event);
-    }
-  }
+    },
+  },
 });
 export default global['__wxComponents']['vant-weapp/notice-bar/index']
 </script>
 <style platform="mp-weixin">
-@import "../common/index.css";
-.van-notice-bar {
-  display: -webkit-flex;
-  display: flex;
-  height: 40px;
-  padding: 0 15px;
-  font-size: 14px;
-  line-height: 24px;
-  -webkit-align-items: center;
-  align-items: center;
-}
-.van-notice-bar--within-icon {
-  position: relative;
-  padding-right: 40px;
-}
-.van-notice-bar__left-icon {
-  height: 18px;
-  min-width: 20px;
-  box-sizing: border-box;
-}
-.van-notice-bar__left-icon > image {
-  width: 16px;
-  height: 16px;
-}
-.van-notice-bar__right-icon {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 16px;
-}
-.van-notice-bar__content-wrap {
-  -webkit-flex: 1;
-  flex: 1;
-  height: 24px;
-  overflow: hidden;
-  position: relative;
-}
-.van-notice-bar__content {
-  position: absolute;
-  white-space: nowrap;
-}
-.van-notice-bar__content.van-ellipsis {
-  max-width: 100%;
-}
+@import '../common/index.css';.van-notice-bar{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;height:40px;height:var(--notice-bar-height,40px);padding:0 16px;padding:var(--notice-bar-padding,0 16px);font-size:14px;font-size:var(--notice-bar-font-size,14px);color:#ed6a0c;color:var(--notice-bar-text-color,#ed6a0c);line-height:24px;line-height:var(--notice-bar-line-height,24px);background-color:#fffbe8;background-color:var(--notice-bar-background-color,#fffbe8)}.van-notice-bar--withicon{position:relative;padding-right:40px}.van-notice-bar--wrapable{height:auto;padding:8px 16px;padding:var(--notice-bar-wrapable-padding,8px 16px)}.van-notice-bar--wrapable .van-notice-bar__wrap{height:auto}.van-notice-bar--wrapable .van-notice-bar__content{position:relative;white-space:normal}.van-notice-bar__left-icon{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin-right:4px;vertical-align:middle}.van-notice-bar__left-icon,.van-notice-bar__right-icon{font-size:16px;font-size:var(--notice-bar-icon-size,16px);min-width:22px;min-width:var(--notice-bar-icon-min-width,22px)}.van-notice-bar__right-icon{position:absolute;top:10px;right:15px}.van-notice-bar__wrap{position:relative;-webkit-flex:1;flex:1;overflow:hidden;height:24px;height:var(--notice-bar-line-height,24px)}.van-notice-bar__content{position:absolute;white-space:nowrap}.van-notice-bar__content.van-ellipsis{max-width:100%}
 </style>

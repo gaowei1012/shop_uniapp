@@ -3,36 +3,34 @@ VantComponent({
   field: true,
   classes: ['node-class'],
   props: {
-    checked: Boolean,
+    checked: null,
     loading: Boolean,
     disabled: Boolean,
     activeColor: String,
     inactiveColor: String,
     size: {
       type: String,
-      value: '30px'
-    }
-  },
-  watch: {
-    checked: function checked(value) {
-      this.set({
-        value: value
-      });
-    }
-  },
-  created: function created() {
-    this.set({
-      value: this.data.checked
-    });
+      value: '30',
+    },
+    activeValue: {
+      type: null,
+      value: true,
+    },
+    inactiveValue: {
+      type: null,
+      value: false,
+    },
   },
   methods: {
-    onClick: function onClick() {
-      if (!this.data.disabled && !this.data.loading) {
-
-        var checked = !this.data.checked;
-        this.$emit('input', checked);
-        this.$emit('change', checked);
+    onClick() {
+      const { activeValue, inactiveValue, disabled, loading } = this.data;
+      if (disabled || loading) {
+        return;
       }
-    }
-  }
+      const checked = this.data.checked === activeValue;
+      const value = checked ? inactiveValue : activeValue;
+      this.$emit('input', value);
+      this.$emit('change', value);
+    },
+  },
 });

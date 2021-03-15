@@ -1,67 +1,51 @@
 import { VantComponent } from '../common/component';
 import { BLUE } from '../common/color';
+import { getRect } from '../common/utils';
 VantComponent({
   props: {
     inactive: Boolean,
-    percentage: Number,
+    percentage: {
+      type: Number,
+      observer: 'setLeft',
+    },
     pivotText: String,
     pivotColor: String,
+    trackColor: String,
     showPivot: {
       type: Boolean,
-      value: true
+      value: true,
     },
     color: {
       type: String,
-      value: BLUE
+      value: BLUE,
     },
     textColor: {
       type: String,
-      value: '#fff'
-    }
+      value: '#fff',
+    },
+    strokeWidth: {
+      type: null,
+      value: 4,
+    },
   },
   data: {
-    pivotWidth: 0,
-    progressWidth: 0
+    right: 0,
   },
-  watch: {
-    pivotText: 'getWidth',
-    showPivot: 'getWidth'
-  },
-  computed: {
-    portionStyle: function portionStyle() {
-      var width = (this.data.progressWidth - this.data.pivotWidth) * this.data.percentage / 100 + 'px';
-      var background = this.getCurrentColor();
-      return "width: " + width + "; background: " + background + "; ";
-    },
-    pivotStyle: function pivotStyle() {
-      var color = this.data.textColor;
-      var background = this.data.pivotColor || this.getCurrentColor();
-      return "color: " + color + "; background: " + background;
-    },
-    text: function text() {
-      return this.data.pivotText || this.data.percentage + '%';
-    }
-  },
-  mounted: function mounted() {
-    this.getWidth();
+  mounted() {
+    this.setLeft();
   },
   methods: {
-    getCurrentColor: function getCurrentColor() {
-      return this.data.inactive ? '#cacaca' : this.data.color;
+    setLeft() {
+      Promise.all([
+        getRect(this, '.van-progress'),
+        getRect(this, '.van-progress__pivot'),
+      ]).then(([portion, pivot]) => {
+        if (portion && pivot) {
+          this.setData({
+            right: (pivot.width * (this.data.percentage - 100)) / 100,
+          });
+        }
+      });
     },
-    getWidth: function getWidth() {
-      var _this = this;
-
-      this.getRect('.van-progress').then(function (rect) {
-        _this.set({
-          progressWidth: rect.width
-        });
-      });
-      this.getRect('.van-progress__pivot').then(function (rect) {
-        _this.set({
-          pivotWidth: rect.width || 0
-        });
-      });
-    }
-  }
+  },
 });

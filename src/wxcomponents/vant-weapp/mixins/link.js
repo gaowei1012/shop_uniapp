@@ -1,24 +1,24 @@
-export var link = Behavior({
+export const link = Behavior({
   properties: {
     url: String,
     linkType: {
       type: String,
-      value: 'navigateTo'
-    }
+      value: 'navigateTo',
+    },
   },
   methods: {
-    jumpLink: function jumpLink(urlKey) {
-      if (urlKey === void 0) {
-        urlKey = 'url';
-      }
-
-      var url = this.data[urlKey];
-
+    jumpLink(urlKey = 'url') {
+      const url = this.data[urlKey];
       if (url) {
-        wx[this.data.linkType]({
-          url: url
-        });
+        if (
+          this.data.linkType === 'navigateTo' &&
+          getCurrentPages().length > 9
+        ) {
+          wx.redirectTo({ url });
+        } else {
+          wx[this.data.linkType]({ url });
+        }
       }
-    }
-  }
+    },
+  },
 });
