@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:57:56
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-17 17:52:19
+ * @LastEditTime: 2021-03-17 22:06:38
  * @Description: 分类
 -->
 <template>
@@ -55,12 +55,12 @@
           </template>
         </view>
         <view class="right-box">
+          <image
+            :src="introducedImg"
+            mode="scaleToFill"
+            style="width:500rpx;height:180rpx;"
+          />
           <view class="content-box" v-for="item in typeArray" :key="item.id">
-            <image
-              :src="introducedImg"
-              mode="scaleToFill"
-              style="width:500rpx;height:180rpx;"
-            />
             <view class="title">{{ item.text }}</view>
             <view class="content flex flex-warp">
               <view class="box" v-for="child in item.children" :key="child.id">
@@ -232,15 +232,6 @@ export default {
       ],
       mainActiveIndex: 0,
       activeId: null,
-
-      scrollHeight: 400,
-      scrollTopSize: 0,
-      fillHeight: 0, // 填充高度，用于最后一项低于滚动区域时使用
-      leftArray: [],
-      mainArray: [],
-      topArr: [],
-      leftIndex: 0,
-      scrollInto: "",
     };
   },
   created() {
@@ -250,6 +241,10 @@ export default {
       this.items,
       Object.prototype.toString.call(this.items)
     );
+  },
+  mounted() {
+    // const element = document.getElementsByClassName("right-box");
+    // console.log("element==>", element);
   },
   //方法集合
   methods: {
