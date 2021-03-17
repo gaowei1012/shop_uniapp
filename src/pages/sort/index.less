@@ -36,11 +36,17 @@
     }
 
     .left-box {
-      height: 100vh;
+      min-height: 100vh;
+      max-height: auto;
       background-color: #f7f8fa;
       flex: 3;
       .box {
         padding: 24rpx 16rpx 24rpx 24rpx;
+      }
+      .sideBar-active {
+        background-color: #fff;
+        border-left: 3px solid #000;
+        border-color: rgb(247, 89, 171);
       }
     }
     .right-box {

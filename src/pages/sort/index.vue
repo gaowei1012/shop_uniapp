@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:57:56
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-17 22:06:38
+ * @LastEditTime: 2021-03-17 22:44:32
  * @Description: 分类
 -->
 <template>
@@ -49,9 +49,13 @@
       <view class="flex">
         <view class="left-box">
           <template v-for="(items, index) in items">
-            <view class="box" :class="" :key="index" @click="clickNav(items)">{{
-              items.text
-            }}</view>
+            <view
+              class="box"
+              :class="activeLeft === index ? 'sideBar-active' : null"
+              :key="index"
+              @click="clickNav(index)"
+              >{{ items.text }}</view
+            >
           </template>
         </view>
         <view class="right-box">
@@ -105,7 +109,6 @@ export default {
           text: "所有城市5",
         },
       ],
-
       typeArray: [
         {
           id: 0,
@@ -175,32 +178,32 @@ export default {
             {
               id: "111",
               src: "https://img.yzcdn.cn/vant/apple-1.jpg",
-              text: "SKII神仙水",
+              text: "SKII神仙水11",
             },
             {
               id: "222",
               src: "https://img.yzcdn.cn/vant/apple-1.jpg",
-              text: "SKII神仙水1",
+              text: "SKII神仙水22",
             },
             {
               id: "333",
               src: "https://img.yzcdn.cn/vant/apple-1.jpg",
-              text: "SKII神仙水2",
+              text: "SKII神仙水33",
             },
             {
               id: "444",
               src: "https://img.yzcdn.cn/vant/apple-1.jpg",
-              text: "SKII神仙水2",
+              text: "SKII神仙44",
             },
             {
               id: "555",
               src: "https://img.yzcdn.cn/vant/apple-1.jpg",
-              text: "SKII神仙水2",
+              text: "SKII神仙水55",
             },
             {
               id: "666",
               src: "https://img.yzcdn.cn/vant/apple-1.jpg",
-              text: "SKII神仙水2",
+              text: "SKII神仙水66",
             },
             {
               id: "777",
@@ -232,32 +235,19 @@ export default {
       ],
       mainActiveIndex: 0,
       activeId: null,
+      activeLeft: 0,
     };
   },
-  created() {
-    // this.getData();
-    console.log(
-      "treeData==>",
-      this.items,
-      Object.prototype.toString.call(this.items)
-    );
-  },
-  mounted() {
-    // const element = document.getElementsByClassName("right-box");
-    // console.log("element==>", element);
-  },
+
   //方法集合
   methods: {
     onClickNav(e = {}) {
       const { detail } = e;
-      console.log("onClickNav==>detail", detail);
       this.mainActiveIndex = detail.index || 0;
-      // this.typeArray.push(...this.typeArray);
     },
 
     clickNav(e) {
-      const { text } = e;
-      console.log("点击到左侧栏了:", text);
+      this.activeLeft = e;
     },
 
     onClickItem(e) {
