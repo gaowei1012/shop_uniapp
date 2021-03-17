@@ -3,32 +3,46 @@
     height: 138rpx;
     margin-bottom: 18rpx;
   }
-  .tree {
-    .van-tree-select__nav {
-      .van-sidebar-item--selected {
-        border-color: #f759ab;
+  .container {
+    .title {
+      margin-top: 60rpx;
+      margin-bottom: 32rpx;
+      color: rgba(247, 89, 171, 100);
+      font-size: 26rpx;
+    }
+    .box {
+      margin-bottom: 28rpx;
+      image {
+        width: 140rpx;
+        height: 140rpx;
+        margin: 0 28rpx 16rpx 0;
       }
     }
-    .content-box {
-      padding-left: 26rpx;
-      padding-right: 26rpx;
-      .title {
-        color: #f759ab;
-        font-size: 26rpx;
-        margin-top: 60rpx;
-        margin-bottom: 32rpx;
-      }
-      .content {
-        flex-wrap: wrap;
-        justify-content: start;
-        .box {
-          margin-bottom: 44rpx;
-          margin-right: 27rpx;
-          view {
-            font-size: 24rpx;
-          }
+
+    /deep/ .van-tree-select {
+      .van-tree-select__nav {
+        flex: inherit;
+        width: 200rpx;
+        .van-sidebar-item--selected {
+          border-color: rgb(247, 89, 171);
         }
       }
+      .van-tree-select__content {
+        padding-left: 32rpx;
+      }
+    }
+
+    .left-box {
+      height: 100vh;
+      background-color: #f7f8fa;
+      flex: 3;
+      .box {
+        padding: 24rpx 16rpx 24rpx 24rpx;
+      }
+    }
+    .right-box {
+      flex: 7;
+      padding-left: 32rpx;
     }
   }
 }

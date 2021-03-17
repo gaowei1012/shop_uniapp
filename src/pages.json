@@ -17,7 +17,9 @@
         "navigationBarTitleText": "分类",
         "usingComponents": {
           "van-search": "/wxcomponents/vant-weapp/search/index",
-          "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
+          "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index",
+          "van-sidebar": "/wxcomponents/vant-weapp/sidebar/index",
+          "van-sidebar-item": "/wxcomponents/vant-weapp/sidebar-item/index"
         }
       }
     },
