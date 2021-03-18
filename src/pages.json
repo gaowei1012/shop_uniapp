@@ -2,6 +2,16 @@
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
+      "path": "pages/address/index",
+      "style": {
+        "navigationBarTitleText": "我的收货地址",
+        "usingComponents": {
+          "van-radio": "/wxcomponents/vant-weapp/radio/index",
+          "van-radio-group": "/wxcomponents/vant-weapp/radio-group/index"
+        }
+      }
+    },
+    {
       "path": "pages/home/index",
       "style": {
         "navigationBarTitleText": "首页",
@@ -39,12 +49,6 @@
       "style": {
         "navigationBarTitleText": "个人中心"
       }
-    },
-    {
-      "path": "pages/address/index",
-      "style": {
-        "navigationBarTitleText": "我的收货地址"
-      }
     }
   ],
   "globalStyle": {
@@ -52,7 +56,8 @@
     "navigationBarBackgroundColor": "#F7C659",
     "usingComponents": {
       "van-icon": "/wxcomponents/vant-weapp/icon/index",
-      "van-button": "/wxcomponents/vant-weapp/button/index"
+      "van-button": "/wxcomponents/vant-weapp/button/index",
+      "van-empty": "/wxcomponents/vant-weapp/empty/index"
     }
   },
   "tabBar": {

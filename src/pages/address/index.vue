@@ -2,22 +2,34 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-12 20:41:46
+ * @LastEditTime: 2021-03-18 20:24:44
  * @Description: 地址列表
 -->
 
 <template>
   <view class="address-container">
-    <template v-if="addressArray.length > 0">
-      <view>哈哈哈</view>
-    </template>
-    <template v-else>
-      <image
-        style="width:696rpx;height:696rpx"
-        src="../../static/img/no-address.png"
-      />
-      <view class="no-address">暂无任何地址</view>
-    </template>
+    <view class="content-box">
+      <template v-if="addressArray.length > 0">
+        <view class="box" v-for="item in addressArray" :key="item.id">
+          <view>
+            <text class="name">{{ item.name }}</text>
+            <text class="mobile">{{ item.mobile }}</text>
+          </view>
+          <view class="address">{{ item.address }}</view>
+          <view class="edit-box flex justify-content-between">
+            <van-radio :name="item.id">设置为默认地址</van-radio>
+            <view class="edit">
+              <van-icon class="iconfont icon-edit" />
+              <text>编辑</text>
+            </view>
+          </view>
+        </view>
+      </template>
+      <template v-else>
+        <image class="margin-top-107" src="../../static/img/no-address.png" />
+        <view class="no-info">暂无任何地址</view>
+      </template>
+    </view>
     <van-button class="btn">添加地址</van-button>
   </view>
 </template>
@@ -26,7 +38,56 @@
 export default {
   data() {
     return {
-      addressArray: [],
+      addressArray: [
+        {
+          id: 0,
+          name: "子墨",
+          mobile: "15919698695",
+          address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        },
+        {
+          id: 1,
+          name: "子墨1",
+          mobile: "15919698695",
+          address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        },
+        {
+          id: 2,
+          name: "子墨2",
+          mobile: "15919698695",
+          address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        },
+        {
+          id: 3,
+          name: "子墨3",
+          mobile: "15919698695",
+          address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        },
+        {
+          id: 4,
+          name: "子墨4",
+          mobile: "15919698695",
+          address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        },
+        {
+          id: 5,
+          name: "子墨5",
+          mobile: "15919698695",
+          address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        },
+        {
+          id: 6,
+          name: "子墨6",
+          mobile: "15919698695",
+          address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        },
+        {
+          id: 7,
+          name: "子墨7",
+          mobile: "15919698695",
+          address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        },
+      ],
     };
   },
   onLoad() {},

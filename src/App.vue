@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-01 20:05:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-12 19:24:33
+ * @LastEditTime: 2021-03-18 11:07:52
  * @Description: 
 -->
 <script>
@@ -21,7 +21,7 @@ export default {
 
 <style lang="less">
 @import url("./static/icons/iconfont.css");
-@import url('./static/css/index.css');
+@import url("./static/css/index.css");
 /*每个页面公共css */
 * {
   font-family: PingFangSC-regular;
@@ -41,4 +41,11 @@ export default {
     border-radius: 60rpx;
   }
 }
+
+.no-info {
+  color: #bfbfbf;
+  font-size: 30rpx;
+  text-align: center;
+}
+
 </style>
