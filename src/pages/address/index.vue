@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-18 20:38:12
+ * @LastEditTime: 2021-03-18 20:46:27
  * @Description: 地址列表
 -->
 
@@ -14,6 +14,7 @@
           <view>
             <text class="name">{{ item.name }}</text>
             <text class="mobile">{{ item.mobile }}</text>
+            <text class="default" v-if="checked == item.id">默认</text>
           </view>
           <view class="address">{{ item.address }}</view>
           <view class="edit-box flex justify-content-between">
