@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-18 20:24:44
+ * @LastEditTime: 2021-03-18 20:38:12
  * @Description: 地址列表
 -->
 
@@ -17,7 +17,13 @@
           </view>
           <view class="address">{{ item.address }}</view>
           <view class="edit-box flex justify-content-between">
-            <van-radio :name="item.id">设置为默认地址</van-radio>
+            <van-radio
+              :value="checked"
+              :name="item.id"
+              checked-color="#f759ab"
+              @click.native="clickRadio(item.id)"
+              >设置为默认地址</van-radio
+            >
             <view class="edit">
               <van-icon class="iconfont icon-edit" />
               <text>编辑</text>
@@ -38,6 +44,7 @@
 export default {
   data() {
     return {
+      checked: undefined,
       addressArray: [
         {
           id: 0,
@@ -90,9 +97,16 @@ export default {
       ],
     };
   },
-  onLoad() {},
+  created() {
+    this.checked = 0;
+  },
   //方法集合
-  methods: {},
+  methods: {
+    clickRadio(e) {
+      console.log("e==>", e);
+      this.checked = e;
+    },
+  },
 };
 </script>
 <style lang="less">
