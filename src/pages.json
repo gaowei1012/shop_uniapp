@@ -1,13 +1,32 @@
 {
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+
     {
       "path": "pages/address/index",
       "style": {
         "navigationBarTitleText": "我的收货地址",
         "usingComponents": {
           "van-radio": "/wxcomponents/vant-weapp/radio/index",
-          "van-radio-group": "/wxcomponents/vant-weapp/radio-group/index"
+          "van-area": "/wxcomponents/vant-weapp/area/index"
+        }
+      }
+    },
+    {
+      "path": "pages/address/add/index",
+      "style": {
+        "navigationBarTitleText": "新增地址",
+        "usingComponents": {
+          "van-area": "/wxcomponents/vant-weapp/area/index"
+        }
+      }
+    },
+    {
+      "path": "pages/address/edit/index",
+      "style": {
+        "navigationBarTitleText": "编辑地址",
+        "usingComponents": {
+          "van-area": "/wxcomponents/vant-weapp/area/index"
         }
       }
     },
@@ -57,7 +76,10 @@
     "usingComponents": {
       "van-icon": "/wxcomponents/vant-weapp/icon/index",
       "van-button": "/wxcomponents/vant-weapp/button/index",
-      "van-empty": "/wxcomponents/vant-weapp/empty/index"
+      "van-empty": "/wxcomponents/vant-weapp/empty/index",
+      "van-cell": "/wxcomponents/vant-weapp/cell/index",
+      "van-cell-group": "/wxcomponents/vant-weapp/cell-group/index",
+      "van-field": "/wxcomponents/vant-weapp/field/index"
     }
   },
   "tabBar": {

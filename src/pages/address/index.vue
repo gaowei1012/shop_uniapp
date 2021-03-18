@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-18 20:46:27
+ * @LastEditTime: 2021-03-18 21:17:54
  * @Description: 地址列表
 -->
 
@@ -27,7 +27,7 @@
             >
             <view class="edit">
               <van-icon class="iconfont icon-edit" />
-              <text>编辑</text>
+              <text @click="editAddaddress(item)">编辑</text>
             </view>
           </view>
         </view>
@@ -37,7 +37,7 @@
         <view class="no-info">暂无任何地址</view>
       </template>
     </view>
-    <van-button class="btn">添加地址</van-button>
+    <van-button class="btn" @click="goAddaddress">添加地址</van-button>
   </view>
 </template>
 
@@ -103,9 +103,19 @@ export default {
   },
   //方法集合
   methods: {
+    // 切换点击radio
     clickRadio(e) {
       console.log("e==>", e);
       this.checked = e;
+    },
+    // 跳转添加收货地址
+    goAddaddress() {
+      uni.navigateTo({ url: "/pages/address/add/index" });
+    },
+    // 跳转编辑收货地址
+    editAddaddress(e) {
+      console.log(e);
+      uni.navigateTo({ url: "/pages/address/edit/index" });
     },
   },
 };
