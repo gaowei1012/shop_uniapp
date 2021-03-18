@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:57:56
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-17 22:44:32
+ * @LastEditTime: 2021-03-18 09:13:25
  * @Description: 分类
 -->
 <template>
@@ -25,7 +25,6 @@
         :main-active-index="mainActiveIndex"
         :active-id="activeId"
         @click-nav="onClickNav"
-        @click-item="onClickItem"
       >
         <template slot="content">
           <image
@@ -36,7 +35,12 @@
           <view class="content-box" v-for="item in typeArray" :key="item.id">
             <view class="title">{{ item.text }}</view>
             <view class="content flex flex-warp">
-              <view class="box" v-for="child in item.children" :key="child.id">
+              <view
+                class="box"
+                v-for="child in item.children"
+                :key="child.id"
+                @click="clickItem(child)"
+              >
                 <image :src="child.src" mode="scaleToFill" />
                 <view>{{ child.text }}</view>
               </view>
@@ -67,7 +71,12 @@
           <view class="content-box" v-for="item in typeArray" :key="item.id">
             <view class="title">{{ item.text }}</view>
             <view class="content flex flex-warp">
-              <view class="box" v-for="child in item.children" :key="child.id">
+              <view
+                class="box"
+                @click="clickItem(child)"
+                v-for="child in item.children"
+                :key="child.id"
+              >
                 <image :src="child.src" mode="scaleToFill" />
                 <view>{{ child.text }}</view>
               </view>
@@ -250,10 +259,8 @@ export default {
       this.activeLeft = e;
     },
 
-    onClickItem(e) {
-      const { detail } = e;
-      console.log("onClickItem==>detail", detail);
-      this.activeId = detail.id;
+    clickItem(e) {
+      console.log("clickItem==>", e);
     },
 
     searchInfo(e) {
