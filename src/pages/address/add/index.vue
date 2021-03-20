@@ -22,6 +22,10 @@
     </input-val>
     <!-- 选择地区 -->
     <address-selector @change="addressSelector">{{txt}}</address-selector>
+    <input-val :form="form" :array="array" @changeInput="enterVal" />
+
+    <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
+    <!-- <van-button type="default" @click="resetForm">清空</van-button> -->
   </view>
 </template>
 
@@ -51,7 +55,6 @@ export default {
           name: "所在地区",
           placeholder: "请输入所在地区",
           model: "address",
-          disabled: true,
         },
         {
           name: "详细地址",
@@ -68,6 +71,7 @@ export default {
       },
     };
   },
+
   //方法集合
   methods: {
     enterVal(type, e) {
@@ -110,6 +114,17 @@ export default {
   }
   .input {
     flex: 7;
+  }
+}
+.btn {
+  button {
+    width: 80%;
+    margin: 0 42rpx;
+    position: fixed;
+    left: 5%;
+    bottom: 10%;
+    background-color: #f759ab;
+    border: none;
   }
 }
 </style>
