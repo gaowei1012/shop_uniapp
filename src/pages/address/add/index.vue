@@ -8,21 +8,9 @@
 <template>
   <view class="addAddress-container" id="app">
     <!-- <view class="title">添加地址</view> -->
-    <input-val
-      :form="form"
-      :array="array"
-      @changeInput="enterVal"
-      @formSubmit="formSubmit"
-      @clickInput="clickInput"
-    >
-      <!-- TODO:省市区选择 -->
-      <!-- -->
-      <van-button type="primary" @click="submitForm">提交</van-button>
-      <van-button type="default" @click="resetForm">清空</van-button>
-    </input-val>
+    <input-val :form="form" :array="array" @changeInput="enterVal" />
     <!-- 选择地区 -->
     <address-selector @change="addressSelector">{{txt}}</address-selector>
-    <input-val :form="form" :array="array" @changeInput="enterVal" />
 
     <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
     <!-- <van-button type="default" @click="resetForm">清空</van-button> -->
