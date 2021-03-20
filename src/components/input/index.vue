@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:58:58
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-20 13:21:30
+ * @LastEditTime: 2021-03-20 20:58:34
  * @Description: 封装input
 -->
 <template>
@@ -15,10 +15,9 @@
             v-model="form[item.model]"
             :type="item.inputType ? item.inputType : 'text'"
             :placeholder="item.placeholder ? item.placeholder : ''"
-            :readonly="item.readonly ? item.readonly : false"
             :disabled="item.disabled ? item.disabled : false"
             placeholder-class="placeholderClass"
-            @input="changeInput"
+            @input="changeInput($event, item.name)"
             @click="clickInput(item.name)"
           />
           <label class="msg color-ED2324">{{ errMsg }}</label>
@@ -47,12 +46,11 @@ export default {
   //方法集合
   methods: {
     clickInput(e) {
-      console.log("e==>", e);
       this.$emit("clickInput", e);
     },
-    changeInput(e) {
+    changeInput(e, name) {
       const { value } = e.detail;
-      this.$emit("changeInput", this.name, value);
+      this.$emit("changeInput", name, value);
     },
   },
 };

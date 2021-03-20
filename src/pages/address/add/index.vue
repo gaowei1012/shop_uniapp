@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-20 13:22:08
+ * @LastEditTime: 2021-03-20 20:58:52
  * @Description: 添加地址
 -->
 <template>
@@ -16,10 +16,19 @@
       @clickInput="clickInput"
     >
       <!-- TODO:省市区选择 -->
-      <!-- <van-area :area-list="areaList" value="110101" /> -->
+      <!-- -->
       <van-button type="primary" @click="submitForm">提交</van-button>
       <van-button type="default" @click="resetForm">清空</van-button>
     </input-val>
+    <van-popup
+      :show="is_show"
+      position="bottom"
+      custom-style="height: 50%;"
+      :close-on-click-overlay="false"
+      @close="onClose"
+    >
+      <van-area :area-list="areaList" value="110101" @confirm="confirmArea" />
+    </van-popup>
   </view>
 </template>
 
@@ -52,7 +61,7 @@ export default {
           120105: "河北区",
         },
       },
-
+      is_show: false,
       array: [
         {
           name: "收货人",
@@ -112,7 +121,19 @@ export default {
       };
     },
     // 点击input框
-    clickInput(e) {},
+    clickInput(e) {
+      if (e === "所在地区") this.is_show = true;
+    },
+    // 关闭弹框
+    onClose() {
+      this.is_show = false;
+    },
+    // 确定选择地区
+    confirmArea(e) {
+      const { values } = e.detail;
+      this.form.address = Array.from(values, ({ name }) => name).join(" ");
+      this.is_show = false;
+    },
   },
 };
 </script>
