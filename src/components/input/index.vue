@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:58:58
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-20 20:58:34
+ * @LastEditTime: 2021-03-20 21:03:25
  * @Description: 封装input
 -->
 <template>
@@ -20,7 +20,7 @@
             @input="changeInput($event, item.name)"
             @click="clickInput(item.name)"
           />
-          <label class="msg color-ED2324">{{ errMsg }}</label>
+          <!-- <label class="msg color-ED2324">{{ errMsg }}</label> -->
         </view>
       </view>
       <view class="form-item">
