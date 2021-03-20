@@ -1,12 +1,12 @@
 <!--
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
- * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-20 20:58:52
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-03-20 22:07:41
  * @Description: 添加地址
 -->
 <template>
-  <view class="addAddress-container">
+  <view class="addAddress-container" id="app">
     <!-- <view class="title">添加地址</view> -->
     <input-val
       :form="form"
@@ -20,48 +20,22 @@
       <van-button type="primary" @click="submitForm">提交</van-button>
       <van-button type="default" @click="resetForm">清空</van-button>
     </input-val>
-    <van-popup
-      :show="is_show"
-      position="bottom"
-      custom-style="height: 50%;"
-      :close-on-click-overlay="false"
-      @close="onClose"
-    >
-      <van-area :area-list="areaList" value="110101" @confirm="confirmArea" />
-    </van-popup>
+    <!-- 选择地区 -->
+    <address-selector @change="addressSelector">{{txt}}</address-selector>
   </view>
 </template>
 
 <script>
 import inputVal from "../../../components/input";
+import addressSelector from "../../../components/address";
 export default {
-  components: { inputVal },
+  components: { 
+    inputVal,
+    addressSelector,
+    },
   data() {
     return {
-      areaList: {
-        province_list: {
-          110000: "北京市",
-          120000: "天津市",
-        },
-        city_list: {
-          110100: "北京市",
-          110200: "县",
-          120100: "天津市",
-          120200: "县",
-        },
-        county_list: {
-          110101: "东城区",
-          110102: "西城区",
-          110105: "朝阳区",
-          110106: "丰台区",
-          120101: "和平区",
-          120102: "河东区",
-          120103: "河西区",
-          120104: "南开区",
-          120105: "河北区",
-        },
-      },
-      is_show: false,
+       txt: '选择地址',
       array: [
         {
           name: "收货人",
@@ -120,19 +94,9 @@ export default {
         addressDetail: "",
       };
     },
-    // 点击input框
-    clickInput(e) {
-      if (e === "所在地区") this.is_show = true;
-    },
-    // 关闭弹框
-    onClose() {
-      this.is_show = false;
-    },
-    // 确定选择地区
-    confirmArea(e) {
-      const { values } = e.detail;
-      this.form.address = Array.from(values, ({ name }) => name).join(" ");
-      this.is_show = false;
+    // 获取选择地址data
+    addressSelector(data) {
+      console.log('data ===>>>', data)
     },
   },
 };
