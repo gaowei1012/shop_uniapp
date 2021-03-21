@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-13 22:44:32
+ * @LastEditTime: 2021-03-21 23:12:12
  * @Description: 首页
 -->
 
@@ -16,28 +16,11 @@
       />
     </view>
     <view class="content-container">
-      <!-- 
-      indicator-dots 是否展示面板指示点
-      indicator-color	指示点颜色
-      indicator-active-color 指示点当前选中颜色
-      autoplay 是否自动切换
-      interval 自动切换时间间隔
-      duration 滑动动画时长
-    -->
-      <swiper
+      <swiper-box
         class="swiper"
-        :indicator-dots="true"
-        indicator-color="rgba(255,255,255,1)"
-        indicator-active-color="#F759AA"
-        :autoplay="true"
-        :interval="2000"
-        :duration="500"
-      >
-        <swiper-item v-for="(item, index) in swiperArray" :key="index">
-          <view class="swiper-item">{{ item }}</view>
-        </swiper-item>
-      </swiper>
-
+        :options="options"
+        :swiperArray="swiperArray"
+      />
       <view class="img-box">
         <view class="img" v-for="(items, key) in introductionArray" :key="key">
           <van-icon class="iconfont icon-world" />
@@ -141,7 +124,9 @@
 
 <script>
 import request from "../../api/index";
+import swiperBox from "@c/swiper/index";
 export default {
+  components: { swiperBox },
   data() {
     return {
       searchVal: "",
@@ -152,8 +137,7 @@ export default {
           id: 1,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装",
-          category_img:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617367474&t=bb9858f82790be0b4775b40473b85dd4",
+          category_img: "../../static/sale.png",
           update_at: "2021-03-02T12:58:15+08:00",
           create_at: "2021-03-02T10:22:18+08:00",
         },
@@ -161,8 +145,7 @@ export default {
           id: 2,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装1",
-          category_img:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617367474&t=bb9858f82790be0b4775b40473b85dd4",
+          category_img: "../../static/sale.png",
           update_at: "2021-03-02T12:58:15+08:00",
           create_at: "2021-03-02T10:22:18+08:00",
         },
@@ -170,8 +153,7 @@ export default {
           id: 3,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装1",
-          category_img:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617367474&t=bb9858f82790be0b4775b40473b85dd4",
+          category_img: "../../static/sale.png",
           update_at: "2021-03-02T12:58:15+08:00",
           create_at: "2021-03-02T10:22:18+08:00",
         },
@@ -179,8 +161,7 @@ export default {
           id: 4,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装2",
-          category_img:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617367474&t=bb9858f82790be0b4775b40473b85dd4",
+          category_img: "../../static/sale.png",
           update_at: "2021-03-02T12:58:15+08:00",
           create_at: "2021-03-02T10:22:18+08:00",
         },
@@ -188,8 +169,7 @@ export default {
           id: 5,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装3",
-          category_img:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617367474&t=bb9858f82790be0b4775b40473b85dd4",
+          category_img: "../../static/sale.png",
           update_at: "2021-03-02T12:58:15+08:00",
           create_at: "2021-03-02T10:22:18+08:00",
         },
@@ -197,8 +177,7 @@ export default {
           id: 6,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装4",
-          category_img:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617367474&t=bb9858f82790be0b4775b40473b85dd4",
+          category_img: "../../static/sale.png",
           update_at: "2021-03-02T12:58:15+08:00",
           create_at: "2021-03-02T10:22:18+08:00",
         },
@@ -206,8 +185,7 @@ export default {
           id: 7,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装5",
-          category_img:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617367474&t=bb9858f82790be0b4775b40473b85dd4",
+          category_img: "../../static/sale.png",
           update_at: "2021-03-02T12:58:15+08:00",
           create_at: "2021-03-02T10:22:18+08:00",
         },
@@ -215,8 +193,7 @@ export default {
           id: 8,
           category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
           category_name: "童装6",
-          category_img:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617367474&t=bb9858f82790be0b4775b40473b85dd4",
+          category_img: "../../static/sale.png",
           update_at: "2021-03-02T12:58:15+08:00",
           create_at: "2021-03-02T10:22:18+08:00",
         },
@@ -312,6 +289,14 @@ export default {
           price: "68.9",
         },
       ],
+      options: {
+        dots: true,
+        color: "rgba(255,255,255,1)",
+        activeColor: "#F759AA",
+        autoplay: true,
+        interval: "2000",
+        duration: "500",
+      },
     };
   },
   onLoad() {
@@ -332,6 +317,6 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import url("./index.less");
 </style>

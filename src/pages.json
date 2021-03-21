@@ -1,7 +1,16 @@
 {
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "usingComponents": {
+          "van-search": "/wxcomponents/vant-weapp/search/index",
+          "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
+        }
+      }
+    },
     {
       "path": "pages/address/index",
       "style": {
@@ -31,16 +40,7 @@
         }
       }
     },
-    {
-      "path": "pages/home/index",
-      "style": {
-        "navigationBarTitleText": "首页",
-        "usingComponents": {
-          "van-search": "/wxcomponents/vant-weapp/search/index",
-          "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
-        }
-      }
-    },
+
     {
       "path": "pages/sort/index",
       "style": {
