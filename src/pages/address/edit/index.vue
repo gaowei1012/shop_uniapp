@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 19:09:18
+ * @LastEditTime: 2021-03-21 22:44:02
  * @Description: 添加地址
 -->
 <template>
@@ -17,6 +17,8 @@
 
     <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
     <van-button class="btn" type="primary" @click="deleteForm">删除</van-button>
+    <van-toast id="van-toast" />
+    <van-dialog id="van-dialog" />
   </view>
 </template>
 
@@ -102,7 +104,10 @@ export default {
     },
     // 删除信息
     deleteForm() {
-      console.log("deleteForm==>hhh");
+      this.$confirm("是否准备删除").then(() => {
+        this.$toast("准备删除~");
+        console.log("deleteForm==>hhh");
+      });
     },
     // 失去焦点验证
     blurInput(value, name) {
