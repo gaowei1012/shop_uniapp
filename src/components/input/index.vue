@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:58:58
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 08:06:46
+ * @LastEditTime: 2021-03-21 18:32:54
  * @Description: 封装input
 -->
 <template>
@@ -16,6 +16,7 @@
             :type="item.inputType ? item.inputType : 'text'"
             :placeholder="item.placeholder ? item.placeholder : ''"
             :disabled="item.disabled ? item.disabled : false"
+            :maxlength="item.max ? item.max : -1"
             placeholder-class="placeholderClass"
             @input="changeInput($event, item.name)"
             @click="clickInput(item.name)"
@@ -25,7 +26,7 @@
 
         <slot />
       </view>
-      <label class="msg color-ED2324">{{ errmsg }}</label>
+      <label class="msg color-ED2324">{{ errMsg }}</label>
     </form>
   </view>
 </template>
@@ -41,12 +42,12 @@ export default {
       type: Object,
       default: () => {},
     },
+    errMsg: {
+      type: String,
+      default: () => "",
+    },
   },
-  data() {
-    return {
-      errmsg: "",
-    };
-  },
+
   //方法集合
   methods: {
     clickInput(e) {
@@ -58,9 +59,7 @@ export default {
     },
     blurInput(e, name) {
       const { value } = e.detail;
-      if (!value) {
-        this.errmsg = "请输入" + name + "的值";
-      }
+      this.$emit("blurInput", value, name);
     },
   },
 };

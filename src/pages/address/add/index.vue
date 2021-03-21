@@ -2,13 +2,19 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 07:58:39
+ * @LastEditTime: 2021-03-21 18:32:16
  * @Description: 添加地址
 -->
 <template>
   <view class="addAddress-container">
     <!-- <view class="title">添加地址</view> -->
-    <input-val :form="form" :array="array" @changeInput="enterVal" />
+    <input-val
+      :form="form"
+      :array="array"
+      :errMsg="errmsg"
+      @changeInput="enterVal"
+      @blurInput="blurInput"
+    />
 
     <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
   </view>
@@ -16,26 +22,28 @@
 
 <script>
 import inputVal from "../../../components/input";
-
+import validator from "validator";
 export default {
   components: {
     inputVal,
   },
   data() {
     return {
-      txt: "选择地址",
+      errmsg: "",
       array: [
         {
           id: 0,
           name: "收货人",
           placeholder: "请输入收货人",
           model: "name",
+          max: 8,
         },
         {
           id: 1,
           name: "手机号码",
           placeholder: "请输入手机号码",
           model: "mobile",
+          max: 11,
         },
         {
           id: 2,
@@ -71,6 +79,18 @@ export default {
       } else {
         this.form.addressDetail = e;
       }
+
+      if (!e) {
+        this.errmsg = `请输入${type}的信息`;
+      } else if (type.includes("手机号")) {
+        if (e.length < 11) {
+          this.errmsg = "请输入11位数手机号";
+        } else if (!validator.isMobilePhone(e, "zh-CN")) {
+          this.errmsg = "请输入正确格式的手机号";
+        }
+      } else {
+        this.errmsg = "";
+      }
     },
     // 提交表单
     submitForm() {
@@ -84,6 +104,20 @@ export default {
         address: "",
         addressDetail: "",
       };
+    },
+    // 失去焦点验证
+    blurInput(value, name) {
+      if (!value) {
+        this.errmsg = `请输入${name}的信息`;
+      } else if (name.includes("手机号")) {
+        if (value.length < 11) {
+          this.errmsg = "请输入11位数手机号";
+        } else if (!validator.isMobilePhone(value, "zh-CN")) {
+          this.errmsg = "请输入正确格式的手机号";
+        }
+      } else {
+        this.errmsg = "";
+      }
     },
   },
 };
