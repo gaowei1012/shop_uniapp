@@ -2,23 +2,145 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-18 21:15:59
- * @Description: 编辑地址
+ * @LastEditTime: 2021-03-21 19:09:18
+ * @Description: 添加地址
 -->
 <template>
-  <view class="editAddress-container">编辑地址</view>
+  <view class="editAddress-container">
+    <input-val
+      :form="form"
+      :array="array"
+      :errMsg="errmsg"
+      @changeInput="enterVal"
+      @blurInput="blurInput"
+    />
+
+    <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
+    <van-button class="btn" type="primary" @click="deleteForm">删除</van-button>
+  </view>
 </template>
 
 <script>
+import inputVal from "@c/input";
+import validator from "validator";
 export default {
-  data() {
-    return {};
+  components: {
+    inputVal,
   },
-  onLoad() {},
+  data() {
+    return {
+      errmsg: "",
+      array: [
+        {
+          id: 0,
+          name: "收货人",
+          placeholder: "请输入收货人",
+          model: "name",
+          max: 8,
+        },
+        {
+          id: 1,
+          name: "手机号码",
+          placeholder: "请输入手机号码",
+          model: "mobile",
+          max: 11,
+        },
+        {
+          id: 2,
+          name: "所在地区",
+          placeholder: "请输入所在地区",
+          model: "address",
+        },
+        {
+          id: 3,
+          name: "详细地址",
+          placeholder: "请输入详细地址",
+          model: "addressDetail",
+        },
+      ],
+      form: {
+        name: "",
+        mobile: "",
+        address: "",
+        addressDetail: "",
+      },
+    };
+  },
+  //页面加载,上一个页面传值的options
+  onLoad(options) {
+    const { key } = options;
+    this.form = Object.assign(this.form, JSON.parse(key));
+  },
   //方法集合
-  methods: {},
+  methods: {
+    enterVal(type, e) {
+      if (type === "收货人") {
+        this.form.name = e;
+      } else if (type === "手机号码") {
+        this.form.mobile = e;
+      } else if (type === "所在地区") {
+        this.form.address = e;
+      } else {
+        this.form.addressDetail = e;
+      }
+
+      if (!e) {
+        this.errmsg = `请输入${type}的信息`;
+      } else if (type.includes("手机号")) {
+        if (e.length < 11) {
+          this.errmsg = "请输入11位数手机号";
+        } else if (!validator.isMobilePhone(e, "zh-CN")) {
+          this.errmsg = "请输入正确格式的手机号";
+        }
+      } else {
+        this.errmsg = "";
+      }
+    },
+    // 提交表单
+    submitForm() {
+      console.log("submitForm==>", this.form);
+    },
+    // 删除信息
+    deleteForm() {
+      console.log("deleteForm==>hhh");
+    },
+    // 失去焦点验证
+    blurInput(value, name) {
+      if (!value) {
+        this.errmsg = `请输入${name}的信息`;
+      } else if (name.includes("手机号")) {
+        if (value.length < 11) {
+          this.errmsg = "请输入11位数手机号";
+        } else if (!validator.isMobilePhone(value, "zh-CN")) {
+          this.errmsg = "请输入正确格式的手机号";
+        }
+      } else {
+        this.errmsg = "";
+      }
+    },
+  },
 };
 </script>
 <style lang="less">
 @import url("./index.less");
+.form-item {
+  display: flex;
+  .title {
+    flex: 3;
+  }
+  .input {
+    flex: 7;
+  }
+}
+.btn {
+  button {
+    width: 80%;
+    margin: 0 42rpx;
+    position: fixed;
+    left: 5%;
+    bottom: 10%;
+    background-color: #f759ab;
+    border: none;
+  }
+}
 </style>

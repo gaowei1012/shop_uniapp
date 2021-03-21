@@ -326,7 +326,6 @@ export default {
 
     getSort() {
       request.getCategoryList().then((res) => {
-        console.log(res);
         this.sortArray = res.data;
       });
     },

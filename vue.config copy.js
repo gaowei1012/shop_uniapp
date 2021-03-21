@@ -1,18 +1,10 @@
 /*
  * @Author: 一个为高薪头秃的程序媴
- * @Date: 2021-03-15 19:28:55
+ * @Date: 2021-03-02 12:04:30
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 19:08:11
+ * @LastEditTime: 2021-03-21 19:02:31
  * @Description:
  */
-"use strict";
-const path = require("path");
-
-function resolve(dir) {
-  return path.join(__dirname, dir);
-}
-
-const name = "shop";
 
 module.exports = {
   css: {
@@ -21,22 +13,18 @@ module.exports = {
       less: {},
     },
   },
-  // 路径别名
   configureWebpack: {
-    name: name,
+    name: "shop",
     resolve: {
       alias: {
         "@": resolve("src"),
-        "@api": resolve("src/api"),
+        "@a": resolve("src/api"),
         "@c": resolve("src/components"),
-        "@a": resolve("src/assets"),
-        "@s": resolve("src/styles"),
         "@u": resolve("src/utils"),
         "@v": resolve("src/pages"),
       },
     },
   },
-
   devServer: {
     disableHostCheck: true, //webpack4.0 开启热更新
     hot: true,
