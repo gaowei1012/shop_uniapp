@@ -2,13 +2,13 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:58:58
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-20 21:03:25
+ * @LastEditTime: 2021-03-21 08:06:46
  * @Description: 封装input
 -->
 <template>
   <view class="input-container">
     <form>
-      <view class="form-item" v-for="(item, index) in array" :key="index">
+      <view class="form-item" v-for="item in array" :key="item.id">
         <view class="title">{{ item.name }}</view>
         <view class="input">
           <input
@@ -19,13 +19,13 @@
             placeholder-class="placeholderClass"
             @input="changeInput($event, item.name)"
             @click="clickInput(item.name)"
+            @blur="blurInput($event, item.name)"
           />
-          <!-- <label class="msg color-ED2324">{{ errMsg }}</label> -->
         </view>
-      </view>
-      <view class="form-item">
+
         <slot />
       </view>
+      <label class="msg color-ED2324">{{ errmsg }}</label>
     </form>
   </view>
 </template>
@@ -42,7 +42,11 @@ export default {
       default: () => {},
     },
   },
-
+  data() {
+    return {
+      errmsg: "",
+    };
+  },
   //方法集合
   methods: {
     clickInput(e) {
@@ -51,6 +55,12 @@ export default {
     changeInput(e, name) {
       const { value } = e.detail;
       this.$emit("changeInput", name, value);
+    },
+    blurInput(e, name) {
+      const { value } = e.detail;
+      if (!value) {
+        this.errmsg = "请输入" + name + "的值";
+      }
     },
   },
 };
