@@ -2,41 +2,18 @@
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
+      "path": "pages/collect/index",
+      "style": {
+        "navigationBarTitleText": "商品收藏"
+      }
+    },
+    {
       "path": "pages/home/index",
       "style": {
         "navigationBarTitleText": "首页",
         "usingComponents": {
           "van-search": "/wxcomponents/vant-weapp/search/index",
           "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
-        }
-      }
-    },
-    {
-      "path": "pages/address/index",
-      "style": {
-        "navigationBarTitleText": "我的收货地址",
-        "usingComponents": {
-          "van-radio": "/wxcomponents/vant-weapp/radio/index",
-          "van-area": "/wxcomponents/vant-weapp/area/index"
-        }
-      }
-    },
-    {
-      "path": "pages/address/add/index",
-      "style": {
-        "navigationBarTitleText": "新增地址",
-        "usingComponents": {
-          "van-area": "/wxcomponents/vant-weapp/area/index",
-          "van-popup": "/wxcomponents/vant-weapp/popup/index"
-        }
-      }
-    },
-    {
-      "path": "pages/address/edit/index",
-      "style": {
-        "navigationBarTitleText": "编辑地址",
-        "usingComponents": {
-          "van-area": "/wxcomponents/vant-weapp/area/index"
         }
       }
     },
@@ -68,6 +45,35 @@
       "path": "pages/mine/index",
       "style": {
         "navigationBarTitleText": "个人中心"
+      }
+    },
+    {
+      "path": "pages/address/index",
+      "style": {
+        "navigationBarTitleText": "我的收货地址",
+        "usingComponents": {
+          "van-radio": "/wxcomponents/vant-weapp/radio/index",
+          "van-area": "/wxcomponents/vant-weapp/area/index"
+        }
+      }
+    },
+    {
+      "path": "pages/address/add/index",
+      "style": {
+        "navigationBarTitleText": "新增地址",
+        "usingComponents": {
+          "van-area": "/wxcomponents/vant-weapp/area/index",
+          "van-popup": "/wxcomponents/vant-weapp/popup/index"
+        }
+      }
+    },
+    {
+      "path": "pages/address/edit/index",
+      "style": {
+        "navigationBarTitleText": "编辑地址",
+        "usingComponents": {
+          "van-area": "/wxcomponents/vant-weapp/area/index"
+        }
       }
     }
   ],

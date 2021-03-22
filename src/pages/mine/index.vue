@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:44
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-12 20:44:19
+ * @LastEditTime: 2021-03-21 23:18:58
  * @Description: 我的
 -->
 
@@ -178,7 +178,7 @@ export default {
     handleList(e) {
       e === "收货地址"
         ? uni.navigateTo({ url: "/pages/address/index" })
-        : console.log("哈哈哈");
+        : uni.navigateTo({ url: "/pages/collect/index" });
     },
   },
 };
