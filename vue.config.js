@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-15 19:28:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 19:08:11
+ * @LastEditTime: 2021-03-22 14:48:27
  * @Description:
  */
 "use strict";
@@ -27,12 +27,10 @@ module.exports = {
     resolve: {
       alias: {
         "@": resolve("src"),
-        "@api": resolve("src/api"),
-        "@c": resolve("src/components"),
-        "@a": resolve("src/assets"),
-        "@s": resolve("src/styles"),
-        "@u": resolve("src/utils"),
-        "@v": resolve("src/pages"),
+        "api": resolve("src/api"),
+        "components": resolve("src/components"),
+        "utils": resolve("src/utils"),
+        "views": resolve("src/pages"),
       },
     },
   },

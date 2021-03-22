@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 22:44:02
+ * @LastEditTime: 2021-03-22 14:48:56
  * @Description: 添加地址
 -->
 <template>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import inputVal from "@c/input";
+import inputVal from "components/input/index";
 import validator from "validator";
 export default {
   components: {
@@ -105,8 +105,8 @@ export default {
     // 删除信息
     deleteForm() {
       this.$confirm("是否准备删除").then(() => {
-        this.$toast("准备删除~");
         console.log("deleteForm==>hhh");
+        this.$toast("准备删除~");
       });
     },
     // 失去焦点验证

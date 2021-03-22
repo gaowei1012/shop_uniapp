@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 23:12:12
+ * @LastEditTime: 2021-03-22 14:58:45
  * @Description: 首页
 -->
 
@@ -123,8 +123,8 @@
 </template>
 
 <script>
-import request from "../../api/index";
-import swiperBox from "@c/swiper/index";
+import request from "api/index";
+import swiperBox from "components/swiper/index";
 export default {
   components: { swiperBox },
   data() {

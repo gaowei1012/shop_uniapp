@@ -2,12 +2,11 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 18:32:16
+ * @LastEditTime: 2021-03-22 15:34:42
  * @Description: 添加地址
 -->
 <template>
   <view class="addAddress-container">
-    <!-- <view class="title">添加地址</view> -->
     <input-val
       :form="form"
       :array="array"
@@ -21,7 +20,7 @@
 </template>
 
 <script>
-import inputVal from "../../../components/input";
+import inputVal from "components/input";
 import validator from "validator";
 export default {
   components: {
