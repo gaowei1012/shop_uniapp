@@ -35,8 +35,6 @@
       "style": {
         "usingComponents": {
           "van-stepper": "/wxcomponents/vant-weapp/stepper/index",
-          "van-checkbox": "/wxcomponents/vant-weapp/checkbox/index",
-          "van-checkbox-group": "/wxcomponents/vant-weapp/checkbox-group/index",
           "van-submit-bar": "/wxcomponents/vant-weapp/submit-bar/index"
         }
       }
@@ -88,7 +86,9 @@
       "van-cell-group": "/wxcomponents/vant-weapp/cell-group/index",
       "van-field": "/wxcomponents/vant-weapp/field/index",
       "van-toast": "/wxcomponents/vant-weapp/toast/index",
-      "van-dialog": "/wxcomponents/vant-weapp/dialog/index"
+      "van-dialog": "/wxcomponents/vant-weapp/dialog/index",
+      "van-checkbox": "/wxcomponents/vant-weapp/checkbox/index",
+      "van-checkbox-group": "/wxcomponents/vant-weapp/checkbox-group/index"
     }
   },
   "tabBar": {

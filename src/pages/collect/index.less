@@ -12,7 +12,12 @@
       padding: 14rpx 24rpx 40rpx 16rpx;
       width: 43%;
       margin-bottom: 20rpx;
-
+      position: relative;
+      .van-checkbox {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
       image {
         width: 320rpx;
         height: 320rpx;
@@ -63,15 +68,35 @@
     align-items: center;
     justify-content: flex-end;
     padding-right: 42rpx;
+    color: #404040;
     font-size: 28rpx;
+    padding-left: 32rpx;
+    .deal {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .box {
+        display: flex;
+      }
+    }
+    .delete,
+    .finish,
     .edit {
       width: 118rpx;
       height: 60rpx;
       line-height: 60rpx;
       text-align: center;
-      color: #404040;
-      border: 2rpx solid #bfbfbf;
       border-radius: 32rpx;
+    }
+    .finish,
+    .edit {
+      border: 2rpx solid #bfbfbf;
+    }
+    .delete {
+      color: #f759ab;
+      border: 2rpx solid #f759ab;
+      margin-right: 14rpx;
     }
   }
 }

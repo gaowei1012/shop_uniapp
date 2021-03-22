@@ -2,25 +2,39 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-21 23:17:07
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-22 10:08:40
+ * @LastEditTime: 2021-03-22 11:12:08
  * @Description: 商品收藏
 -->
 <template>
   <view class="collect-container">
-    <view class="content-box">
-      <view class="box" v-for="item in array" :key="item.id">
-        <image :src="item.img" mode="scaleToFill" />
-        <view class="title">{{ item.title }}</view>
-        <view class="name">{{ item.name }}</view>
-        <view class="new">new</view>
-        <view class="price-box">
-          <view class="new-price">￥{{ item.new_price }}</view>
-          <view class="old-price">￥{{ item.old_price }}</view>
+    <van-checkbox-group :value="checked" @change="onChange">
+      <view class="content-box">
+        <view class="box" v-for="item in array" :key="item.id">
+          <van-checkbox :name="item.id" class="checkbox" />
+          <image :src="item.img" mode="scaleToFill" />
+          <view class="title">{{ item.title }}</view>
+          <view class="name">{{ item.name }}</view>
+          <view class="new">new</view>
+          <view class="price-box">
+            <view class="new-price">￥{{ item.new_price }}</view>
+            <view class="old-price">￥{{ item.old_price }}</view>
+          </view>
         </view>
       </view>
-    </view>
+    </van-checkbox-group>
+
     <view class="edit-deal">
-      <view class="edit">编辑</view>
+      <template v-if="is_edit === true">
+        <view class="deal">
+          <view class="box">
+            <view class="delete">删除</view>
+            <view class="finish" @click="is_edit = false">完成</view>
+          </view>
+        </view>
+      </template>
+      <template v-else>
+        <view class="edit" @click="is_edit = true">编辑</view>
+      </template>
     </view>
   </view>
 </template>
@@ -63,6 +77,9 @@ export default {
           old_price: "369",
         },
       ],
+      is_edit: false,
+      checkedAll: false,
+      checked: [],
     };
   },
   //页面加载,上一个页面传值的options
@@ -76,7 +93,24 @@ export default {
   //监听页面卸载
   onUnload() {},
   //方法集合
-  methods: {},
+  methods: {
+    // 单选
+    onChange(event) {
+      const { detail } = event;
+      this.checked = detail;
+      this.checked.length === this.array.length
+        ? (this.checkedAll = true)
+        : (this.checkedAll = false);
+    },
+    // 全选
+    allChecked(event) {
+      this.checked = this.array.map((item) => {
+        return item.id.toString();
+      });
+      this.checkedAll = event.detail;
+      if (this.checkedAll === false) this.checked = [];
+    },
+  },
 };
 </script>
 <style lang="less">
