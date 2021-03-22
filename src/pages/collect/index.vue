@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-21 23:17:07
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-22 11:12:08
+ * @LastEditTime: 2021-03-22 11:18:35
  * @Description: 商品收藏
 -->
 <template>
@@ -26,8 +26,11 @@
     <view class="edit-deal">
       <template v-if="is_edit === true">
         <view class="deal">
+          <van-checkbox :value="checkedAll" @change="allChecked"
+            >全选</van-checkbox
+          >
           <view class="box">
-            <view class="delete">删除</view>
+            <view class="delete" @click="deleteShop">删除</view>
             <view class="finish" @click="is_edit = false">完成</view>
           </view>
         </view>
@@ -109,6 +112,27 @@ export default {
       });
       this.checkedAll = event.detail;
       if (this.checkedAll === false) this.checked = [];
+    },
+    // 删除商品
+    deleteShop() {
+      if (this.checked.length > 0) {
+        // 删除所有商品
+        if (
+          this.array.length == this.checked.length ||
+          this.checkedAll === true
+        ) {
+          this.array = [];
+        } else {
+          const id = parseInt(this.checked.join());
+          // 删除多个商品
+          this.array.splice(
+            this.array.findIndex((item) => item.id == id),
+            this.checked.length
+          );
+          this.checked = [];
+        }
+      } else {
+      }
     },
   },
 };
