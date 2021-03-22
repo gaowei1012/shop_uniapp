@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-21 23:00:13
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 23:10:02
+ * @LastEditTime: 2021-03-22 17:25:09
  * @Description: 封装轮播组件
 -->
 <template>
@@ -19,7 +19,7 @@
       class="swiper"
       :indicator-dots="options.doots"
       :indicator-color="options.color"
-      :indicator-active-color="options.actioveColor"
+      :indicator-active-color="options.activeColor"
       :autoplay="options.autoplay"
       :interval="options.interval"
       :duration="options.duration"

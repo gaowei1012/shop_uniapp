@@ -1,7 +1,12 @@
 {
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
+    {
+      "path": "pages/detail/index",
+      "style": {
+        "navigationBarTitleText": "商品详情"
+      }
+    },
     {
       "path": "pages/home/index",
       "style": {
@@ -12,14 +17,6 @@
         }
       }
     },
-
-    {
-      "path": "pages/collect/index",
-      "style": {
-        "navigationBarTitleText": "商品收藏"
-      }
-    },
-
     {
       "path": "pages/sort/index",
       "style": {
@@ -74,6 +71,12 @@
         "usingComponents": {
           "van-area": "/wxcomponents/vant-weapp/area/index"
         }
+      }
+    },
+    {
+      "path": "pages/collect/index",
+      "style": {
+        "navigationBarTitleText": "商品收藏"
       }
     }
   ],
