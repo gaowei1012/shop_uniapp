@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-22 15:59:15
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-23 09:55:26
+ * @LastEditTime: 2021-03-23 10:57:06
  * @Description: 商品详情页
 -->
 <template>
@@ -24,13 +24,19 @@
         </view>
       </view>
     </view>
+    <div class="comment-box">
+      <comment-box />
+    </div>
+    <view class="product-box"></view>
   </view>
 </template>
 
 <script>
 import swiperBox from "components/swiper/index";
+import commentBox from "./comment/index";
 export default {
-  components: { swiperBox },
+  components: { swiperBox, commentBox },
+
   data() {
     return {
       options: {
@@ -65,7 +71,7 @@ export default {
   onUnload() {},
   // 分享
   onShareAppMessage() {
-    console.log("分享分享分享");
+    // console.log("分享分享分享");
   },
   //方法集合
   methods: {},

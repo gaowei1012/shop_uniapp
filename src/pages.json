@@ -93,7 +93,8 @@
       "van-toast": "/wxcomponents/vant-weapp/toast/index",
       "van-dialog": "/wxcomponents/vant-weapp/dialog/index",
       "van-checkbox": "/wxcomponents/vant-weapp/checkbox/index",
-      "van-checkbox-group": "/wxcomponents/vant-weapp/checkbox-group/index"
+      "van-checkbox-group": "/wxcomponents/vant-weapp/checkbox-group/index",
+      "van-rate": "/wxcomponents/vant-weapp/rate/index"
     }
   },
   "tabBar": {
