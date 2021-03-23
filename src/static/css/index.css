@@ -45,3 +45,7 @@
 .margin-top-107 {
   margin-top: 214rpx;
 }
+/* 删除线 */
+.text-decoration-through {
+  text-decoration: line-through;
+}
