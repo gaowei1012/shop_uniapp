@@ -2,20 +2,20 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-01 20:05:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-18 11:07:52
+ * @LastEditTime: 2021-03-23 18:14:34
  * @Description: 
 -->
 <script>
 export default {
-  onLaunch: function() {
-    console.log("App Launch");
-  },
-  onShow: function() {
-    console.log("App Show");
-  },
-  onHide: function() {
-    console.log("App Hide");
-  },
+  // onLaunch: function() {
+  //   console.log("App Launch");
+  // },
+  // onShow: function() {
+  //   console.log("App Show");
+  // },
+  // onHide: function() {
+  //   console.log("App Hide");
+  // },
 };
 </script>
 
