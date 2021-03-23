@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-22 15:59:15
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-23 10:57:06
+ * @LastEditTime: 2021-03-23 18:46:12
  * @Description: 商品详情页
 -->
 <template>
@@ -28,6 +28,25 @@
       <comment-box />
     </div>
     <view class="product-box"></view>
+
+    <van-goods-action>
+      <van-goods-action-icon
+        v-for="(item, index) in iconArray"
+        :key="item.id"
+        :icon="item.icon"
+        :text="item.text"
+        @click="onClickIcon(item)"
+      />
+
+      <van-goods-action-button
+        v-for="deal in dealArray"
+        :key="deal.id"
+        :text="deal.text"
+        :color="deal.color"
+        :plain="deal.plan ? deal.plan : false"
+        @click="onClickButton(deal)"
+      />
+    </van-goods-action>
   </view>
 </template>
 
@@ -57,6 +76,15 @@ export default {
         taxes: "免税",
         sale: 23,
       },
+      iconArray: [
+        { id: 0, icon: "chat-o", text: "客服" },
+        { id: 1, icon: "like-o", text: "收藏" },
+        { id: 2, icon: "shopping-cart-o", text: "购物单" },
+      ],
+      dealArray: [
+        { id: 0, text: "加入购物袋", color: "#F759AB", plan: true },
+        { id: 1, text: "立即购买", color: "#F759AB" },
+      ],
     };
   },
   //页面加载,上一个页面传值的options
@@ -74,7 +102,14 @@ export default {
     // console.log("分享分享分享");
   },
   //方法集合
-  methods: {},
+  methods: {
+    onClickIcon(e) {
+      console.log("点击图标", e);
+    },
+    onClickButton(e) {
+      console.log("点击按钮", e);
+    },
+  },
 };
 </script>
 <style lang="less">

@@ -4,7 +4,12 @@
     {
       "path": "pages/detail/index",
       "style": {
-        "navigationBarTitleText": "商品详情"
+        "navigationBarTitleText": "商品详情",
+        "usingComponents": {
+          "van-goods-action": "/wxcomponents/vant-weapp/goods-action/index",
+          "van-goods-action-icon": "/wxcomponents/vant-weapp/goods-action-icon/index",
+          "van-goods-action-button": "/wxcomponents/vant-weapp/goods-action-button/index"
+        }
       }
     },
     {
