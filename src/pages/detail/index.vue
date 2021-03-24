@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-22 15:59:15
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-24 16:46:48
+ * @LastEditTime: 2021-03-24 18:13:19
  * @Description: 商品详情页
 -->
 <template>
@@ -31,8 +31,8 @@
       </view>
       <comment-box :carray="array" />
     </view>
-    <view class="product-box"></view>
 
+    <product-box />
     <van-goods-action>
       <van-goods-action-icon
         v-for="(item, index) in iconArray"
@@ -57,8 +57,9 @@
 <script>
 import swiperBox from "components/swiper/index";
 import commentBox from "./comment/index";
+import productBox from "./product/index";
 export default {
-  components: { swiperBox, commentBox },
+  components: { swiperBox, commentBox, productBox },
 
   data() {
     return {
