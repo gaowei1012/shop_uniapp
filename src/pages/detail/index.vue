@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-22 15:59:15
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-24 10:31:24
+ * @LastEditTime: 2021-03-24 15:07:09
  * @Description: 商品详情页
 -->
 <template>
@@ -27,7 +27,7 @@
     <view class="comment-box">
       <view class="title-box">
         <view class="title">商品评价({{ array.length }})</view>
-        <view class="iconfont icon-right" />
+        <view class="iconfont icon-right" @click="goCommentList" />
       </view>
       <comment-box :carray="array" />
     </view>
@@ -198,20 +198,6 @@ export default {
       ],
     };
   },
-  //页面加载,上一个页面传值的options
-  onLoad(options) {},
-  //监听页面显示
-  onShow() {},
-  //监听页面初次渲染完成
-  onReady() {},
-  //监听页面隐藏
-  onHide() {},
-  //监听页面卸载
-  onUnload() {},
-  // 分享
-  onShareAppMessage() {
-    // console.log("分享分享分享");
-  },
   //方法集合
   methods: {
     onClickIcon(e) {
@@ -219,6 +205,15 @@ export default {
     },
     onClickButton(e) {
       console.log("点击按钮", e);
+    },
+    goCommentList() {
+      let obj = { ...this.array };
+      console.log("obj==>", obj);
+      obj.length = this.array.length;
+      obj = encodeURIComponent(JSON.stringify(obj));
+      uni.navigateTo({
+        url: `/pages/detail/list/index?list=${obj}`,
+      });
     },
   },
 };

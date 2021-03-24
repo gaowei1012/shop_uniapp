@@ -13,6 +13,12 @@
       }
     },
     {
+      "path": "pages/detail/list/index",
+      "style": {
+        "navigationBarTitleText": "评论列表"
+      }
+    },
+    {
       "path": "pages/home/index",
       "style": {
         "navigationBarTitleText": "首页",
