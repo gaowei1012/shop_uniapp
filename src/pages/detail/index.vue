@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-22 15:59:15
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-23 18:46:12
+ * @LastEditTime: 2021-03-24 10:31:24
  * @Description: 商品详情页
 -->
 <template>
@@ -24,9 +24,13 @@
         </view>
       </view>
     </view>
-    <div class="comment-box">
-      <comment-box />
-    </div>
+    <view class="comment-box">
+      <view class="title-box">
+        <view class="title">商品评价({{ array.length }})</view>
+        <view class="iconfont icon-right" />
+      </view>
+      <comment-box :carray="array" />
+    </view>
     <view class="product-box"></view>
 
     <van-goods-action>
@@ -76,6 +80,113 @@ export default {
         taxes: "免税",
         sale: 23,
       },
+      array: [
+        {
+          id: 0,
+          img: "../../../static/sale.png",
+          name: "子墨",
+          rate: 5,
+          comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+          level: "强烈推荐",
+          date: "2020-11-07",
+          pic: [
+            "https://t7.baidu.com/it/u=1595072465,3644073269&fm=193&f=GIF",
+            "https://t7.baidu.com/it/u=4198287529,2774471735&fm=193&f=GIF",
+            "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
+          ],
+          specification: "35ml",
+        },
+        {
+          id: 1,
+          img: "../../../static/sale.png",
+          name: "子墨",
+          rate: 5,
+          comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+          level: "强烈推荐",
+          date: "2020-11-07",
+          specification: "35ml",
+        },
+        // {
+        //   id: 2,
+        //   img: "../../../static/sale.png",
+        //   name: "子墨",
+        //   rate: 5,
+        //   comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+        //   level: "强烈推荐",
+        //   date: "2020-11-07",
+        //   specification: "35ml",
+        // },
+        // {
+        //   id: 3,
+        //   img: "../../../static/sale.png",
+        //   name: "子墨",
+        //   rate: 4,
+        //   comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+        //   level: "强烈推荐",
+        //   date: "2020-11-07",
+        //   specification: "35ml",
+        // },
+        // {
+        //   id: 4,
+        //   img: "../../../static/sale.png",
+        //   name: "子墨",
+        //   rate: 5,
+        //   comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+        //   level: "强烈推荐",
+        //   date: "2020-11-07",
+        //   specification: "35ml",
+        // },
+        // {
+        //   id: 5,
+        //   img: "../../../static/sale.png",
+        //   name: "子墨",
+        //   rate: 5,
+        //   comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+        //   level: "强烈推荐",
+        //   date: "2020-11-07",
+        //   specification: "35ml",
+        // },
+        // {
+        //   id: 6,
+        //   img: "../../../static/sale.png",
+        //   name: "子墨",
+        //   rate: 5,
+        //   comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+        //   level: "强烈推荐",
+        //   date: "2020-11-07",
+        //   specification: "35ml",
+        // },
+        // {
+        //   id: 7,
+        //   img: "../../../static/sale.png",
+        //   name: "子墨",
+        //   rate: 5,
+        //   comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+        //   level: "强烈推荐",
+        //   date: "2020-11-07",
+        //   specification: "35ml",
+        // },
+        // {
+        //   id: 8,
+        //   img: "../../../static/sale.png",
+        //   name: "子墨",
+        //   rate: 5,
+        //   comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+        //   level: "强烈推荐",
+        //   date: "2020-11-07",
+        //   specification: "35ml",
+        // },
+        // {
+        //   id: 9,
+        //   img: "../../../static/sale.png",
+        //   name: "子墨",
+        //   rate: 5,
+        //   comment: "这款产品口碑非常好，一次性囤了两支，一支已经在用了，很好用",
+        //   level: "强烈推荐",
+        //   date: "2020-11-07",
+        //   specification: "35ml",
+        // },
+      ],
       iconArray: [
         { id: 0, icon: "chat-o", text: "客服" },
         { id: 1, icon: "like-o", text: "收藏" },
