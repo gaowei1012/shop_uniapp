@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-23 10:42:22
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-24 10:29:24
+ * @LastEditTime: 2021-03-24 16:46:32
  * @Description: 
 -->
 <template>
@@ -41,7 +41,7 @@
         </view>
       </view>
     </template>
-
+    <view class="more" @click="goCommentList">查看更多</view>
   </view>
 </template>
 
@@ -49,7 +49,8 @@
 export default {
   computed: {
     commentArray() {
-      return this.carray;
+      const array = this.carray.splice(0, 2);
+      return array;
     },
   },
   props: {
@@ -75,6 +76,14 @@ export default {
       uni.previewImage({
         urls,
         current: index,
+      });
+    },
+    goCommentList() {
+      let obj = { ...this.carray };
+      obj.length = this.carray.length;
+      obj = encodeURIComponent(JSON.stringify(obj));
+      uni.navigateTo({
+        url: `/pages/detail/list/index?list=${obj}`,
       });
     },
   },
