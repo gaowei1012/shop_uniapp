@@ -7,20 +7,20 @@
 -->
 <template>
   <view class="product-box">
-    <div class="title">产品参数</div>
-    <div class="params-box">
+    <view class="title">产品参数</view>
+    <view class="params-box">
       <view class="params" v-for="params in paramsArray" :key="params.id">
         <text class="title">{{ params.title }}</text>
         <text>{{ params.content }}</text>
       </view>
-    </div>
-    <div class="content-box">
-      <div class="title">产品描述</div>
-      <div class="content">
+    </view>
+    <view class="content-box">
+      <view class="title">产品描述</view>
+      <view class="content">
         <swiper-items :options="options" :swiperArray="swiperArray" />
         <view>{{ content }}</view>
-      </div>
-    </div>
+      </view>
+    </view>
   </view>
 </template>
 
