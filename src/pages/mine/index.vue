@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:44
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 23:18:58
+ * @LastEditTime: 2021-03-25 16:00:26
  * @Description: 我的
 -->
 
@@ -17,14 +17,6 @@
           src="https://img.yzcdn.cn/vant/cat.jpeg"
         />
         <view class="name">苏小妍</view>
-        <view class="zhiwei">
-          <van-icon class="iconfont icon-crown" />
-          洋掌柜
-        </view>
-      </view>
-      <view class="right">
-        <van-icon class="iconfont icon-message" />
-        <van-icon class="iconfont icon-setting" />
       </view>
     </view>
     <!-- 我的订单 -->
