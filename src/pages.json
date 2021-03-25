@@ -2,12 +2,13 @@
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
-      "path": "pages/discount/index",
+      "path": "pages/settings/index",
       "style": {
-        "navigationBarTitleText": "今日折扣",
-        "usingComponents": {
-          "van-count-down": "/wxcomponents/vant-weapp/count-down/index"
-        }
+        "navigationBarTitleText": "设置"
+        // "usingComponents": {
+        //   "van-search": "/wxcomponents/vant-weapp/search/index",
+        //   "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
+        // }
       }
     },
     {
@@ -17,6 +18,15 @@
         "usingComponents": {
           "van-search": "/wxcomponents/vant-weapp/search/index",
           "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
+        }
+      }
+    },
+    {
+      "path": "pages/discount/index",
+      "style": {
+        "navigationBarTitleText": "今日折扣",
+        "usingComponents": {
+          "van-count-down": "/wxcomponents/vant-weapp/count-down/index"
         }
       }
     },
