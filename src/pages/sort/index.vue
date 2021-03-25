@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:57:56
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-18 09:13:25
+ * @LastEditTime: 2021-03-25 17:23:08
  * @Description: 分类
 -->
 <template>
@@ -11,6 +11,7 @@
       v-model="searchVal"
       placeholder="搜索商品"
       @search="searchInfo"
+      style="background:#f7c659"
     />
 
     <view class="container">

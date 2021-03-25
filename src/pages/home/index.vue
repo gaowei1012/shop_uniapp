@@ -13,6 +13,7 @@
         v-model="searchVal"
         placeholder="请输入搜索关键词"
         @search="searchInfo"
+        style="background:#f7c659"
       />
     </view>
     <view class="content-container">

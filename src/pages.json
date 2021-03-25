@@ -1,16 +1,22 @@
 {
+  //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
   "pages": [
-    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/search/index",
+      "style": {
+        "navigationBarTitleText": "搜索"
+      }
+    },
     {
       "path": "pages/home/index",
       "style": {
         "navigationBarTitleText": "首页",
         "usingComponents": {
-          "van-search": "/wxcomponents/vant-weapp/search/index",
           "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index"
         }
       }
     },
+
     {
       "path": "pages/discount/index",
       "style": {
@@ -42,7 +48,6 @@
       "style": {
         "navigationBarTitleText": "分类",
         "usingComponents": {
-          "van-search": "/wxcomponents/vant-weapp/search/index",
           "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index",
           "van-sidebar": "/wxcomponents/vant-weapp/sidebar/index",
           "van-sidebar-item": "/wxcomponents/vant-weapp/sidebar-item/index"
@@ -120,7 +125,8 @@
       "van-dialog": "/wxcomponents/vant-weapp/dialog/index",
       "van-checkbox": "/wxcomponents/vant-weapp/checkbox/index",
       "van-checkbox-group": "/wxcomponents/vant-weapp/checkbox-group/index",
-      "van-rate": "/wxcomponents/vant-weapp/rate/index"
+      "van-rate": "/wxcomponents/vant-weapp/rate/index",
+      "van-search": "/wxcomponents/vant-weapp/search/index"
     }
   },
   "tabBar": {

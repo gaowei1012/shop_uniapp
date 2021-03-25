@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-01 20:05:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-23 18:14:34
+ * @LastEditTime: 2021-03-25 17:24:02
  * @Description: 
 -->
 <script>
@@ -36,7 +36,6 @@ export default {
   height: 100vh !important;
 }
 .van-search {
-  background: #f7c659 !important;
   .van-search__content {
     border-radius: 60rpx;
   }
@@ -47,5 +46,4 @@ export default {
   font-size: 30rpx;
   text-align: center;
 }
-
 </style>
