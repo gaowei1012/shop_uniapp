@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-26 17:22:48
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-26 18:50:48
+ * @LastEditTime: 2021-03-26 20:48:56
  * @Description: 订单支付
 -->
 <template>
@@ -18,27 +18,37 @@
         自动关闭
       </view>
     </view>
-
-    <view class="info-box">
-      <view class="desc-box flex">
-        <!-- <view class="desc">免运费</view> -->
-        <view class="desc">正品保证</view>
-      </view>
-      <view class="box" v-for="item in array" :key="item.id">
-        <image :src="item.img" mode="scaleToFill" />
-        <view class="content">
-          <view class="name-box">
-            <view class="name">{{ item.name }}</view>
-            <view class="capacity">{{ item.capacity }}</view>
-          </view>
-          <view class="price-box">
-            <view class="price">{{ item.price }}</view>
-            <view class="amount">x{{ item.amount }}</view>
+    <view class="content-box">
+      <view class="info-box">
+        <view class="desc-box flex">
+          <!-- <view class="desc">免运费</view> -->
+          <view class="desc">正品保证</view>
+        </view>
+        <view class="box" v-for="item in array" :key="item.id">
+          <image :src="item.img" mode="scaleToFill" />
+          <view class="content">
+            <view class="name-box">
+              <view class="name">{{ item.name }}</view>
+              <view class="capacity">{{ item.capacity }}</view>
+            </view>
+            <view class="price-box">
+              <view class="price">{{ item.price }}</view>
+              <view class="amount">x{{ item.amount }}</view>
+            </view>
           </view>
         </view>
       </view>
+      <view class="order-box">钉钉想象</view>
     </view>
-    <view class="order-box">钉钉想象</view>
+    <view class="btn-box">
+      <view class="total-box">
+        <view class="amount">共{{ array.length }}件</view>
+        <view class="price">
+          合计:<text>￥{{ total }} </text>
+        </view>
+      </view>
+      <view class="pay">立即付款</view>
+    </view>
   </view>
 </template>
 
@@ -52,7 +62,7 @@ export default {
           id: 0,
           img: "../../static/sale.png",
           name: "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底...",
-          price: "399.00",
+          price: 399,
           amount: 1,
           capacity: "35ml",
         },
@@ -60,7 +70,7 @@ export default {
           id: 1,
           img: "../../static/sale.png",
           name: "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底...",
-          price: "399.00",
+          price: 399.5,
           amount: 2,
           capacity: "35ml",
         },
@@ -68,12 +78,23 @@ export default {
           id: 2,
           img: "../../static/sale.png",
           name: "【香港直邮】shu uemura植村秀 清透持妆小方瓶粉底...",
-          price: "399.00",
+          price: 399,
           amount: 3,
           capacity: "35ml",
         },
       ],
+      totals: 0,
     };
+  },
+  computed: {
+    total() {
+      let sum = 0;
+      for (var i = 0; i < this.array.length; i++) {
+        const item = this.array[i];
+        sum += item.price * item.amount;
+      }
+      return sum;
+    },
   },
   //页面加载,上一个页面传值的options
   onLoad(options) {},
