@@ -2,6 +2,15 @@
   //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
   "pages": [
     {
+      "path": "pages/sales/index",
+      "style": {
+        "navigationBarTitleText": "品牌特卖",
+        "usingComponents": {
+          "van-count-down": "/wxcomponents/vant-weapp/count-down/index"
+        }
+      }
+    },
+    {
       "path": "pages/order/index",
       "style": {
         "navigationBarTitleText": "订单中心",
