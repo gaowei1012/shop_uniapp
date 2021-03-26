@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-25 17:25:14
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-25 18:23:40
+ * @LastEditTime: 2021-03-26 10:17:21
  * @Description: 搜索组件
 -->
 <template>
@@ -35,8 +35,9 @@ export default {
       const { detail } = e;
       this.$emit("changeSearch", detail);
     },
-    onSearch() {
-      this.$emit("onSearch");
+    onSearch(e) {
+      const { detail } = e;
+      this.$emit("onSearch", detail);
     },
   },
 };
