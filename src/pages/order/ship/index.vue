@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-26 11:54:28
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-26 11:58:39
+ * @LastEditTime: 2021-03-26 12:21:04
  * @Description: 待发货
 -->
 <template>
@@ -37,7 +37,7 @@
 
     <view class="btn-box">
       <view class="detail">订单详情</view>
-      <view class="pay">付款</view>
+      <view class="ship">提醒发货</view>
     </view>
   </view>
 </template>

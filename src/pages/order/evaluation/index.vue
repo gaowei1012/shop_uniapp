@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-26 11:54:52
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-26 11:57:16
+ * @LastEditTime: 2021-03-26 12:23:17
  * @Description: 待评价
 -->
 <template>
@@ -37,7 +37,8 @@
 
     <view class="btn-box">
       <view class="detail">订单详情</view>
-      <view class="pay">付款</view>
+      <view class="logistics">查看物流</view>
+      <view class="evaluation">评价</view>
     </view>
   </view>
 </template>
