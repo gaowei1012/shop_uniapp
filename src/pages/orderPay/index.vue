@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-26 17:22:48
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-26 20:48:56
+ * @LastEditTime: 2021-03-26 21:10:30
  * @Description: 订单支付
 -->
 <template>
@@ -38,7 +38,27 @@
           </view>
         </view>
       </view>
-      <view class="order-box">钉钉想象</view>
+      <view class="order-box">
+        <view class="title">订单信息</view>
+        <view class="content">
+          <view class="box">
+            <view class="title-1">订单金额:</view>
+            <view class="content">￥{{ orderObj.money }}</view>
+          </view>
+          <view class="box">
+            <view class="title-1">订单编号:</view>
+            <view class="content">{{ orderObj.order_id }}</view>
+          </view>
+          <view class="box">
+            <view class="title-1">收货地址:</view>
+            <view class="content">{{ orderObj.address }}</view>
+          </view>
+          <view class="box">
+            <view class="title-1">买家备注:</view>
+            <view class="content">{{ orderObj.remark }}</view>
+          </view>
+        </view>
+      </view>
     </view>
     <view class="btn-box">
       <view class="total-box">
@@ -83,6 +103,12 @@ export default {
           capacity: "35ml",
         },
       ],
+      orderObj: {
+        money: "798.00",
+        order_id: "#2011043281014542",
+        address: "江西省赣州市章贡区江西蓉吟贸易有限公司",
+        remark: "暂无",
+      },
       totals: 0,
     };
   },
