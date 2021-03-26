@@ -1,0 +1,107 @@
+.orderPay-container {
+  min-height: 100vh;
+  height: auto;
+  background-color: #f5f5f5;
+  .title-box {
+    height: 382rpx;
+    background-color: #f7c659;
+
+    .flex {
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding-top: 88rpx;
+      margin-bottom: 36rpx;
+      .iconfont {
+        font-size: 52rpx;
+        margin-right: 18rpx;
+      }
+      .title {
+        font-size: 48rpx;
+      }
+    }
+    .time {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+
+      .van-count-down {
+        color: #fff;
+        margin: 0 20rpx;
+        font-size: 28rpx !important;
+        // bottom 38px
+      }
+    }
+  }
+  .info-box,
+  .order-box {
+    background-color: #fff;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+  }
+
+  .info-box {
+    padding: 34rpx 20rpx 76rpx 28rpx;
+    margin-bottom: 28rpx;
+    position: relative;
+    top: -76rpx;
+    .desc-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 44rpx;
+      .desc {
+        height: 38rpx;
+        line-height: 38rpx;
+        // margin-right: 18rpx;
+        color: #f759ab;
+        border: 1px solid #f759ab;
+        border-radius: 40rpx;
+        padding: 14rpx;
+        font-size: 26rpx;
+      }
+    }
+    .box {
+      display: flex;
+
+      image {
+        width: 160rpx;
+        height: 160rpx;
+      }
+      .content {
+        display: flex;
+        font-size: 28rpx;
+        .name-box {
+          width: 174px;
+          margin-left: 24rpx;
+          margin-right: 18rpx;
+          .capacity {
+            width: 84rpx;
+            color: #919191;
+            background-color: #f5f5f5;
+            margin-top: 20rpx;
+            text-align: center;
+          }
+        }
+        .price-box {
+          text-align: right;
+          .price {
+            margin-bottom: 10rpx;
+          }
+          .amount {
+            color: #919191;
+          }
+        }
+      }
+    }
+    .box:not(:last-child) {
+      margin-bottom: 24rpx;
+    }
+  }
+
+  .order-box {
+    // 19 18 27 15
+    padding: 38rpx 36rpx 54rpx 30rpx;
+    margin-bottom: 82rpx;
+  }
+}
