@@ -2,12 +2,12 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-26 11:46:49
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-26 15:56:15
+ * @LastEditTime: 2021-03-26 16:01:09
  * @Description: 全部
 -->
 <template>
-  <view class="all-container" v-for="item in array" :key="item.id">
-    <view class="box">
+  <view class="all-container">
+    <view class="box" v-for="item in array" :key="item.id">
       <view class="order_num">
         <view class="num">订单号：{{ item.order_num }}</view>
         <view class="status color-f759ab">待{{ item.status }}</view>
@@ -145,8 +145,3 @@ export default {
   methods: {},
 };
 </script>
-<style lang="less">
-.box {
-  margin-bottom: 28rpx;
-}
-</style>
