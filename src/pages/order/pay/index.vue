@@ -19,7 +19,7 @@
         <view class="name"
           >3件装 | MEDIHEAL 美迪惠尔 N.M.F针剂水库保湿面膜 10片/盒...</view
         >
-        <view class="rl">35ml</view>
+        <view class="capacity">35ml</view>
       </view>
       <view class="price-box">
         <view class="price">￥169.00</view>

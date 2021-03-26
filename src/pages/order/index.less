@@ -8,101 +8,103 @@
       margin-bottom: 28rpx;
     }
     .van-tab__pane {
-      margin: 0 20rpx;
-      background-color: #fff;
-      padding: 24rpx 20rpx 48rpx 16rpx;
-      .order_num {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #e9e9e9;
-        padding-bottom: 32rpx;
-        font-size: 28rpx;
-        margin-bottom: 32rpx;
-      }
-      .content-box {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #e9e9e9;
-        margin-bottom: 20rpx;
-        padding-bottom: 20rpx;
-        .img {
-          width: 100rpx;
-          height: 100rpx;
-          margin-right: 20rpx;
-          image {
-            width: 100%;
-            height: 100%;
-          }
-        }
-        .info-box {
-          width: 382rpx;
-          margin-right: 46rpx;
-          .name {
-            font-size: 24rpx;
-            margin-bottom: 20rpx;
-          }
-          .rl {
-            font-size: 26rpx;
-          }
-        }
-        .price-box {
-          font-size: 28rpx;
-          text-align: right;
-          .price {
-            margin-bottom: 4rpx;
-          }
-        }
-      }
-      .price-box1 {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 26rpx;
-        color: #bfbfbf;
-        .taxes {
-          margin-left: 28rpx;
-          margin-right: 18rpx;
-        }
-        .pay {
+      .box {
+        background-color: #fff;
+        padding: 24rpx 20rpx 48rpx 16rpx;
+        margin: 0 28rpx 28rpx;
+        .order_num {
           display: flex;
           align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid #e9e9e9;
+          padding-bottom: 32rpx;
           font-size: 28rpx;
-          color: #5c5c5c;
+          margin-bottom: 32rpx;
         }
-      }
-      .btn-box {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        margin-top: 36rpx;
-        font-size: 28rpx;
-        .detail,
-        .pay,
-        .ship,
-        .logistics,
-        .receipt,
-        .evaluation {
-          width: 156rpx;
-          height: 62rpx;
-          line-height: 62rpx;
-          text-align: center;
-          border-radius: 44rpx;
+        .content-box {
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid #e9e9e9;
+          margin-bottom: 20rpx;
+          padding-bottom: 20rpx;
+          .img {
+            width: 100rpx;
+            height: 100rpx;
+            margin-right: 20rpx;
+            image {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .info-box {
+            width: 382rpx;
+            margin-right: 46rpx;
+            .name {
+              font-size: 24rpx;
+              margin-bottom: 20rpx;
+            }
+            .capacity {
+              font-size: 26rpx;
+            }
+          }
+          .price-box {
+            font-size: 28rpx;
+            text-align: right;
+            .price {
+              margin-bottom: 4rpx;
+            }
+          }
         }
-        .detail,
-        .logistics,
-        .ship {
-          border: 1px solid #bbb;
+        .price-box1 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 26rpx;
+          color: #bfbfbf;
+          .taxes {
+            margin-left: 28rpx;
+            margin-right: 18rpx;
+          }
+          .pay {
+            display: flex;
+            align-items: center;
+            font-size: 28rpx;
+            color: #5c5c5c;
+          }
         }
-        .detail,
-        .logistics {
-          margin-right: 20rpx;
-        }
-        .pay,
-        .receipt,
-        .evaluation {
-          color: #f759ab;
-          border: 1px solid #f759ab;
+        .btn-box {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin-top: 36rpx;
+          font-size: 28rpx;
+          .detail,
+          .pay,
+          .ship,
+          .logistics,
+          .receipt,
+          .evaluation {
+            width: 156rpx;
+            height: 62rpx;
+            line-height: 62rpx;
+            text-align: center;
+            border-radius: 44rpx;
+          }
+          .detail,
+          .logistics,
+          .ship {
+            border: 1px solid #bbb;
+          }
+          .detail,
+          .logistics {
+            margin-right: 20rpx;
+          }
+          .pay,
+          .receipt,
+          .evaluation {
+            color: #f759ab;
+            border: 1px solid #f759ab;
+          }
         }
       }
     }
