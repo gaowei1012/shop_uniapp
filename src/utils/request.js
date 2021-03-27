@@ -2,12 +2,11 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-06 08:11:49
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-06 17:39:50
+ * @LastEditTime: 2021-03-27 20:23:25
  * @Description: 封装请求
- * 
- * 4 */
+ */
 import base from "../api/base";
-// TODO:token==>7天过期
+
 const request = (config) => {
   if (!config.data) {
     config.data = {};
@@ -15,7 +14,7 @@ const request = (config) => {
 
   return new Promise((resolve, reject) => {
     uni.request({
-      url: `${base.api}/${config.url}`,
+      url: `${base.api2}/${config.url}`,
       data: config.data,
       method: config.method,
       success: (res) => {

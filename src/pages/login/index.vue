@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-27 17:55:11
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-27 20:04:13
+ * @LastEditTime: 2021-03-27 20:20:29
  * @Description: 登录
 -->
 <template>
@@ -58,17 +58,10 @@ export default {
         provider: "weixin",
         success: (res) => {
           const { code } = res;
-          uni.request({
-            url: "http://192.168.2.216:7082/api/v0.0.1/auth/data/user/wxlogin",
-            method: "post",
-            data: {
-              code: code,
-            },
-            success(res) {
-              const { token, open_id } = res.data.data;
-              tool.setItem("token", token);
-              tool.setItem("open_id", open_id);
-            },
+          this.$api.user.goLogin(code).then((res) => {
+            const { open_id, token } = res;
+            tool.setItem("open_id", open_id);
+            tool.setItem("token", token);
           });
         },
       });
@@ -79,7 +72,6 @@ export default {
         success: (res) => {
           const { userInfo } = res;
           this.userInfo = userInfo;
-          console.log("userInfo==>", this.userInfo);
           tool.setItem("userInfo", JSON.stringify(userInfo));
         },
         fail: () => {
