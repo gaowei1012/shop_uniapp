@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:44
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-25 16:00:26
+ * @LastEditTime: 2021-03-27 18:22:38
  * @Description: 我的
 -->
 
@@ -10,13 +10,7 @@
   <view class="mine-container">
     <view class="header-box">
       <view class="left">
-        <image
-          class="avatar"
-          fit="cover"
-          style="width:108rpx;height:108rpx"
-          src="https://img.yzcdn.cn/vant/cat.jpeg"
-        />
-        <view class="name">苏小妍</view>
+        <login-box />
       </view>
     </view>
     <!-- 我的订单 -->
@@ -88,7 +82,9 @@
 </template>
 
 <script>
+import loginBox from "../login/index";
 export default {
+  components: { loginBox },
   data() {
     return {
       orderArray: [
@@ -172,6 +168,7 @@ export default {
         ? uni.navigateTo({ url: "/pages/address/index" })
         : uni.navigateTo({ url: "/pages/collect/index" });
     },
+    // 登录
   },
 };
 </script>
