@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-22 14:58:45
+ * @LastEditTime: 2021-03-27 21:48:54
  * @Description: 首页
 -->
 
@@ -301,17 +301,20 @@ export default {
     };
   },
   onLoad() {
-    // this.getSort();
+    this.getSort();
   },
   //方法集合
   methods: {
+    // 获取轮播信息
+    getSwiperInfo() {},
+
     searchInfo(e) {
       const { detail } = e;
       console.log("searchInfo==>", detail);
     },
 
     getSort() {
-      request.getCategoryList().then((res) => {
+      this.$api.home.getCategoryList().then((res) => {
         this.sortArray = res.data;
       });
     },
