@@ -2,10 +2,9 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-06 08:11:49
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-27 20:23:25
+ * @LastEditTime: 2021-03-28 15:38:38
  * @Description: 封装请求
  */
-import base from "../api/base";
 
 const request = (config) => {
   if (!config.data) {
@@ -13,8 +12,9 @@ const request = (config) => {
   }
 
   return new Promise((resolve, reject) => {
+    const baseUrl = process.env.VUE_APP_BASE_API;
     uni.request({
-      url: `${base.api2}/${config.url}`,
+      url: `${baseUrl}/${config.url}`,
       data: config.data,
       method: config.method,
       success: (res) => {
