@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-27 21:48:54
+ * @LastEditTime: 2021-03-30 10:39:24
  * @Description: 首页
 -->
 
@@ -124,7 +124,6 @@
 </template>
 
 <script>
-import request from "api/index";
 import swiperBox from "components/swiper/index";
 export default {
   components: { swiperBox },
@@ -302,6 +301,7 @@ export default {
   },
   onLoad() {
     this.getSort();
+    this.getBrandList();
   },
   //方法集合
   methods: {
@@ -312,10 +312,27 @@ export default {
       const { detail } = e;
       console.log("searchInfo==>", detail);
     },
-
+    // 获取分类
     getSort() {
       this.$api.home.getCategoryList().then((res) => {
         this.sortArray = res.data;
+      });
+    },
+    // 获取品牌特卖
+    getBrandList() {
+      this.$api.home.getBrandList().then((res) => {
+        console.log("getBrandList==>", res.data);
+        // brand_id: "e5fdc57d-b010-4643-9e13-96bb17e0c304"
+        // brand_name: "制服诱惑"
+        // brand_url: "https://qiwenda.oss-cn-hangzhou.aliyuncs.com/bg.png"
+        // create_at: "2021-03-07T11:07:41+08:00"
+
+        const { brand_name, brand_url, activity_time } = res.data[0];
+        console.log(res.data[0]);
+
+        this.saleObj.desc = brand_name;
+        this.saleObj.time = activity_time;
+        this.saleObj.img = brand_url;
       });
     },
   },
