@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-25 09:53:58
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-25 10:50:14
+ * @LastEditTime: 2021-04-02 19:38:39
  * @Description: 今日折扣
 -->
 <template>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import tool from "@/utils/tool";
 export default {
   data() {
     return {
@@ -38,12 +39,18 @@ export default {
   },
   computed: {
     time() {
-      const str = 30 * 60 * 60 * 1000;
-      return str;
+      let now_date = new Date(
+        new Date(new Date().toLocaleDateString()).getTime() +
+          24 * 60 * 60 * 1000 -
+          1
+      );
+      return tool.countDown("", now_date);
     },
   },
   //页面加载,上一个页面传值的options
-  onLoad(options) {},
+  onLoad(options) {
+    console.log("list==>", JSON.parse(options.list));
+  },
   //监听页面显示
   onShow() {},
   //监听页面初次渲染完成

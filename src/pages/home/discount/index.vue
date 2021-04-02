@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-04-02 17:17:22
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-02 17:29:55
+ * @LastEditTime: 2021-04-02 17:48:39
  * @Description: 今日折扣
 -->
 <template>
@@ -20,6 +20,7 @@
         class="box"
         v-for="discount in discountArray"
         :key="discount.discount_id"
+        @click="handleDiscount(discount)"
       >
         <image
           style="width:140rpx;height:140rpx"
@@ -54,7 +55,18 @@ export default {
         this.discountArray = res.splice(0, 4);
       });
     },
+    // 点击单个折扣项
+    handleDiscount(e) {
+      // let obj = { ...this.carray };
+      // obj.length = this.carray.length;
+      // obj = encodeURIComponent(JSON.stringify(obj));
+      // uni.navigateTo({
+      //   url: `/pages/detail/list/index?list=${obj}`,
+      // });
+      uni.navigateTo({
+        url: `/pages/discount/index?list=${JSON.stringify(e)}`,
+      });
+    },
   },
 };
 </script>
-<style lang="less"></style>
