@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-30 10:39:24
+ * @LastEditTime: 2021-04-02 17:19:55
  * @Description: 首页
 -->
 
@@ -51,31 +51,7 @@
         <view class="time">活动时间：{{ saleObj.time }}</view>
       </view>
       <!-- 今日折扣 -->
-      <view class="discount-box ">
-        <view class="title-box">
-          <view class="left">
-            <van-icon class="iconfont icon-discount" />
-            <view class="title">今日折扣</view>
-            <view class="desc">拼手速的时候到了</view>
-          </view>
-          <view class="right">立即抢购</view>
-        </view>
-        <view class="content-box">
-          <view
-            class="box"
-            v-for="discount in discountArray"
-            :key="discount.id"
-          >
-            <image style="width:140rpx;height:140rpx" :src="discount.src" />
-            <view class="new-price color-f7c659"
-              >￥{{ discount.new_price }}</view
-            >
-            <view class="old-price color-bfbfbf"
-              >￥{{ discount.old_price }}</view
-            >
-          </view>
-        </view>
-      </view>
+      <discount-box />
       <!-- 热销榜单 -->
       <view class="hot-box">
         <view class="title-box">
@@ -125,8 +101,9 @@
 
 <script>
 import swiperBox from "components/swiper/index";
+import discountBox from "./discount";
 export default {
-  components: { swiperBox },
+  components: { swiperBox, discountBox },
   data() {
     return {
       searchVal: "",
@@ -202,32 +179,7 @@ export default {
         desc: "阿玛尼品牌专场",
         time: "2020/11/16 - 2020/11/20",
       },
-      discountArray: [
-        {
-          id: 0,
-          old_price: "29.9",
-          new_price: "58",
-          src: "../../static/sale.png",
-        },
-        {
-          id: 1,
-          old_price: "29.9",
-          new_price: "58",
-          src: "../../static/sale.png",
-        },
-        {
-          id: 2,
-          old_price: "29.9",
-          new_price: "58",
-          src: "../../static/sale.png",
-        },
-        {
-          id: 3,
-          old_price: "29.9",
-          new_price: "58",
-          src: "../../static/sale.png",
-        },
-      ],
+      discountArray: [],
       hotArray: [
         {
           id: 0,
@@ -322,13 +274,8 @@ export default {
     getBrandList() {
       this.$api.home.getBrandList().then((res) => {
         console.log("getBrandList==>", res.data);
-        // brand_id: "e5fdc57d-b010-4643-9e13-96bb17e0c304"
-        // brand_name: "制服诱惑"
-        // brand_url: "https://qiwenda.oss-cn-hangzhou.aliyuncs.com/bg.png"
-        // create_at: "2021-03-07T11:07:41+08:00"
 
         const { brand_name, brand_url, activity_time } = res.data[0];
-        console.log(res.data[0]);
 
         this.saleObj.desc = brand_name;
         this.saleObj.time = activity_time;
