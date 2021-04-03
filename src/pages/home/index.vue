@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 09:26:37
+ * @LastEditTime: 2021-04-03 10:03:00
  * @Description: 首页
 -->
 
@@ -42,29 +42,7 @@
       <!-- 今日折扣 -->
       <discount-box />
       <!-- 热销榜单 -->
-      <view class="hot-box">
-        <view class="title-box">
-          <view class="left">
-            <van-icon class="iconfont icon-hot" />
-            <view class="title">热销榜单</view>
-            <view class="desc">看看大家都在买什么</view>
-          </view>
-          <view class="right">
-            <label>更多商品</label>
-            <van-icon name="arrow" />
-          </view>
-        </view>
-        <view class="content-box">
-          <view class="box flex" v-for="hot in hotArray" :key="hot.id">
-            <image class="img" :src="hot.src" />
-            <view class="content">
-              <view class="name">{{ hot.name }}</view>
-              <view class="origin">{{ hot.origin }}</view>
-              <view class="price color-f7c659">￥{{ hot.price }}</view>
-            </view>
-          </view>
-        </view>
-      </view>
+      <hot-box />
       <!-- 精品推荐 -->
       <view class="recommend-box">
         <view class="title-box">
@@ -92,79 +70,15 @@
 import swiperBox from "components/swiper/index";
 import discountBox from "./discount";
 import saleBox from "./sales";
+import hotBox from "./hot";
 export default {
-  components: { swiperBox, discountBox, saleBox },
+  components: { swiperBox, discountBox, saleBox, hotBox },
   data() {
     return {
       searchVal: "",
       swiperArray: ["A", "B", "C"],
       introductionArray: ["全球采购", "正品保障", "品质溯源", "假一赔十"],
-      sortArray: [
-        {
-          id: 1,
-          category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
-          category_name: "童装",
-          category_img: "../../static/sale.png",
-          update_at: "2021-03-02T12:58:15+08:00",
-          create_at: "2021-03-02T10:22:18+08:00",
-        },
-        {
-          id: 2,
-          category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
-          category_name: "童装1",
-          category_img: "../../static/sale.png",
-          update_at: "2021-03-02T12:58:15+08:00",
-          create_at: "2021-03-02T10:22:18+08:00",
-        },
-        {
-          id: 3,
-          category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
-          category_name: "童装1",
-          category_img: "../../static/sale.png",
-          update_at: "2021-03-02T12:58:15+08:00",
-          create_at: "2021-03-02T10:22:18+08:00",
-        },
-        {
-          id: 4,
-          category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
-          category_name: "童装2",
-          category_img: "../../static/sale.png",
-          update_at: "2021-03-02T12:58:15+08:00",
-          create_at: "2021-03-02T10:22:18+08:00",
-        },
-        {
-          id: 5,
-          category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
-          category_name: "童装3",
-          category_img: "../../static/sale.png",
-          update_at: "2021-03-02T12:58:15+08:00",
-          create_at: "2021-03-02T10:22:18+08:00",
-        },
-        {
-          id: 6,
-          category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
-          category_name: "童装4",
-          category_img: "../../static/sale.png",
-          update_at: "2021-03-02T12:58:15+08:00",
-          create_at: "2021-03-02T10:22:18+08:00",
-        },
-        {
-          id: 7,
-          category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
-          category_name: "童装5",
-          category_img: "../../static/sale.png",
-          update_at: "2021-03-02T12:58:15+08:00",
-          create_at: "2021-03-02T10:22:18+08:00",
-        },
-        {
-          id: 8,
-          category_id: "df314fa4-c91b-4f61-b35b-611714e440b3",
-          category_name: "童装6",
-          category_img: "../../static/sale.png",
-          update_at: "2021-03-02T12:58:15+08:00",
-          create_at: "2021-03-02T10:22:18+08:00",
-        },
-      ],
+      sortArray: [],
       hotArray: [
         {
           id: 0,
@@ -241,9 +155,6 @@ export default {
   },
   //方法集合
   methods: {
-    // 获取轮播信息
-    getSwiperInfo() {},
-
     searchInfo(e) {
       const { detail } = e;
       console.log("searchInfo==>", detail);

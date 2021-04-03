@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-06 10:07:44
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-02 17:14:51
+ * @LastEditTime: 2021-04-03 10:17:30
  * @Description: 首页的接口管理
  */
 
@@ -35,6 +35,13 @@ const home = {
     return axios({
       method: "GET",
       url: "discount/getAllDiscount",
+    });
+  },
+  // 热门列表
+  getHotList() {
+    return axios({
+      method: "GET",
+      url: "hotCakes/getAllHotCakes",
     });
   },
 };

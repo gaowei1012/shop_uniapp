@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-04-03 09:24:08
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 09:50:06
+ * @LastEditTime: 2021-04-03 09:58:24
  * @Description: 品牌特卖
 -->
 <template>
@@ -40,7 +40,6 @@ export default {
     getBrandList() {
       this.$api.home.getBrandList().then((res) => {
         this.array = res.data;
-        console.log("getBrandList==>", res.data[0]);
         const { brand_name, brand_url, activity_time } = res.data[0];
         const obj = {
           desc: brand_name,
@@ -52,15 +51,12 @@ export default {
     },
     // 跳转到详情页
     goSales() {
-      console.log("array==>", this.array);
       let obj = { ...this.array };
       obj.length = this.array.length;
       obj = encodeURIComponent(JSON.stringify(obj));
       uni.navigateTo({
         url: `/pages/sales/index?list=${obj}`,
       });
-      //  let list = decodeURIComponent(options.list);
-      // this.commentArray = Array.from(JSON.parse(list));
     },
   },
 };
