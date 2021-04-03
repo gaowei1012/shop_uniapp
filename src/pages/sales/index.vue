@@ -2,24 +2,21 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-26 16:34:37
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-26 17:02:29
+ * @LastEditTime: 2021-04-03 09:53:18
  * @Description: 品牌特卖
 -->
 <template>
   <view class="sales-container">
-    <view class="img">
-      <image src="../../static/sale.png" mode="scaleToFill" />
-    </view>
     <van-count-down :time="time" format="DD 天 HH 时 mm 分 ss 秒" />
     <view class="content-box">
-      <view class="box" v-for="item in array" :key="item.id">
-        <image :src="item.img" mode="scaleToFill" />
-        <view class="name">{{ item.name }}</view>
+      <view class="box" v-for="item in array" :key="item.brand_id">
+        <image :src="item.brand_url" mode="scaleToFill" />
+        <view class="name">{{ item.brand_name }}</view>
         <view class="deal-box">
           <view class="price-box">
-            <view class="new-price">￥{{ item.new_price }}</view>
+            <view class="new-price">￥{{ item.discounted_price }}</view>
             <view class="old-price text-decoration-through"
-              >市场均价:￥{{ item.old_price }}</view
+              >市场均价:￥{{ item.original_price }}</view
             >
           </view>
           <view class="detail">查看详情</view>
@@ -81,7 +78,11 @@ export default {
     };
   },
   //页面加载,上一个页面传值的options
-  onLoad(options) {},
+  onLoad(options) {
+    // console.log(decodeURIComponent(options.list));
+    this.array = Array.from(JSON.parse(decodeURIComponent(options.list)));
+    console.log("sales==>array==>", this.array);
+  },
   //监听页面显示
   onShow() {},
   //监听页面初次渲染完成

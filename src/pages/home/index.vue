@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-02 17:19:55
+ * @LastEditTime: 2021-04-03 09:26:37
  * @Description: 首页
 -->
 
@@ -38,18 +38,7 @@
         </view>
       </view>
       <!-- 特卖 -->
-      <view class="sale-box">
-        <view class="title-box">
-          <van-icon class="iconfont icon-sale" />
-          <label class="title">品牌特卖</label>
-          <label class="desc">一手活动信息在这里</label>
-        </view>
-        <view class="sale-img">
-          <image src="../../static/sale.png" />
-        </view>
-        <view class="desc">{{ saleObj.desc }}</view>
-        <view class="time">活动时间：{{ saleObj.time }}</view>
-      </view>
+      <saleBox />
       <!-- 今日折扣 -->
       <discount-box />
       <!-- 热销榜单 -->
@@ -102,8 +91,9 @@
 <script>
 import swiperBox from "components/swiper/index";
 import discountBox from "./discount";
+import saleBox from "./sales";
 export default {
-  components: { swiperBox, discountBox },
+  components: { swiperBox, discountBox, saleBox },
   data() {
     return {
       searchVal: "",
@@ -175,11 +165,6 @@ export default {
           create_at: "2021-03-02T10:22:18+08:00",
         },
       ],
-      saleObj: {
-        desc: "阿玛尼品牌专场",
-        time: "2020/11/16 - 2020/11/20",
-      },
-      discountArray: [],
       hotArray: [
         {
           id: 0,
@@ -253,7 +238,6 @@ export default {
   },
   onLoad() {
     this.getSort();
-    this.getBrandList();
   },
   //方法集合
   methods: {
@@ -268,18 +252,6 @@ export default {
     getSort() {
       this.$api.home.getCategoryList().then((res) => {
         this.sortArray = res.data;
-      });
-    },
-    // 获取品牌特卖
-    getBrandList() {
-      this.$api.home.getBrandList().then((res) => {
-        console.log("getBrandList==>", res.data);
-
-        const { brand_name, brand_url, activity_time } = res.data[0];
-
-        this.saleObj.desc = brand_name;
-        this.saleObj.time = activity_time;
-        this.saleObj.img = brand_url;
       });
     },
   },
