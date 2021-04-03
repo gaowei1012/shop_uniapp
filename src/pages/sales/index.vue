@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-26 16:34:37
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 09:56:59
+ * @LastEditTime: 2021-04-03 14:09:34
  * @Description: 品牌特卖
 -->
 <template>
@@ -79,8 +79,7 @@ export default {
   },
   computed: {
     time() {
-      const now_date = this.array[0].activity_time;
-      return tool.countDown("", now_date);
+      return tool.countDown("", this.array[0].end_activity_time);
     },
   },
   //页面加载,上一个页面传值的options

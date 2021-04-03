@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-04-03 10:02:04
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 10:19:37
+ * @LastEditTime: 2021-04-03 13:53:37
  * @Description: 热销榜单
 -->
 <template>
@@ -23,7 +23,8 @@
         <image class="img" :src="hot.hot_cakes_url" />
         <view class="content">
           <view class="name">{{ hot.hot_cakes_name }}</view>
-          <view class="origin">{{ hot.original_price }}</view>
+          <!-- TODO:品牌名字 -->
+          <view class="origin">[{{ hot.origin }}]</view>
           <view class="price color-f7c659">￥{{ hot.discounted_price }}</view>
         </view>
       </view>
