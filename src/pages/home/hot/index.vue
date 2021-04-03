@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-04-03 10:02:04
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 13:53:37
+ * @LastEditTime: 2021-04-03 17:17:59
  * @Description: 热销榜单
 -->
 <template>
@@ -24,8 +24,17 @@
         <view class="content">
           <view class="name">{{ hot.hot_cakes_name }}</view>
           <!-- TODO:品牌名字 -->
-          <view class="origin">[{{ hot.origin }}]</view>
-          <view class="price color-f7c659">￥{{ hot.discounted_price }}</view>
+          <view class="origin"
+            >[{{ hot.origin }}] {{ hot.hot_cakes_detail }}</view
+          >
+          <view class=" price">
+            <view class="old_price text-decoration-through">
+              ￥{{ hot.original_price }}
+            </view>
+            <view class="new_price  color-f7c659"
+              >￥{{ hot.discounted_price }}</view
+            >
+          </view>
         </view>
       </view>
     </view>
@@ -48,7 +57,6 @@ export default {
   methods: {
     getHot() {
       this.$api.home.getHotList().then((res) => {
-        console.log("res==>", res);
         this.hotArray = res;
       });
     },

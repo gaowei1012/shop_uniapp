@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 17:01:04
+ * @LastEditTime: 2021-04-03 17:08:39
  * @Description: 首页
 -->
 
@@ -63,67 +63,6 @@ export default {
       swiperArray: ["A", "B", "C"],
       introductionArray: ["全球采购", "正品保障", "品质溯源", "假一赔十"],
       sortArray: [],
-      hotArray: [
-        {
-          id: 0,
-          src: "../../static/sale.png",
-          name: "SK-II微肌因赋活修护精华霜试用装 35ml装",
-          origin: "[日本] SK-II",
-          price: "29.9",
-        },
-        {
-          id: 1,
-          src: "../../static/sale.png",
-          name: "SK-II微肌因赋活修护精华霜试用装 35ml装",
-          origin: "[日本] SK-II",
-          price: "29.9",
-        },
-        {
-          id: 2,
-          src: "../../static/sale.png",
-          name: "SK-II微肌因赋活修护精华霜试用装 35ml装",
-          origin: "[日本] SK-II",
-          price: "29.9",
-        },
-      ],
-      recommendArray: [
-        {
-          id: 0,
-          src: "../../static/sale.png",
-          name: "修复精华水",
-          price: "68.9",
-        },
-        {
-          id: 1,
-          src: "../../static/sale.png",
-          name: "修复精华水0",
-          price: "68.9",
-        },
-        {
-          id: 2,
-          src: "../../static/sale.png",
-          name: "修复精华水1",
-          price: "68.9",
-        },
-        {
-          id: 3,
-          src: "../../static/sale.png",
-          name: "修复精华水2",
-          price: "68.9",
-        },
-        {
-          id: 4,
-          src: "../../static/sale.png",
-          name: "修复精华水3",
-          price: "68.9",
-        },
-        {
-          id: 5,
-          src: "../../static/sale.png",
-          name: "修复精华水4",
-          price: "68.9",
-        },
-      ],
       options: {
         dots: true,
         color: "rgba(255,255,255,1)",
