@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-26 16:34:37
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 09:53:18
+ * @LastEditTime: 2021-04-03 09:56:59
  * @Description: 品牌特卖
 -->
 <template>
@@ -27,10 +27,10 @@
 </template>
 
 <script>
+import tool from "@/utils/tool";
 export default {
   data() {
     return {
-      time: 30 * 60 * 60 * 1000,
       array: [
         {
           id: 0,
@@ -77,22 +77,16 @@ export default {
       ],
     };
   },
+  computed: {
+    time() {
+      const now_date = this.array[0].activity_time;
+      return tool.countDown("", now_date);
+    },
+  },
   //页面加载,上一个页面传值的options
   onLoad(options) {
-    // console.log(decodeURIComponent(options.list));
     this.array = Array.from(JSON.parse(decodeURIComponent(options.list)));
-    console.log("sales==>array==>", this.array);
   },
-  //监听页面显示
-  onShow() {},
-  //监听页面初次渲染完成
-  onReady() {},
-  //监听页面隐藏
-  onHide() {},
-  //监听页面卸载
-  onUnload() {},
-  //方法集合
-  methods: {},
 };
 </script>
 <style lang="less">
