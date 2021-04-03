@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 10:03:00
+ * @LastEditTime: 2021-04-03 17:01:04
  * @Description: 首页
 -->
 
@@ -44,24 +44,7 @@
       <!-- 热销榜单 -->
       <hot-box />
       <!-- 精品推荐 -->
-      <view class="recommend-box">
-        <view class="title-box">
-          <van-icon class="iconfont icon-recommended" />
-          <label class="title">精品推荐</label>
-          <label class="desc">精挑细选，总有一款适合你</label>
-        </view>
-        <view class="content-box">
-          <view
-            class="box"
-            v-for="recommend in recommendArray"
-            :key="recommend.id"
-          >
-            <image class="image" :src="recommend.src" />
-            <view class="name">{{ recommend.name }}</view>
-            <view class="price color-f7c659">￥{{ recommend.price }}</view>
-          </view>
-        </view>
-      </view>
+      <recommend-box />
     </view>
   </view>
 </template>
@@ -71,8 +54,9 @@ import swiperBox from "components/swiper/index";
 import discountBox from "./discount";
 import saleBox from "./sales";
 import hotBox from "./hot";
+import recommendBox from "./recommend";
 export default {
-  components: { swiperBox, discountBox, saleBox, hotBox },
+  components: { swiperBox, discountBox, saleBox, hotBox, recommendBox },
   data() {
     return {
       searchVal: "",
