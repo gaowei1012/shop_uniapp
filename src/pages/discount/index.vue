@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-25 09:53:58
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-02 19:38:39
+ * @LastEditTime: 2021-04-03 09:05:35
  * @Description: 今日折扣
 -->
 <template>
@@ -15,12 +15,16 @@
       </view>
     </view>
     <view class="content-box">
-      <view class="name-box">
-        <image class="avator" :src="infoObj.img" mode="scaleToFill" />
-        <view class="title">{{ infoObj.title }}</view>
-      </view>
-      <image class="img" :src="infoObj.img" mode="scaleToFill" />
-      <view class="name">{{ infoObj.name }}</view>
+      <template v-for="(item, index) in infoObj">
+        <view class="box" :key="index">
+          <view class="name-box">
+            <image class="avator" :src="item.discount_url" mode="scaleToFill" />
+            <view class="title">{{ item.discount_name }}</view>
+          </view>
+          <image class="img" :src="item.discount_url" mode="scaleToFill" />
+          <view class="name">{{ item.discount_detail }}</view>
+        </view>
+      </template>
     </view>
   </view>
 </template>
@@ -30,11 +34,7 @@ import tool from "@/utils/tool";
 export default {
   data() {
     return {
-      infoObj: {
-        title: "ESTEE LAUDER/雅诗兰黛",
-        img: "https://t7.baidu.com/it/u=1595072465,3644073269&fm=193&f=GIF",
-        name: "【新品推荐】雅诗兰黛沁水粉底液63号SPF15/PA++ 30ml（2CO）",
-      },
+      infoObj: [],
     };
   },
   computed: {
@@ -49,8 +49,49 @@ export default {
   },
   //页面加载,上一个页面传值的options
   onLoad(options) {
-    console.log("list==>", JSON.parse(options.list));
+    if (Object.keys(options).length > 0) {
+      console.log("list==>", options.list);
+      tool.setItem("discount", options.list);
+      var list = JSON.parse(options.list);
+    } else {
+      list = JSON.parse(tool.getItem("discount"));
+    }
+    this.infoObj.push(list);
   },
+  // 分享
+  // TODO:开发版小程序已过期，请在开发者工具重新扫码
+  onShareAppMessage(res) {
+    // https://blog.csdn.net/qq_39109182/article/details/93312659
+    var shareData = this.infoObj[0];
+    console.log("infoObj==>", shareData);
+    return {
+      title: "哈哈哈哈",
+      desc: "描述描述",
+      // imageUrl: "分享要显示的图片，如果不设置就会默认截图当前页面的图片",
+      path: `/pages/discount/index?list=${shareData}`,
+
+      success: function(res) {
+        // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+      },
+      fail: function(res) {
+        // 转发失败
+        console.log("转发失败:" + JSON.stringify(res));
+      },
+      complete: function(res) {
+        console.log("转发结束:", res, JSON.stringify(res));
+      },
+    };
+  },
+
+  onShareAppMessage() {
+    var that = this;
+    return {
+      title: "今日折扣详情",
+      path: "/pages/discount/index",
+    };
+  },
+
   //监听页面显示
   onShow() {},
   //监听页面初次渲染完成
