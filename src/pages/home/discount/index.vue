@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-04-02 17:17:22
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-02 17:48:39
+ * @LastEditTime: 2021-04-03 09:11:36
  * @Description: 今日折扣
 -->
 <template>
@@ -13,7 +13,7 @@
         <view class="title">今日折扣</view>
         <view class="desc">拼手速的时候到了</view>
       </view>
-      <view class="right">立即抢购</view>
+      <view class="right" @click="handleDiscount('')">立即抢购</view>
     </view>
     <view class="content-box">
       <view
@@ -57,12 +57,7 @@ export default {
     },
     // 点击单个折扣项
     handleDiscount(e) {
-      // let obj = { ...this.carray };
-      // obj.length = this.carray.length;
-      // obj = encodeURIComponent(JSON.stringify(obj));
-      // uni.navigateTo({
-      //   url: `/pages/detail/list/index?list=${obj}`,
-      // });
+      e = e ? e : this.discountArray[0];
       uni.navigateTo({
         url: `/pages/discount/index?list=${JSON.stringify(e)}`,
       });
