@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-22 14:48:56
+ * @LastEditTime: 2021-04-04 18:37:48
  * @Description: 添加地址
 -->
 <template>
@@ -15,8 +15,14 @@
       @blurInput="blurInput"
     />
 
-    <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
-    <van-button class="btn" type="primary" @click="deleteForm">删除</van-button>
+    <view class="btn-box">
+      <van-button class="btn" type="primary" @click="submitForm"
+        >提交</van-button
+      >
+      <van-button class="btn" type="primary" @click="deleteForm"
+        >删除</van-button
+      >
+    </view>
     <van-toast id="van-toast" />
     <van-dialog id="van-dialog" />
   </view>
@@ -25,6 +31,7 @@
 <script>
 import inputVal from "components/input/index";
 import validator from "validator";
+import tool from "@/utils/tool";
 export default {
   components: {
     inputVal,
@@ -37,70 +44,85 @@ export default {
           id: 0,
           name: "收货人",
           placeholder: "请输入收货人",
-          model: "name",
+          model: "receiver",
           max: 8,
         },
         {
           id: 1,
           name: "手机号码",
           placeholder: "请输入手机号码",
-          model: "mobile",
+          model: "phone",
           max: 11,
         },
         {
           id: 2,
           name: "所在地区",
           placeholder: "请输入所在地区",
-          model: "address",
+          model: "province_city",
         },
         {
           id: 3,
           name: "详细地址",
           placeholder: "请输入详细地址",
-          model: "addressDetail",
+          model: "address_details",
         },
       ],
       form: {
-        name: "",
-        mobile: "",
-        address: "",
-        addressDetail: "",
+        receiver: "",
+        phone: "",
+        province_city: "",
+        address_details: "",
       },
     };
   },
   //页面加载,上一个页面传值的options
   onLoad(options) {
     const { key } = options;
+    console.log(key);
     this.form = Object.assign(this.form, JSON.parse(key));
   },
   //方法集合
   methods: {
     enterVal(type, e) {
       if (type === "收货人") {
-        this.form.name = e;
+        this.form.receiver = e;
       } else if (type === "手机号码") {
-        this.form.mobile = e;
+        this.form.phone = e;
       } else if (type === "所在地区") {
-        this.form.address = e;
+        this.form.province_city = e;
       } else {
-        this.form.addressDetail = e;
-      }
-
-      if (!e) {
-        this.errmsg = `请输入${type}的信息`;
-      } else if (type.includes("手机号")) {
-        if (e.length < 11) {
-          this.errmsg = "请输入11位数手机号";
-        } else if (!validator.isMobilePhone(e, "zh-CN")) {
-          this.errmsg = "请输入正确格式的手机号";
-        }
-      } else {
-        this.errmsg = "";
+        this.form.address_details = e;
       }
     },
     // 提交表单
     submitForm() {
+      if (!this.form.receiver) {
+        this.errmsg = "请输入用户名";
+        return;
+      }
+      if (!this.form.phone) {
+        this.errmsg = "请输入手机号";
+        return;
+      }
+      if (!validator.isMobilePhone(this.form.phone, "zh-CN")) {
+        this.errmsg = "请输入正确格式的手机号";
+        return;
+      }
+      if (!this.form.province_city) {
+        this.errmsg = "请输入所在地区";
+        return;
+      }
+      if (!this.form.address_details) {
+        this.errmsg = "请输入详细地址";
+        return;
+      }
+      this.errmsg = "";
+      this.form.user_id = tool.getItem("user_id");
       console.log("submitForm==>", this.form);
+
+      this.$api.user.editAddress(this.form).then(() => {
+        this.$toast("编辑成功", "success");
+      });
     },
     // 删除信息
     deleteForm() {
@@ -126,9 +148,9 @@ export default {
   },
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import url("./index.less");
-.form-item {
+/deep/ .form-item {
   display: flex;
   .title {
     flex: 3;
@@ -137,15 +159,30 @@ export default {
     flex: 7;
   }
 }
-.btn {
-  button {
-    width: 80%;
-    margin: 0 42rpx;
-    position: fixed;
-    left: 5%;
-    bottom: 10%;
-    background-color: #f759ab;
-    border: none;
+
+/deep/ .btn-box {
+  width: 80%;
+  position: fixed;
+  left: 5%;
+  bottom: 10%;
+  .btn {
+    button {
+      width: 100%;
+      margin: 0 42rpx;
+      border: none;
+      border-radius: 20rpx;
+    }
+  }
+  .btn:first-child {
+    button {
+      margin-bottom: 20rpx;
+      background-color: #f759ab;
+    }
+  }
+  .btn:last-child {
+    button {
+      background-color: #bfbfbf;
+    }
   }
 }
 </style>

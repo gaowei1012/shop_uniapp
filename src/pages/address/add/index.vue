@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-04 18:04:47
+ * @LastEditTime: 2021-04-04 18:31:42
  * @Description: 添加地址
 -->
 <template>
@@ -105,11 +105,9 @@ export default {
       }
       this.errmsg = "";
       this.form.user_id = tool.getItem("user_id");
-      console.log("form==>", this.form);
 
       this.$api.user.addAddress(this.form).then(() => {
         this.$toast("添加成功", "success");
-        // uni.
       });
     },
     // 重置form表单
@@ -138,9 +136,9 @@ export default {
   },
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import url("./index.less");
-.form-item {
+/deep/ .form-item {
   display: flex;
   .title {
     flex: 3;
@@ -149,7 +147,7 @@ export default {
     flex: 7;
   }
 }
-.btn {
+/deep/ .btn {
   button {
     width: 80%;
     margin: 0 42rpx;

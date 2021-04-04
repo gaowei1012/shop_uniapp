@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-04 18:06:03
+ * @LastEditTime: 2021-04-04 18:29:52
  * @Description: 地址列表
 -->
 
@@ -143,6 +143,6 @@ export default {
   },
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import url("./index.less");
 </style>
