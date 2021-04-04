@@ -851,10 +851,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@~7.12.0":
-  version "7.12.18"
-  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.12.18.tgz#af137bd7e7d9705a412b3caaf991fe6aaa97831b"
-  integrity sha1-rxN71+fZcFpBKzyq+ZH+aqqXgxs=
+"@babel/runtime@^7.12.18":
+  version "7.13.10"
+  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.13.10.tgz#47d42a57b6095f4468da440388fdbad8bebf0d7d"
+  integrity sha1-R9QqV7YJX0Ro2kQDiP262L6/DX0=
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -1735,11 +1735,6 @@
   integrity sha1-NPf+yLOJ1/PB/QgCaldj4HLTxtw=
   dependencies:
     "@types/yargs-parser" "*"
-
-"@vant/weapp@^1.6.8":
-  version "1.6.8"
-  resolved "https://registry.npm.taobao.org/@vant/weapp/download/@vant/weapp-1.6.8.tgz#948ae16fba07c5a2054c52783f22aaf6a04453e1"
-  integrity sha1-lIrhb7oHxaIFTFJ4PyKq9qBEU+E=
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
@@ -10294,6 +10289,11 @@ uuid@^3.3.2, uuid@^3.4.0:
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.4.0.tgz?cache=0&sync_timestamp=1607460081656&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=
 
+uview-ui@^1.8.4:
+  version "1.8.4"
+  resolved "https://registry.npm.taobao.org/uview-ui/download/uview-ui-1.8.4.tgz#e32bbf2379421d319022e324e1cb7b5387d3bd44"
+  integrity sha1-4yu/I3lCHTGQIuMk4ct7U4fTvUQ=
+
 v8-to-istanbul@^4.1.3:
   version "4.1.4"
   resolved "https://registry.npm.taobao.org/v8-to-istanbul/download/v8-to-istanbul-4.1.4.tgz#b97936f21c0e2d9996d4985e5c5156e9d4e49cd6"
@@ -10310,6 +10310,11 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+validator@^13.5.2:
+  version "13.5.2"
+  resolved "https://registry.npm.taobao.org/validator/download/validator-13.5.2.tgz?cache=0&sync_timestamp=1607602676416&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvalidator%2Fdownload%2Fvalidator-13.5.2.tgz#c97ae63ed4224999fb6f42c91eaca9567fe69a46"
+  integrity sha1-yXrmPtQiSZn7b0LJHqypVn/mmkY=
 
 vary@^1.1.2, vary@~1.1.2:
   version "1.1.2"

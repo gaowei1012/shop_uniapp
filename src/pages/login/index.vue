@@ -2,13 +2,17 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-27 17:55:11
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-27 20:20:29
+ * @LastEditTime: 2021-04-04 17:29:02
  * @Description: 登录
 -->
 <template>
   <view class="login-box">
     <!-- TODO: -->
-    <template v-if="token || Object.keys(userInfo).length > 0">
+    <template
+      v-if="
+        Object.keys(info).length > 0 || Object.keys(this.userInfo).length > 0
+      "
+    >
       <image class="avatar" fit="cover" :src="userInfo.avatarUrl" />
       <view class="name">{{ userInfo.nickName }}</view>
     </template>
@@ -31,6 +35,7 @@ import tool from "@/utils/tool";
 export default {
   data() {
     return {
+      canIUseGetUserProfile: true,
       userInfo: {},
     };
   },
@@ -38,7 +43,15 @@ export default {
     token() {
       return tool.getItem("token");
     },
+    info() {
+      let info = {};
+      if (tool.getItem("userInfo")) {
+        info = JSON.parse(tool.getItem("userInfo"));
+      }
+      return info;
+    },
   },
+
   //监听页面初次渲染完成
   onReady() {
     if (!tool.getItem("token")) {
@@ -59,16 +72,17 @@ export default {
         success: (res) => {
           const { code } = res;
           this.$api.user.goLogin(code).then((res) => {
-            const { open_id, token } = res;
+            const { open_id, token, user_id } = res;
             tool.setItem("open_id", open_id);
             tool.setItem("token", token);
+            tool.setItem("user_id", user_id);
           });
         },
       });
     },
     // 获取用户信息
     wxGetUserInfo() {
-      uni.getUserInfo({
+      wx.getUserProfile({
         success: (res) => {
           const { userInfo } = res;
           this.userInfo = userInfo;
