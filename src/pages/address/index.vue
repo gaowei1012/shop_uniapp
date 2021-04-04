@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-21 18:57:20
+ * @LastEditTime: 2021-04-04 17:45:33
  * @Description: 地址列表
 -->
 
@@ -38,10 +38,12 @@
       </template>
     </view>
     <van-button class="btn" @click="goAddaddress">添加地址</van-button>
+    <van-toast id="van-toast" />
   </view>
 </template>
 
 <script>
+import tool from "@/utils/tool";
 export default {
   data() {
     return {
@@ -108,9 +110,23 @@ export default {
   },
   created() {
     this.checked = 0;
+    this.getAddress();
   },
   //方法集合
   methods: {
+    // 获取地址列表
+    getAddress() {
+      const user_id = tool.getItem("user_id");
+      if (!user_id) {
+        this.$toast("请先去登录", "fail");
+        return;
+      }
+      this.$api.user.getAddressList(user_id).then((res) => {
+        this.addressArray.length = 0;
+        this.addressArray = res.data;
+      });
+    },
+
     // 切换点击radio
     clickRadio(e) {
       this.checked = e;

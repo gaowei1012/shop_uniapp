@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-27 20:07:48
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-27 20:13:49
+ * @LastEditTime: 2021-04-04 17:33:33
  * @Description: 用户接口管理
  */
 
@@ -16,6 +16,13 @@ const user = {
       data: {
         code,
       },
+    });
+  },
+  // 获取地址
+  getAddressList(userid) {
+    return axios({
+      method: "GET",
+      url: `address/getAddress/${userid}`,
     });
   },
 };
