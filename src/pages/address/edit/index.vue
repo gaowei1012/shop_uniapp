@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-04 18:37:48
+ * @LastEditTime: 2021-04-04 18:42:41
  * @Description: 添加地址
 -->
 <template>
@@ -78,7 +78,6 @@ export default {
   //页面加载,上一个页面传值的options
   onLoad(options) {
     const { key } = options;
-    console.log(key);
     this.form = Object.assign(this.form, JSON.parse(key));
   },
   //方法集合
@@ -127,8 +126,9 @@ export default {
     // 删除信息
     deleteForm() {
       this.$confirm("是否准备删除").then(() => {
-        console.log("deleteForm==>hhh");
-        this.$toast("准备删除~");
+        this.$api.user.deleteAddress(tool.getItem("user_id")).then(() => {
+          this.$toast("删除成功", "success");
+        });
       });
     },
     // 失去焦点验证
