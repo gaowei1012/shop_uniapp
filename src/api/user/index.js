@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-27 20:07:48
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-04 17:33:33
+ * @LastEditTime: 2021-04-04 17:53:15
  * @Description: 用户接口管理
  */
 
@@ -23,6 +23,20 @@ const user = {
     return axios({
       method: "GET",
       url: `address/getAddress/${userid}`,
+    });
+  },
+  // 添加地址
+  addAddress(data) {
+    return axios({
+      method: "POST",
+      url: "address/addAddress",
+      data: {
+        user_id: data.user_id,
+        receiver: data.name,
+        phone: data.mobile,
+        province_city: data.address,
+        address_details: data.addressDetail,
+      },
     });
   },
 };

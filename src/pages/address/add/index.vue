@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-03-22 15:34:42
+ * @LastEditTime: 2021-04-04 18:04:47
  * @Description: 添加地址
 -->
 <template>
@@ -16,12 +16,14 @@
     />
 
     <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
+    <van-toast id="van-toast" />
   </view>
 </template>
 
 <script>
 import inputVal from "components/input";
 import validator from "validator";
+import tool from "@/utils/tool";
 export default {
   components: {
     inputVal,
@@ -78,22 +80,37 @@ export default {
       } else {
         this.form.addressDetail = e;
       }
-
-      if (!e) {
-        this.errmsg = `请输入${type}的信息`;
-      } else if (type.includes("手机号")) {
-        if (e.length < 11) {
-          this.errmsg = "请输入11位数手机号";
-        } else if (!validator.isMobilePhone(e, "zh-CN")) {
-          this.errmsg = "请输入正确格式的手机号";
-        }
-      } else {
-        this.errmsg = "";
-      }
     },
     // 提交表单
     submitForm() {
-      console.log("submitForm==>", this.form);
+      if (!this.form.name) {
+        this.errmsg = "请输入用户名";
+        return;
+      }
+      if (!this.form.mobile) {
+        this.errmsg = "请输入手机号";
+        return;
+      }
+      if (!validator.isMobilePhone(this.form.mobile, "zh-CN")) {
+        this.errmsg = "请输入正确格式的手机号";
+        return;
+      }
+      if (!this.form.address) {
+        this.errmsg = "请输入所在地区";
+        return;
+      }
+      if (!this.form.addressDetail) {
+        this.errmsg = "请输入详细地址";
+        return;
+      }
+      this.errmsg = "";
+      this.form.user_id = tool.getItem("user_id");
+      console.log("form==>", this.form);
+
+      this.$api.user.addAddress(this.form).then(() => {
+        this.$toast("添加成功", "success");
+        // uni.
+      });
     },
     // 重置form表单
     resetForm() {

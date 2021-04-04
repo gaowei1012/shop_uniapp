@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-04 17:45:33
+ * @LastEditTime: 2021-04-04 18:06:03
  * @Description: 地址列表
 -->
 
@@ -10,19 +10,19 @@
   <view class="address-container">
     <view class="content-box">
       <template v-if="addressArray.length > 0">
-        <view class="box" v-for="item in addressArray" :key="item.id">
+        <view class="box" v-for="item in addressArray" :key="item.address_id">
           <view>
-            <text class="name">{{ item.name }}</text>
-            <text class="mobile">{{ item.mobile }}</text>
-            <text class="default" v-if="checked == item.id">默认</text>
+            <text class="name">{{ item.receiver }}</text>
+            <text class="mobile">{{ item.phone }}</text>
+            <text class="default" v-if="checked == item.address_id">默认</text>
           </view>
-          <view class="address">{{ item.addressDetail }}</view>
+          <view class="address">{{ item.address_details }}</view>
           <view class="edit-box flex justify-content-between">
             <van-radio
               :value="checked"
-              :name="item.id"
+              :name="item.address_id"
               checked-color="#f759ab"
-              @click.native="clickRadio(item.id)"
+              @click.native="clickRadio(item.address_id)"
               >设置为默认地址</van-radio
             >
             <view class="edit" @click="editAddaddress(item)">
