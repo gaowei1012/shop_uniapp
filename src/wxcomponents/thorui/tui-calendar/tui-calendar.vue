@@ -71,7 +71,7 @@
 					<text>{{ type == 1 ? activeDate : startDate }}</text>
 					<text v-if="endDate">至{{ endDate }}</text>
 				</view>
-				<view class="tui-calendar-btn_box"><tui-button :type="btnType" height="72rpx" shape="circle" :size="28" @click="btnFix(false)">确定</tui-button></view>
+				<view class="tui-calendar-btn_box"><van-button :type="btnType" height="72rpx" shape="circle" :size="28" @click="btnFix(false)">确定</van-button></view>
 			</view>
 		</view>
 
@@ -141,7 +141,7 @@
 </template>
 <script>
 //easycom组件模式 无需手动引入
-// import tuiButton from "../tui-button/tui-button"
+// import tuiButton from "../van-button/van-button"
 const calendar = require('./tui-calendar.js');
 export default {
 	name: 'tuiCalendar',

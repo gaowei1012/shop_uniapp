@@ -38,7 +38,7 @@
         <view class="no-info">暂无任何地址</view>
       </template>
     </view>
-    <tui-button class="btn" @click="goAddaddress">添加地址</tui-button>
+    <van-button class="btn" @click="goAddaddress">添加地址</van-button>
     <van-toast id="van-toast" />
   </view>
 </template>

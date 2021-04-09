@@ -16,11 +16,11 @@
     />
 
     <view class="btn-box">
-      <tui-button class="btn" type="primary" @click="submitForm"
-        >提交</tui-button
+      <van-button class="btn" type="primary" @click="submitForm"
+        >提交</van-button
       >
-      <tui-button class="btn" type="primary" @click="deleteForm"
-        >删除</tui-button
+      <van-button class="btn" type="primary" @click="deleteForm"
+        >删除</van-button
       >
     </view>
     <van-toast id="van-toast" />

@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:59:36
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-09 21:44:09
+ * @LastEditTime: 2021-04-09 22:28:41
  * @Description: 购物车
 -->
 <template>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { uniqBy, find, forEach } from "lodash";
+import { uniqBy, find } from "lodash";
 export default {
   data() {
     return {
@@ -100,6 +100,7 @@ export default {
       is_checked: [],
       checkedAll: false,
       stepperVal: 1,
+      checkedArr: [],
       cartArray: [
         {
           id: 0,
@@ -138,16 +139,12 @@ export default {
           number: 1,
         },
       ],
-      checkedArr: [],
+
       total: 0,
+      shopNum: "结算(0)",
     };
   },
 
-  computed: {
-    shopNum() {
-      return "结算(" + this.checkedArr.length + ")";
-    },
-  },
   watch: {
     is_checked(newVal) {
       let sum = 0;
@@ -157,14 +154,14 @@ export default {
       }
       this.total = sum * 100;
     },
+    checkedArr(newVal) {
+      this.shopNum = "结算(" + newVal.length + ")";
+    },
   },
   //方法集合
   methods: {
     // 单选
     onChange(cart, id) {
-      this.checkedArr = id;
-      this.checkedArr = uniqBy(this.checkedArr, "id");
-
       this.clickCheckBox(cart);
       // 判断是否为全选
       this.is_checked.length === this.cartArray.length
@@ -177,26 +174,31 @@ export default {
       if (this.is_checked.length > 0) {
         if (!found) {
           this.is_checked.push(event);
+          this.checkedArr.push(event.id);
         } else {
           this.is_checked.splice(
             this.is_checked.findIndex((item) => item.id === event.id),
             1
           );
+          this.checkedArr.push(event.id);
         }
       } else {
         this.is_checked.push(event);
+        this.checkedArr.push(event.id);
       }
     },
 
     // 全选
-    allChecked(event) {
-      this.is_checked = this.cartArray.map((item) => {
-        return item.id.toString();
-      });
-      this.is_checked = [];
-      this.is_checked = this.cartArray;
-      this.checkedAll = event.detail;
-      if (this.checkedAll === false) this.is_checked = [];
+    allChecked() {
+      this.checkedAll = !this.checkedAll;
+      if (this.checkedAll === false) {
+        this.is_checked = [];
+        this.checkedArr = [];
+      } else {
+        this.checkedArr = this.cartArray.map((item) => {
+          return item.id.toString();
+        });
+      }
     },
     // 更改商品数量
     // TODO: 后期改成Toast

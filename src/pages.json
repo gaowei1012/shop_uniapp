@@ -25,11 +25,11 @@
     {
       "path": "pages/order/index",
       "style": {
-        "navigationBarTitleText": "订单中心"
-        // "usingComponents": {
-        //   "van-tab": "/wxcomponents/vant-weapp/tab/index",
-        //   "van-tabs": "/wxcomponents/vant-weapp/tabs/index"
-        // }
+        "navigationBarTitleText": "订单中心",
+        "usingComponents": {
+          "van-tab": "/wxcomponents/vant-weapp/tab/index",
+          "van-tabs": "/wxcomponents/vant-weapp/tabs/index"
+        }
       }
     },
     {
@@ -115,16 +115,17 @@
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarBackgroundColor": "#F7C659"
-    // "usingComponents": {
-    // "van-field": "/wxcomponents/vant-weapp/field/index",
-    // "van-toast": "/wxcomponents/vant-weapp/toast/index",
-    // "van-dialog": "/wxcomponents/vant-weapp/dialog/index",
-    // "van-checkbox": "/wxcomponents/vant-weapp/checkbox/index",
-    // "van-checkbox-group": "/wxcomponents/vant-weapp/checkbox-group/index",
-    // "van-rate": "/wxcomponents/vant-weapp/rate/index",
-    // "van-search": "/wxcomponents/vant-weapp/search/index"
-    // }
+    "navigationBarBackgroundColor": "#F7C659",
+    "usingComponents": {
+      "van-field": "/wxcomponents/vant-weapp/field/index",
+      "van-toast": "/wxcomponents/vant-weapp/toast/index",
+      "van-dialog": "/wxcomponents/vant-weapp/dialog/index",
+      "van-rate": "/wxcomponents/vant-weapp/rate/index",
+      "van-search": "/wxcomponents/vant-weapp/search/index",
+      "van-button": "/wxcomponents/vant-weapp/button/index",
+      "van-checkbox": "/wxcomponents/vant-weapp/checkbox/index",
+      "van-checkbox-group": "/wxcomponents/vant-weapp/checkbox-group/index"
+    }
   },
   "easycom": {
     "autoscan": true,

@@ -15,7 +15,7 @@
       @blurInput="blurInput"
     />
 
-    <tui-button class="btn" type="primary" @click="submitForm">提交</tui-button>
+    <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
     <van-toast id="van-toast" />
   </view>
 </template>
