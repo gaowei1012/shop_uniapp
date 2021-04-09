@@ -60,6 +60,7 @@
     "flyio": "^0.6.2",
     "less": "^4.1.1",
     "less-loader": "^5.0.0",
+    "moment": "^2.29.1",
     "regenerator-runtime": "^0.12.1",
     "uview-ui": "^1.8.4",
     "validator": "^13.5.2",

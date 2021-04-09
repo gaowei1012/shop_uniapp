@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-25 09:53:58
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 09:39:03
+ * @LastEditTime: 2021-04-09 10:59:15
  * @Description: 今日折扣详情
 -->
 <template>
@@ -10,8 +10,8 @@
     <view class="desc-box">
       <view class="desc">限时商品，拼手速的时候到了</view>
       <view>
-        <van-count-down :time="time" format="DD 天 HH 时 mm 分 ss 秒" />
-        后结束
+        <count-down class="count-down" :time="time" />
+        <text>后结束</text>
       </view>
     </view>
     <view class="content-box">
@@ -28,8 +28,13 @@
 </template>
 
 <script>
+import countDown from "components/countDown";
 import tool from "@/utils/tool";
+import moment from "moment";
+import "moment/locale/zh-cn";
+moment.locale("zh-cn");
 export default {
+  components: { countDown },
   data() {
     return {
       obj: {},
@@ -37,12 +42,12 @@ export default {
   },
   computed: {
     time() {
-      let now_date = new Date(
-        new Date(new Date().toLocaleDateString()).getTime() +
-          24 * 60 * 60 * 1000 -
-          1
-      );
-      return tool.countDown("", now_date);
+      const time =
+        moment()
+          .endOf("day")
+          .unix() - moment().unix();
+
+      return time;
     },
   },
   //页面加载,上一个页面传值的options
@@ -65,6 +70,6 @@ export default {
   },
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import url("./index.less");
 </style>
