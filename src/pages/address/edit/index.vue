@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-04 18:42:41
+ * @LastEditTime: 2021-04-09 14:39:16
  * @Description: 添加地址
 -->
 <template>
@@ -16,11 +16,11 @@
     />
 
     <view class="btn-box">
-      <van-button class="btn" type="primary" @click="submitForm"
-        >提交</van-button
+      <tui-button class="btn" type="primary" @click="submitForm"
+        >提交</tui-button
       >
-      <van-button class="btn" type="primary" @click="deleteForm"
-        >删除</van-button
+      <tui-button class="btn" type="primary" @click="deleteForm"
+        >删除</tui-button
       >
     </view>
     <van-toast id="van-toast" />
@@ -168,20 +168,20 @@ export default {
   .btn {
     button {
       width: 100%;
-      margin: 0 42rpx;
+      margin: 0 42rpx !important;
       border: none;
       border-radius: 20rpx;
     }
   }
   .btn:first-child {
     button {
-      margin-bottom: 20rpx;
-      background-color: #f759ab;
+      margin-bottom: 20rpx !important;
+      background-color: #f759ab !important;
     }
   }
   .btn:last-child {
     button {
-      background-color: #bfbfbf;
+      background-color: #bfbfbf !important;
     }
   }
 }

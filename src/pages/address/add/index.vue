@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-18 21:04:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-04 18:31:42
+ * @LastEditTime: 2021-04-09 14:34:31
  * @Description: 添加地址
 -->
 <template>
@@ -15,7 +15,7 @@
       @blurInput="blurInput"
     />
 
-    <van-button class="btn" type="primary" @click="submitForm">提交</van-button>
+    <tui-button class="btn" type="primary" @click="submitForm">提交</tui-button>
     <van-toast id="van-toast" />
   </view>
 </template>
@@ -149,12 +149,12 @@ export default {
 }
 /deep/ .btn {
   button {
-    width: 80%;
+    width: 80% !important;
     margin: 0 42rpx;
     position: fixed;
-    left: 5%;
+    left: 11%;
     bottom: 10%;
-    background-color: #f759ab;
+    background-color: #f759ab !important;
     border: none;
   }
 }

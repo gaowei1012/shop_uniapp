@@ -18,14 +18,14 @@
     </template>
     <template v-else>
       <image src="../../static/img/no-login.png" mode="scaleToFill" />
-      <van-button
+      <tui-button
         class="btn"
         type="default"
         open-type="getUserInfo"
         @getuserinfo="wxGetUserInfo"
       >
         登录/注册
-      </van-button>
+      </tui-button>
     </template>
   </view>
 </template>
