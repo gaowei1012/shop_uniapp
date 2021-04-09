@@ -92,9 +92,6 @@
       "path": "pages/address/index",
       "style": {
         "navigationBarTitleText": "我的收货地址"
-        // "usingComponents": {
-        //   "van-radio": "/wxcomponents/vant-weapp/radio/index",
-        // }
       }
     },
     {
