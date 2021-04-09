@@ -94,7 +94,6 @@
         "navigationBarTitleText": "我的收货地址"
         // "usingComponents": {
         //   "van-radio": "/wxcomponents/vant-weapp/radio/index",
-        //   "van-area": "/wxcomponents/vant-weapp/area/index"
         // }
       }
     },
@@ -102,19 +101,12 @@
       "path": "pages/address/add/index",
       "style": {
         "navigationBarTitleText": "新增地址"
-        // "usingComponents": {
-        //   "van-area": "/wxcomponents/vant-weapp/area/index",
-        //   "van-popup": "/wxcomponents/vant-weapp/popup/index"
-        // }
       }
     },
     {
       "path": "pages/address/edit/index",
       "style": {
         "navigationBarTitleText": "编辑地址"
-        // "usingComponents": {
-        //   "van-area": "/wxcomponents/vant-weapp/area/index"
-        // }
       }
     },
     {

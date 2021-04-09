@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-11 21:02:02
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-04 18:29:52
+ * @LastEditTime: 2021-04-09 15:38:32
  * @Description: 地址列表
 -->
 
@@ -14,17 +14,18 @@
           <view>
             <text class="name">{{ item.receiver }}</text>
             <text class="mobile">{{ item.phone }}</text>
-            <text class="default" v-if="checked == item.address_id">默认</text>
+            <text class="default" v-if="current === item.address_id">默认</text>
           </view>
           <view class="address">{{ item.address_details }}</view>
           <view class="edit-box flex justify-content-between">
-            <van-radio
-              :value="checked"
-              :name="item.address_id"
-              checked-color="#f759ab"
-              @click.native="clickRadio(item.address_id)"
-              >设置为默认地址</van-radio
+            <radio
+              color="#f759ab"
+              :value="item.address_id"
+              :checked="current === item.address_id"
+              @click="clickRadio(item.address_id)"
             >
+              设置为默认地址
+            </radio>
             <view class="edit" @click="editAddaddress(item)">
               <tui-icon class="iconfont icon-edit" />
               <text>编辑</text>
@@ -47,7 +48,7 @@ import tool from "@/utils/tool";
 export default {
   data() {
     return {
-      checked: undefined,
+      current: 0,
       addressArray: [
         {
           id: 0,
@@ -109,7 +110,6 @@ export default {
     };
   },
   created() {
-    this.checked = 0;
     this.getAddress();
   },
   //方法集合
@@ -129,7 +129,7 @@ export default {
 
     // 切换点击radio
     clickRadio(e) {
-      this.checked = e;
+      this.current = e;
     },
     // 跳转添加收货地址
     goAddaddress() {
