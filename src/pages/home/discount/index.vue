@@ -9,7 +9,7 @@
   <view class="discount-box ">
     <view class="title-box">
       <view class="left">
-        <van-icon class="iconfont icon-discount" />
+        <tui-icon class="iconfont icon-discount" />
         <view class="title">今日折扣</view>
         <view class="desc">拼手速的时候到了</view>
       </view>

@@ -9,13 +9,13 @@
   <view class="hot-box">
     <view class="title-box">
       <view class="left">
-        <van-icon class="iconfont icon-hot" />
+        <tui-icon class="iconfont icon-hot" />
         <view class="title">热销榜单</view>
         <view class="desc">看看大家都在买什么</view>
       </view>
       <view class="right">
         <label>更多商品</label>
-        <van-icon name="arrow" />
+        <tui-icon name="arrow" />
       </view>
     </view>
     <view class="content-box">

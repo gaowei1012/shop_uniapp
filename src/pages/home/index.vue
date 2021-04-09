@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-02 10:29:55
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-03 17:08:39
+ * @LastEditTime: 2021-04-09 14:19:29
  * @Description: 首页
 -->
 
@@ -24,7 +24,8 @@
       />
       <view class="img-box">
         <view class="img" v-for="(items, key) in introductionArray" :key="key">
-          <van-icon class="iconfont icon-world" />
+          <tui-icon class="iconfont icon-world" />
+
           <view>
             {{ items }}
           </view>

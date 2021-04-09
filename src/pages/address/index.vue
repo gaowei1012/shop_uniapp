@@ -26,7 +26,7 @@
               >设置为默认地址</van-radio
             >
             <view class="edit" @click="editAddaddress(item)">
-              <van-icon class="iconfont icon-edit" />
+              <tui-icon class="iconfont icon-edit" />
               <text>编辑</text>
             </view>
           </view>

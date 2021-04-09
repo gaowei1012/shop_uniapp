@@ -8,7 +8,7 @@
 <template>
   <view class="recommend-box">
     <view class="title-box">
-      <van-icon class="iconfont icon-recommended" />
+      <tui-icon class="iconfont icon-recommended" />
       <label class="title">精品推荐</label>
       <label class="desc">精挑细选，总有一款适合你</label>
     </view>

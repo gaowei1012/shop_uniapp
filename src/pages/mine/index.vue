@@ -19,7 +19,7 @@
         <view class="title">我的订单</view>
         <view class="more">
           更多
-          <van-icon class="iconfont icon-right" />
+          <tui-icon class="iconfont icon-right" />
         </view>
       </view>
 
@@ -44,10 +44,10 @@
         @click="handleList(item.name)"
       >
         <view class="name-box">
-          <van-icon class="iconfont" :class="item.icon" />
+          <tui-icon class="iconfont" :class="item.icon" />
           <view class="name">{{ item.name }}</view>
         </view>
-        <van-icon class="iconfont icon-right" />
+        <tui-icon class="iconfont icon-right" />
       </view>
     </view>
     <!-- 为您推荐 -->
@@ -71,7 +71,7 @@
               <label class="old-price">￥{{ recommend.old_price }}</label>
             </view>
             <view class="leaderboard color-ffaa67">
-              <van-icon class="iconfont icon-trophy color-ffaa67" />
+              <tui-icon class="iconfont icon-trophy color-ffaa67" />
               {{ recommend.leaderboard }}
             </view>
           </view>

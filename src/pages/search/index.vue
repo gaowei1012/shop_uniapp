@@ -25,7 +25,7 @@
       <view class="title-box">
         <view class="title">历史搜索</view>
         <view class="clear" @click="clearHistory">
-          <van-icon class="iconfont icon-delete" />
+          <tui-icon class="iconfont icon-delete" />
           清空</view
         >
       </view>

@@ -9,7 +9,7 @@
   <view class="orderPay-container">
     <view class="title-box">
       <view class="flex">
-        <van-icon class="iconfont icon-time" />
+        <tui-icon class="iconfont icon-time" />
         <view class="title">待支付</view>
       </view>
       <view class="time">

@@ -36,7 +36,7 @@
           </view>
           <view class="deal-box">
             <view class="date">{{ comment.date }}</view>
-            <van-icon class="iconfont icon-like" />
+            <tui-icon class="iconfont icon-like" />
           </view>
         </view>
       </view>

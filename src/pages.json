@@ -20,9 +20,6 @@
       "path": "pages/sales/index",
       "style": {
         "navigationBarTitleText": "品牌特卖"
-        // "usingComponents": {
-        //   "van-count-down": "/wxcomponents/vant-weapp/count-down/index"
-        // }
       }
     },
     {
@@ -46,9 +43,6 @@
       "path": "pages/discount/index",
       "style": {
         "navigationBarTitleText": "今日折扣"
-        // "usingComponents": {
-        //   "van-count-down": "/wxcomponents/vant-weapp/count-down/index"
-        // }
       }
     },
     {

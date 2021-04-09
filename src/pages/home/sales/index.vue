@@ -8,7 +8,7 @@
 <template>
   <view class="sale-box">
     <view class="title-box">
-      <van-icon class="iconfont icon-sale" />
+      <tui-icon class="iconfont icon-sale" />
       <label class="title">品牌特卖</label>
       <label class="end_activity_time">一手活动信息在这里</label>
     </view>
