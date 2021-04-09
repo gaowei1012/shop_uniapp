@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-21 23:17:07
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-09 16:25:36
+ * @LastEditTime: 2021-04-09 17:14:04
  * @Description: 商品收藏
 -->
 <template>
@@ -11,6 +11,7 @@
       <view class="content-box">
         <view class="box" v-for="item in array" :key="item.id">
           <checkbox
+            :value="item.id"
             :checked="item.id === is_checked || checkedAll"
             color="#F759AB"
             class="checkbox"
@@ -96,6 +97,7 @@ export default {
   methods: {
     // 单选
     onChange(event) {
+      console.log(event, event.detail.value);
       const { value } = event.detail;
       this.is_checked = value;
       this.is_checked.length === this.array.length

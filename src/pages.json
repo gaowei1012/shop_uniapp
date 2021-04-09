@@ -48,12 +48,12 @@
     {
       "path": "pages/detail/index",
       "style": {
-        "navigationBarTitleText": "商品详情"
-        // "usingComponents": {
-        //   "van-goods-action": "/wxcomponents/vant-weapp/goods-action/index",
-        //   "van-goods-action-icon": "/wxcomponents/vant-weapp/goods-action-icon/index",
-        //   "van-goods-action-button": "/wxcomponents/vant-weapp/goods-action-button/index"
-        // }
+        "navigationBarTitleText": "商品详情",
+        "usingComponents": {
+          "van-goods-action": "/wxcomponents/vant-weapp/goods-action/index",
+          "van-goods-action-icon": "/wxcomponents/vant-weapp/goods-action-icon/index",
+          "van-goods-action-button": "/wxcomponents/vant-weapp/goods-action-button/index"
+        }
       }
     },
     {
@@ -65,22 +65,22 @@
     {
       "path": "pages/sort/index",
       "style": {
-        "navigationBarTitleText": "分类"
-        // "usingComponents": {
-        //   "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index",
-        //   "van-sidebar": "/wxcomponents/vant-weapp/sidebar/index",
-        //   "van-sidebar-item": "/wxcomponents/vant-weapp/sidebar-item/index"
-        // }
+        "navigationBarTitleText": "分类",
+        "usingComponents": {
+          "van-tree-select": "/wxcomponents/vant-weapp/tree-select/index",
+          "van-sidebar": "/wxcomponents/vant-weapp/sidebar/index",
+          "van-sidebar-item": "/wxcomponents/vant-weapp/sidebar-item/index"
+        }
       }
     },
     {
-      "path": "pages/cart/index"
-      // "style": {
-      //   "usingComponents": {
-      //     "van-stepper": "/wxcomponents/vant-weapp/stepper/index",
-      //     "van-submit-bar": "/wxcomponents/vant-weapp/submit-bar/index"
-      //   }
-      // }
+      "path": "pages/cart/index",
+      "style": {
+        "usingComponents": {
+          "van-stepper": "/wxcomponents/vant-weapp/stepper/index",
+          "van-submit-bar": "/wxcomponents/vant-weapp/submit-bar/index"
+        }
+      }
     },
     {
       "path": "pages/mine/index",

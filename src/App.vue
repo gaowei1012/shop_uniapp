@@ -2,7 +2,7 @@
  * @Author: 一个为高薪头秃的程序媴
  * @Date: 2021-03-01 20:05:27
  * @LastEditors: 一个为高薪头秃的程序猿
- * @LastEditTime: 2021-04-09 15:36:40
+ * @LastEditTime: 2021-04-09 16:39:33
  * @Description: 
 -->
 <script>
@@ -50,4 +50,10 @@ export default {
 .tui-icon {
   font-size: 0 !important;
 }
+
+/* #ifdef  APP-PLUS||MP-WEIXIN */
+.wx-checkbox-input {
+  border-radius: 50% !important;
+}
+/* #endif */
 </style>
